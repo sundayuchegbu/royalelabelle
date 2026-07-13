@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme {
+  --color-background: #fdf8f6;
+  --color-foreground: #4a2b1d;
+
+  --color-primary: #4a2b1d;
+  --color-primary-foreground: #fdf8f6;
+
+  --color-gold: #c48d2c;
+  --color-gold-foreground: #fdf8f6;
+}
+
+/* Base Styles */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings:
+    "rlig" 1,
+    "calt" 1;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f6ede8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c48b72;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b07054;
+}
+
+/* Utilities */
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility bg-gradient-primary {
+  background: linear-gradient(135deg, #4a2b1d 0%, #7f482f 100%);
+}
+
+@utility bg-gradient-gold {
+  background: linear-gradient(135deg, #c48d2c 0%, #d6a545 100%);
+}
+
+@utility text-gradient {
+  background: linear-gradient(135deg, #c48d2c 0%, #d6a545 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility shadow-luxury {
+  box-shadow: 0 20px 60px rgba(74, 43, 29, 0.1);
+}
+
+@utility shadow-gold {
+  box-shadow: 0 10px 30px rgba(196, 141, 44, 0.3);
+}
+
+/* ========================================
+   Animations
+======================================== */
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+@utility animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ========================================
+   Hover Effects
+======================================== */
+
+@utility hover-lift {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(74, 43, 29, 0.15);
+  }
+}
+/* Add to your existing globals.css */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out forwards;
+}
