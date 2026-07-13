@@ -34,15 +34,15 @@ export default function Hero() {
     >
       {/* Decorative Elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-[#c48d2c] rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#c48d2c] rounded-full blur-3xl" />
+        <div className="absolute top-20 left-20 w-64 h-64 bg-gold rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gold rounded-full blur-3xl" />
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6">
-            {/* <p className="text-[#c48d2c] font-semibold text-sm tracking-widest">
+            {/* <p className="text-gold font-semibold text-sm tracking-widest">
               🌟 AMP Certified Micro Locs Specialist
             </p> */}
           </div>
@@ -55,8 +55,8 @@ export default function Hero() {
 
           <p className="text-xl md:text-2xl text-[#f6ede8] mb-8 leading-relaxed max-w-2xl mx-auto">
             My name is{" "}
-            <span className="text-[#c48d2c] font-semibold">PeaceQueen</span>,
-            and I'm here to help you start and maintain healthy, beautiful locs.
+            <span className="text-gold font-semibold">PeaceQueen</span>, and I'm
+            here to help you start and maintain healthy, beautiful locs.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

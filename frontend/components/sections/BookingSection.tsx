@@ -264,7 +264,7 @@ export default function BookingSection() {
       <section id="booking" className="py-20 bg-[#fdf8f6] scroll-mt-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
             <p className="mt-4 text-[#7f482f]">Loading booking form...</p>
           </div>
         </div>
@@ -285,9 +285,9 @@ export default function BookingSection() {
           {/* Auth Status Banner */}
           {!isAuthenticated ? (
             <div className="max-w-3xl mx-auto mb-6">
-              <div className="bg-[#fff5e6] border-2 border-[#c48d2c] rounded-xl p-4 flex items-center justify-between flex-wrap gap-4">
+              <div className="bg-[#fff5e6] border-2 border-gold rounded-xl p-4 flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center space-x-3">
-                  <Lock className="w-5 h-5 text-[#c48d2c]" />
+                  <Lock className="w-5 h-5 text-gold" />
                   <div>
                     <p className="font-medium text-[#4a2b1d]">
                       Sign in required to book
@@ -330,7 +330,7 @@ export default function BookingSection() {
                 {/* Personal Information */}
                 <div className="border-b border-[#f6ede8] pb-6">
                   <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-                    <User className="w-5 h-5 text-[#c48d2c] mr-2" />
+                    <User className="w-5 h-5 text-gold mr-2" />
                     Personal Information
                   </h3>
 
@@ -347,7 +347,7 @@ export default function BookingSection() {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="Your full name"
-                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                           required
                           readOnly={isAuthenticated && !!user?.name}
                         />
@@ -371,7 +371,7 @@ export default function BookingSection() {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="your@email.com"
-                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                           required
                           readOnly={isAuthenticated && !!user?.email}
                         />
@@ -396,7 +396,7 @@ export default function BookingSection() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="(555) 555-5555"
-                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                         required
                         readOnly={isAuthenticated && !!user?.phone}
                       />
@@ -412,7 +412,7 @@ export default function BookingSection() {
                 {/* Hair Information */}
                 <div className="border-b border-[#f6ede8] pb-6">
                   <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-                    <Scissors className="w-5 h-5 text-[#c48d2c] mr-2" />
+                    <Scissors className="w-5 h-5 text-gold mr-2" />
                     Hair Information
                   </h3>
 
@@ -425,7 +425,7 @@ export default function BookingSection() {
                         name="hairType"
                         value={formData.hairType}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                         required
                       >
                         <option value="">Select hair type...</option>
@@ -445,7 +445,7 @@ export default function BookingSection() {
                         name="hairLength"
                         value={formData.hairLength}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                         required
                       >
                         <option value="">Select hair length...</option>
@@ -467,7 +467,7 @@ export default function BookingSection() {
                         name="hairDensity"
                         value={formData.hairDensity}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                         required
                       >
                         <option value="">Select hair density...</option>
@@ -489,7 +489,7 @@ export default function BookingSection() {
                         value={formData.hairCondition}
                         onChange={handleChange}
                         placeholder="e.g., Healthy, Damaged, Color-treated..."
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                         required
                       />
                     </div>
@@ -499,7 +499,7 @@ export default function BookingSection() {
                 {/* Style Preferences */}
                 <div className="border-b border-[#f6ede8] pb-6">
                   <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-                    <Calendar className="w-5 h-5 text-[#c48d2c] mr-2" />
+                    <Calendar className="w-5 h-5 text-gold mr-2" />
                     Style & Schedule
                   </h3>
 
@@ -511,7 +511,7 @@ export default function BookingSection() {
                       name="preferredStyle"
                       value={formData.preferredStyle}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                      className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                       required
                     >
                       <option value="">Select a style...</option>
@@ -536,7 +536,7 @@ export default function BookingSection() {
                           name="preferredDate"
                           value={formData.preferredDate}
                           onChange={handleChange}
-                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                           min={new Date().toISOString().split("T")[0]}
                           required
                         />
@@ -554,7 +554,7 @@ export default function BookingSection() {
                           name="preferredTime"
                           value={formData.preferredTime}
                           onChange={handleChange}
-                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                          className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                           required
                         />
                       </div>
@@ -565,7 +565,7 @@ export default function BookingSection() {
                 {/* Additional Information */}
                 <div>
                   <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-                    <MessageCircle className="w-5 h-5 text-[#c48d2c] mr-2" />
+                    <MessageCircle className="w-5 h-5 text-gold mr-2" />
                     Additional Information
                   </h3>
 
@@ -579,7 +579,7 @@ export default function BookingSection() {
                       onChange={handleChange}
                       placeholder="What are your hair goals? (e.g., length, style, maintenance)"
                       rows={2}
-                      className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none bg-white"
+                      className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none bg-white"
                     />
                   </div>
 
@@ -593,7 +593,7 @@ export default function BookingSection() {
                       onChange={handleChange}
                       placeholder="Any special requests or information..."
                       rows={2}
-                      className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none bg-white"
+                      className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none bg-white"
                     />
                   </div>
                 </div>
@@ -621,9 +621,9 @@ export default function BookingSection() {
                   )}
                 </Button>
 
-                <div className="bg-[#fff5e6] p-3 rounded-lg border-l-4 border-[#c48d2c]">
+                <div className="bg-[#fff5e6] p-3 rounded-lg border-l-4 border-gold">
                   <p className="text-xs text-[#7f482f] flex items-start space-x-2">
-                    <AlertCircle className="w-4 h-4 text-[#c48d2c] flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="w-4 h-4 text-gold shrink-0 mt-0.5" />
                     <span>
                       By submitting, you agree to our booking policy and terms
                       of service. A deposit is required to confirm your
@@ -638,27 +638,27 @@ export default function BookingSection() {
             {/* Quick Contact Info */}
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
-                <Phone className="w-6 h-6 text-[#c48d2c] mx-auto mb-2" />
+                <Phone className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Call Us</p>
                 <a
                   href="tel:6464007132"
-                  className="text-sm text-[#7f482f] hover:text-[#c48d2c]"
+                  className="text-sm text-[#7f482f] hover:text-gold"
                 >
-                  (646) 400-7132
+                  (548) 557-3218
                 </a>
               </div>
               <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
-                <Mail className="w-6 h-6 text-[#c48d2c] mx-auto mb-2" />
+                <Mail className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Email Us</p>
                 <a
                   href="mailto:info@royallabelle.com"
-                  className="text-sm text-[#7f482f] hover:text-[#c48d2c]"
+                  className="text-sm text-[#7f482f] hover:text-gold"
                 >
                   info@royallabelle.com
                 </a>
               </div>
               <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
-                <Clock className="w-6 h-6 text-[#c48d2c] mx-auto mb-2" />
+                <Clock className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Hours</p>
                 <p className="text-sm text-[#7f482f]">Mon-Sat: 9AM - 7PM</p>
               </div>

@@ -281,7 +281,7 @@ export default function AdminPayments() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
         <div className="bg-white rounded-xl shadow-luxury p-4">
           <p className="text-xs text-[#7f482f]">Total Revenue</p>
-          <p className="text-2xl font-bold text-[#c48d2c]">
+          <p className="text-2xl font-bold text-gold">
             {formatPrice(stats.totalRevenue)}
           </p>
         </div>
@@ -315,14 +315,14 @@ export default function AdminPayments() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by client name, email, or payment ID..."
-              className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
             />
           </div>
           <div className="flex gap-4">
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
             >
               <option value="">All Statuses</option>
               {statusOptions.map((status) => (
@@ -334,7 +334,7 @@ export default function AdminPayments() {
             <select
               value={methodFilter}
               onChange={(e) => setMethodFilter(e.target.value)}
-              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
             >
               <option value="">All Methods</option>
               {paymentOptions.map((method) => (
@@ -601,7 +601,7 @@ export default function AdminPayments() {
                   </div>
                   <div>
                     <p className="text-[#7f482f]">Total Amount</p>
-                    <p className="font-bold text-[#c48d2c]">
+                    <p className="font-bold text-gold">
                       {formatPrice(selectedPayment.fullPrice)}
                     </p>
                   </div>

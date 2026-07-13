@@ -250,7 +250,7 @@ export default function AdminGallery() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading gallery...</p>
         </div>
       </div>
@@ -320,7 +320,7 @@ export default function AdminGallery() {
                 </button>
               </div>
               {image.isFeatured && (
-                <div className="absolute top-3 right-3 bg-[#c48d2c] text-white text-xs px-3 py-1 rounded-full">
+                <div className="absolute top-3 right-3 bg-gold text-white text-xs px-3 py-1 rounded-full">
                   Featured
                 </div>
               )}
@@ -387,7 +387,7 @@ export default function AdminGallery() {
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -404,7 +404,7 @@ export default function AdminGallery() {
                       setFormData({ ...formData, image: e.target.value })
                     }
                     placeholder="Or enter image URL"
-                    className="flex-1 px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                    className="flex-1 px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
                   <div className="relative">
                     <button
@@ -434,7 +434,7 @@ export default function AdminGallery() {
                   </div>
                 </div>
                 {isUploading && (
-                  <p className="text-xs text-[#c48d2c] mt-1">
+                  <p className="text-xs text-gold mt-1">
                     Compressing & uploading...
                   </p>
                 )}
@@ -452,7 +452,7 @@ export default function AdminGallery() {
                   onChange={(e) =>
                     setFormData({ ...formData, category: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 >
                   {categories.map((cat) => (
                     <option key={cat} value={cat}>
@@ -469,7 +469,7 @@ export default function AdminGallery() {
                   onChange={(e) =>
                     setFormData({ ...formData, isFeatured: e.target.checked })
                   }
-                  className="w-4 h-4 text-[#c48d2c] rounded focus:ring-[#c48d2c]"
+                  className="w-4 h-4 text-gold rounded focus:ring-gold"
                 />
                 <label className="text-sm text-[#4a2b1d]">
                   Feature this image
@@ -489,7 +489,7 @@ export default function AdminGallery() {
                       order: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   min="0"
                 />
               </div>
@@ -536,7 +536,7 @@ export default function AdminGallery() {
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -550,7 +550,7 @@ export default function AdminGallery() {
                   onChange={(e) =>
                     setFormData({ ...formData, category: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 >
                   {categories.map((cat) => (
                     <option key={cat} value={cat}>
@@ -567,7 +567,7 @@ export default function AdminGallery() {
                   onChange={(e) =>
                     setFormData({ ...formData, isFeatured: e.target.checked })
                   }
-                  className="w-4 h-4 text-[#c48d2c] rounded focus:ring-[#c48d2c]"
+                  className="w-4 h-4 text-gold rounded focus:ring-gold"
                 />
                 <label className="text-sm text-[#4a2b1d]">
                   Feature this image
@@ -587,7 +587,7 @@ export default function AdminGallery() {
                       order: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   min="0"
                 />
               </div>

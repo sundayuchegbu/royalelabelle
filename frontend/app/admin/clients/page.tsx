@@ -271,7 +271,7 @@ export default function AdminClients() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading clients...</p>
         </div>
       </div>
@@ -331,7 +331,7 @@ export default function AdminClients() {
         </div>
         <div className="bg-white rounded-xl shadow-luxury p-4">
           <p className="text-xs text-[#7f482f]">Total Revenue</p>
-          <p className="text-2xl font-bold text-[#c48d2c]">
+          <p className="text-2xl font-bold text-gold">
             {formatPrice(stats.totalRevenue)}
           </p>
         </div>
@@ -353,14 +353,14 @@ export default function AdminClients() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by name, email, or phone..."
-              className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
             />
           </div>
           <div className="flex gap-4">
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
             >
               <option value="">All Roles</option>
               <option value="user">User</option>
@@ -370,7 +370,7 @@ export default function AdminClients() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
             >
               <option value="createdAt">Date Joined</option>
               <option value="name">Name</option>
@@ -451,7 +451,7 @@ export default function AdminClients() {
                           </div>
                           <div className="flex items-center gap-2 text-sm text-[#7f482f]">
                             <Mail className="w-3 h-3" />
-                            <span className="truncate max-w-[150px]">
+                            <span className="truncate max-w-37.5">
                               {client.email}
                             </span>
                           </div>
@@ -737,7 +737,7 @@ export default function AdminClients() {
                   onChange={(e) =>
                     setEditFormData({ ...editFormData, name: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -752,7 +752,7 @@ export default function AdminClients() {
                   onChange={(e) =>
                     setEditFormData({ ...editFormData, email: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 />
               </div>
 
@@ -766,7 +766,7 @@ export default function AdminClients() {
                   onChange={(e) =>
                     setEditFormData({ ...editFormData, phone: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 />
               </div>
 
@@ -783,7 +783,7 @@ export default function AdminClients() {
                       location: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 />
               </div>
 
@@ -797,7 +797,7 @@ export default function AdminClients() {
                     setEditFormData({ ...editFormData, bio: e.target.value })
                   }
                   rows={3}
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none"
                 />
               </div>
 
@@ -810,7 +810,7 @@ export default function AdminClients() {
                   onChange={(e) =>
                     setEditFormData({ ...editFormData, role: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                 >
                   <option value="user">User</option>
                   <option value="admin">Admin</option>
@@ -835,7 +835,7 @@ export default function AdminClients() {
                         },
                       })
                     }
-                    className="w-4 h-4 text-[#c48d2c] rounded focus:ring-[#c48d2c]"
+                    className="w-4 h-4 text-gold rounded focus:ring-gold"
                   />
                   <label className="text-sm text-[#7f482f]">
                     Email Notifications
@@ -854,7 +854,7 @@ export default function AdminClients() {
                         },
                       })
                     }
-                    className="w-4 h-4 text-[#c48d2c] rounded focus:ring-[#c48d2c]"
+                    className="w-4 h-4 text-gold rounded focus:ring-gold"
                   />
                   <label className="text-sm text-[#7f482f]">
                     SMS Notifications
@@ -873,7 +873,7 @@ export default function AdminClients() {
                         },
                       })
                     }
-                    className="w-4 h-4 text-[#c48d2c] rounded focus:ring-[#c48d2c]"
+                    className="w-4 h-4 text-gold rounded focus:ring-gold"
                   />
                   <label className="text-sm text-[#7f482f]">
                     Marketing Emails

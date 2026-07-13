@@ -112,7 +112,7 @@ export default function AuthModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/50 z-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-6 relative">
         {/* Close Button */}
         <button
@@ -143,7 +143,7 @@ export default function AuthModal({
             onClick={() => setIsLogin(true)}
             className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${
               isLogin
-                ? "bg-[#c48d2c] text-white"
+                ? "bg-gold text-white"
                 : "text-[#7f482f] hover:text-[#4a2b1d]"
             }`}
           >
@@ -153,7 +153,7 @@ export default function AuthModal({
             onClick={() => setIsLogin(false)}
             className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${
               !isLogin
-                ? "bg-[#c48d2c] text-white"
+                ? "bg-gold text-white"
                 : "text-[#7f482f] hover:text-[#4a2b1d]"
             }`}
           >
@@ -176,7 +176,7 @@ export default function AuthModal({
                   value={loginData.email}
                   onChange={handleLoginChange}
                   placeholder="your@email.com"
-                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -194,7 +194,7 @@ export default function AuthModal({
                   value={loginData.password}
                   onChange={handleLoginChange}
                   placeholder="Enter your password"
-                  className="w-full pl-9 pr-10 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full pl-9 pr-10 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
                 <button
@@ -226,7 +226,7 @@ export default function AuthModal({
               <button
                 type="button"
                 onClick={() => setIsLogin(false)}
-                className="text-[#c48d2c] hover:underline font-medium"
+                className="text-gold hover:underline font-medium"
               >
                 Register here
               </button>
@@ -247,7 +247,7 @@ export default function AuthModal({
                   value={registerData.name}
                   onChange={handleRegisterChange}
                   placeholder="Your full name"
-                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -265,7 +265,7 @@ export default function AuthModal({
                   value={registerData.email}
                   onChange={handleRegisterChange}
                   placeholder="your@email.com"
-                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -283,7 +283,7 @@ export default function AuthModal({
                   value={registerData.phone}
                   onChange={handleRegisterChange}
                   placeholder="(555) 555-5555"
-                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -301,7 +301,7 @@ export default function AuthModal({
                   value={registerData.password}
                   onChange={handleRegisterChange}
                   placeholder="Min 6 characters"
-                  className="w-full pl-9 pr-10 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full pl-9 pr-10 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                   minLength={6}
                 />
@@ -331,7 +331,7 @@ export default function AuthModal({
                   value={registerData.confirmPassword}
                   onChange={handleRegisterChange}
                   placeholder="Confirm your password"
-                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -352,7 +352,7 @@ export default function AuthModal({
               <button
                 type="button"
                 onClick={() => setIsLogin(true)}
-                className="text-[#c48d2c] hover:underline font-medium"
+                className="text-gold hover:underline font-medium"
               >
                 Sign in here
               </button>

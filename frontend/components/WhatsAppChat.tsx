@@ -103,7 +103,7 @@ export default function WhatsAppChat({
           <div className="p-4 max-h-96 overflow-y-auto">
             {/* Welcome Message */}
             <div className="flex items-start gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-sm flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#25D366] text-white flex items-center justify-center text-sm shrink-0">
                 <MessageCircle className="w-4 h-4" />
               </div>
               <div className="bg-gray-100 rounded-lg p-3 max-w-[85%]">

@@ -125,7 +125,7 @@ export default function AdminAppointments() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading appointments...</p>
         </div>
       </div>
@@ -161,14 +161,14 @@ export default function AdminAppointments() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by client name, email, or ID..."
-              className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
             />
           </div>
           <div className="flex gap-4">
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
             >
               <option value="">All Statuses</option>
               {statusOptions.map((status) => (
@@ -180,7 +180,7 @@ export default function AdminAppointments() {
             <select
               value={paymentFilter}
               onChange={(e) => setPaymentFilter(e.target.value)}
-              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+              className="px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold  focus:border-transparent bg-white"
             >
               <option value="">All Payments</option>
               {paymentOptions.map((method) => (

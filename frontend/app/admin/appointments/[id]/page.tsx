@@ -257,7 +257,7 @@ export default function AdminAppointmentDetails() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading appointment details...</p>
         </div>
       </div>
@@ -376,7 +376,7 @@ export default function AdminAppointmentDetails() {
                     onChange={(e) =>
                       setEditData({ ...editData, status: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                   >
                     {statusOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -399,7 +399,7 @@ export default function AdminAppointmentDetails() {
                         appointmentDate: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
                 </div>
 
@@ -416,7 +416,7 @@ export default function AdminAppointmentDetails() {
                         lateFee: parseFloat(e.target.value) || 0,
                       })
                     }
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                     min="0"
                     step="5"
                   />
@@ -432,7 +432,7 @@ export default function AdminAppointmentDetails() {
                       setEditData({ ...editData, notes: e.target.value })
                     }
                     rows={3}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none"
                   />
                 </div>
 
@@ -487,7 +487,7 @@ export default function AdminAppointmentDetails() {
                 </div>
                 <div>
                   <p className="text-xs text-[#7f482f]">Total Price</p>
-                  <p className="font-bold text-[#c48d2c]">
+                  <p className="font-bold text-gold">
                     {formatPrice(appointment.fullPrice)}
                   </p>
                 </div>
@@ -604,7 +604,7 @@ export default function AdminAppointmentDetails() {
                     <Mail className="w-4 h-4 text-[#7f482f]" />
                     <a
                       href={`mailto:${appointment.userId.email}`}
-                      className="text-[#4a2b1d] hover:text-[#c48d2c]"
+                      className="text-[#4a2b1d] hover:text-gold"
                     >
                       {appointment.userId.email}
                     </a>
@@ -613,7 +613,7 @@ export default function AdminAppointmentDetails() {
                     <Phone className="w-4 h-4 text-[#7f482f]" />
                     <a
                       href={`tel:${appointment.userId.phone}`}
-                      className="text-[#4a2b1d] hover:text-[#c48d2c]"
+                      className="text-[#4a2b1d] hover:text-gold"
                     >
                       {appointment.userId.phone || "N/A"}
                     </a>
