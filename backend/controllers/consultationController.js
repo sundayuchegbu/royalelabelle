@@ -2,6 +2,8 @@ import Consultation from "../models/Consultation.js";
 
 // @desc    Create consultation
 // @route   POST /api/consultations
+// @desc    Create consultation
+// @route   POST /api/consultations
 export const createConsultation = async (req, res) => {
   try {
     const {
@@ -28,14 +30,28 @@ export const createConsultation = async (req, res) => {
     });
 
     if (existingConsultation) {
-      return res.status(400).json({
-        success: false,
-        message: "You already have an active consultation",
-        consultation: existingConsultation,
-      });
+      // Check if the consultation is expired (even if status is still 'active')
+      if (new Date(existingConsultation.expiresAt) < new Date()) {
+        // Update status to expired
+        existingConsultation.status = "expired";
+        await existingConsultation.save();
+        console.log(
+          `⏰ Consultation ${existingConsultation._id} marked as expired`,
+        );
+        // Allow them to create a new one
+      } else {
+        // Still active and not expired
+        return res.status(400).json({
+          success: false,
+          message:
+            "You already have an active consultation. Complete or cancel your existing appointment, or wait for it to expire.",
+          consultation: existingConsultation,
+          expiresAt: existingConsultation.expiresAt,
+        });
+      }
     }
 
-    // Create consultation with all fields
+    // Create new consultation
     const consultation = await Consultation.create({
       userId,
       name,
@@ -48,14 +64,18 @@ export const createConsultation = async (req, res) => {
       preferredStyle,
       preferredDate,
       preferredTime,
-      goals,
-      notes,
+      goals: goals || "",
+      notes: notes || "",
       expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     });
+
+    console.log(`✅ New consultation created for user ${userId}`);
 
     res.status(201).json({
       success: true,
       consultation,
+      message:
+        "Consultation created successfully. You can now book an appointment.",
     });
   } catch (error) {
     console.error("Consultation creation error:", error);
@@ -65,7 +85,6 @@ export const createConsultation = async (req, res) => {
     });
   }
 };
-
 // @desc    Get user's consultation
 // @route   GET /api/consultations/me
 export const getMyConsultation = async (req, res) => {

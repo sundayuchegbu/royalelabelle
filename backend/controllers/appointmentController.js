@@ -171,7 +171,7 @@ export const getAppointment = async (req, res) => {
   }
 };
 
-// @desc    Cancel appointment
+// @desc    Cancel appointment (by customer)
 // @route   PUT /api/user/appointments/:id/cancel
 export const cancelAppointment = async (req, res) => {
   try {
@@ -200,9 +200,21 @@ export const cancelAppointment = async (req, res) => {
     appointment.status = "cancelled";
     await appointment.save();
 
+    // 🔑 CRITICAL FIX: Set consultation back to active so they can rebook
+    if (appointment.consultationId) {
+      await Consultation.findByIdAndUpdate(appointment.consultationId, {
+        status: "active",
+        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      });
+      console.log(
+        `  ✅ Consultation ${appointment.consultationId} set to active`,
+      );
+    }
+
     res.status(200).json({
       success: true,
-      message: "Appointment cancelled successfully",
+      message:
+        "Appointment cancelled successfully. You can book a new appointment.",
       appointment,
     });
   } catch (error) {
@@ -213,7 +225,6 @@ export const cancelAppointment = async (req, res) => {
     });
   }
 };
-
 // @desc    Reschedule appointment
 // @route   PUT /api/user/appointments/:id/reschedule
 export const rescheduleAppointment = async (req, res) => {

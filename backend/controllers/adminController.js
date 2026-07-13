@@ -294,7 +294,6 @@ export const updateAppointment = async (req, res) => {
 // @route   DELETE /api/admin/appointments/:id
 export const deleteAppointment = async (req, res) => {
   try {
-    // Verify admin role
     if (req.user.role !== "admin" && req.user.role !== "super_admin") {
       return res.status(403).json({
         success: false,
@@ -304,7 +303,6 @@ export const deleteAppointment = async (req, res) => {
 
     const appointmentId = req.params.id;
 
-    // Validate appointment ID
     if (!appointmentId) {
       return res.status(400).json({
         success: false,
@@ -312,7 +310,6 @@ export const deleteAppointment = async (req, res) => {
       });
     }
 
-    // Find the appointment
     const appointment = await Appointment.findById(appointmentId);
     if (!appointment) {
       return res.status(404).json({
@@ -325,32 +322,36 @@ export const deleteAppointment = async (req, res) => {
     console.log(`  - Service: ${appointment.serviceType}`);
     console.log(`  - Client: ${appointment.userId}`);
 
-    // Delete the appointment using deleteOne or findByIdAndDelete
-    await Appointment.findByIdAndDelete(appointmentId);
+    // 🔑 CRITICAL FIX: Update the associated consultation status back to 'active'
+    if (appointment.consultationId) {
+      await Consultation.findByIdAndUpdate(appointment.consultationId, {
+        status: "active",
+        // Optionally reset the expiration date to give them more time
+        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      });
+      console.log(
+        `  ✅ Consultation ${appointment.consultationId} set to active`,
+      );
+    }
 
-    // Optionally, also delete associated consultation
-    // Uncomment if you want to delete the consultation too
-    // if (appointment.consultationId) {
-    //   await Consultation.findByIdAndDelete(appointment.consultationId);
-    // }
+    // Delete the appointment
+    await Appointment.findByIdAndDelete(appointmentId);
 
     console.log(`✅ Appointment deleted successfully: ${appointmentId}`);
 
     res.status(200).json({
       success: true,
-      message: "Appointment deleted successfully",
+      message: "Appointment deleted successfully. Customer can now book again.",
     });
   } catch (error) {
     console.error("❌ Delete appointment error:", error);
-    console.error("  - Message:", error.message);
-    console.error("  - Stack:", error.stack);
-
     res.status(500).json({
       success: false,
       message: error.message || "Failed to delete appointment",
     });
   }
 };
+
 // @desc    Get all users
 // @route   GET /api/admin/users
 export const getUsers = async (req, res) => {
