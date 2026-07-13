@@ -69,19 +69,18 @@ export const createAppointment = async (req, res) => {
       status: "pending",
     });
 
-    // Get user details - wrap in try/catch to prevent email failure from breaking booking
-    try {
-      const user = await User.findById(userId);
+    // Get user details
+    const user = await User.findById(userId);
 
-      // Send booking confirmation email
-      if (user) {
-        sendBookingConfirmationEmail(user, appointment).catch((error) => {
-          console.error("Failed to send booking confirmation:", error);
-        });
-      }
-    } catch (emailError) {
-      console.error("Error getting user or sending email:", emailError);
-      // Don't throw - continue with response
+    // Send emails in the background
+    if (user) {
+      sendBookingConfirmationEmail(user, appointment).catch((error) => {
+        console.error("Failed to send booking confirmation:", error);
+      });
+
+      sendAdminBookingNotification(appointment, user).catch((error) => {
+        console.error("Failed to send admin notification:", error);
+      });
     }
 
     res.status(201).json({
@@ -302,7 +301,7 @@ export const confirmAppointment = async (req, res) => {
     if (paymentId) appointment.stripePaymentId = paymentId;
     await appointment.save();
 
-    // Update consultation status
+    // Update consultation status to 'completed'
     await Consultation.findByIdAndUpdate(appointment.consultationId, {
       status: "completed",
     });
@@ -310,7 +309,6 @@ export const confirmAppointment = async (req, res) => {
     // Get user and send confirmation email
     const user = await User.findById(appointment.userId);
     if (user) {
-      // Send appointment confirmed email to customer
       sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
         console.error("Failed to send appointment confirmed email:", error);
       });
@@ -331,6 +329,8 @@ export const confirmAppointment = async (req, res) => {
 };
 
 // Update the existing updateAppointment function to handle status change
+// @desc    Update appointment (admin)
+// @route   PUT /api/admin/appointments/:id
 export const updateAppointment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -344,25 +344,48 @@ export const updateAppointment = async (req, res) => {
       });
     }
 
+    // Check if status is changing to 'confirmed' or 'completed' or 'cancelled'
+    const isBeingConfirmed =
+      status === "confirmed" && appointment.status !== "confirmed";
+    const isBeingCompleted =
+      status === "completed" && appointment.status !== "completed";
+    const isBeingCancelled =
+      status === "cancelled" && appointment.status !== "cancelled";
+
     // Update fields
     if (status) {
       appointment.status = status;
 
-      // If status is changing to 'confirmed', send email
-      if (status === "confirmed") {
-        const user = await User.findById(appointment.userId);
-        if (user) {
-          sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
-            console.error("Failed to send appointment confirmed email:", error);
-          });
-        }
+      // If appointment is being confirmed or completed, update consultation status
+      if (status === "confirmed" || status === "completed") {
+        await Consultation.findByIdAndUpdate(appointment.consultationId, {
+          status: "completed",
+        });
+      }
+
+      // If appointment is being cancelled, update consultation status back to 'active'
+      if (status === "cancelled") {
+        await Consultation.findByIdAndUpdate(appointment.consultationId, {
+          status: "active",
+        });
       }
     }
+
     if (appointmentDate) appointment.appointmentDate = appointmentDate;
     if (notes) appointment.notes = notes;
     if (lateFee !== undefined) appointment.lateFee = lateFee;
 
     await appointment.save();
+
+    // Send email if being confirmed
+    if (isBeingConfirmed) {
+      const user = await User.findById(appointment.userId);
+      if (user) {
+        sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
+          console.error("Failed to send appointment confirmed email:", error);
+        });
+      }
+    }
 
     res.status(200).json({
       success: true,
