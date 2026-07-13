@@ -77,6 +77,7 @@ export default function AdminAppointments() {
     }
   };
 
+  // making a slite change for test purpose
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this appointment?")) return;
 
