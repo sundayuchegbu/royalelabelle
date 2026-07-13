@@ -1,7 +1,11 @@
 import Appointment from "../models/Appointment.js";
 import Consultation from "../models/Consultation.js";
 import User from "../models/User.js"; // Make sure this import exists
-import { sendBookingConfirmationEmail } from "../services/emailService.js";
+import {
+  sendBookingConfirmationEmail,
+  sendAdminBookingNotification,
+  sendAppointmentConfirmedEmail,
+} from "../services/emailService.js";
 
 // Helper function to check if date is within 7 days
 const isWithinSevenDays = (date1, date2) => {
