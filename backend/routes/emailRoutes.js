@@ -3,6 +3,8 @@ import {
   sendWelcomeEmail,
   sendBookingConfirmationEmail,
   sendAdminBookingNotification,
+  testEmailConnection,
+  sendAppointmentConfirmedEmail,
 } from "../services/emailService.js";
 import User from "../models/User.js";
 import Appointment from "../models/Appointment.js";
@@ -133,6 +135,32 @@ router.post("/test-appointment-confirmed", async (req, res) => {
       success: false,
       message: error.message,
     });
+  }
+});
+
+// Test email connection
+router.get("/test-connection", async (req, res) => {
+  const result = await testEmailConnection();
+  res.status(result.success ? 200 : 500).json(result);
+});
+
+// Test welcome email
+router.post("/test-welcome", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const result = await sendWelcomeEmail(user);
+    res.status(200).json({ success: true, result });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 

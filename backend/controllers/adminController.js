@@ -247,32 +247,76 @@ export const updateAppointment = async (req, res) => {
       });
     }
 
-    // Check if status is changing to 'confirmed'
+    // Store old status for email comparison
+    const oldStatus = appointment.status;
+
+    // Check if status is changing
     const isBeingConfirmed =
       status === "confirmed" && appointment.status !== "confirmed";
+    const isBeingCompleted =
+      status === "completed" && appointment.status !== "completed";
+    const isBeingCancelled =
+      status === "cancelled" && appointment.status !== "cancelled";
 
     // Update fields
-    if (status) appointment.status = status;
+    if (status) {
+      appointment.status = status;
+
+      // Update consultation status based on appointment status
+      if (status === "confirmed" || status === "completed") {
+        await Consultation.findByIdAndUpdate(appointment.consultationId, {
+          status: "completed",
+        });
+      }
+
+      if (status === "cancelled") {
+        await Consultation.findByIdAndUpdate(appointment.consultationId, {
+          status: "active",
+        });
+      }
+    }
+
     if (appointmentDate) appointment.appointmentDate = appointmentDate;
     if (notes) appointment.notes = notes;
     if (lateFee !== undefined) appointment.lateFee = lateFee;
 
     await appointment.save();
 
-    // If appointment is being confirmed, send email to customer
-    if (isBeingConfirmed) {
-      try {
-        const user = await User.findById(appointment.userId);
-        if (user) {
-          await sendAppointmentConfirmedEmail(user, appointment);
-          console.log(`📧 Appointment confirmed email sent to ${user.email}`);
-        }
-      } catch (emailError) {
-        console.error(
-          "Failed to send appointment confirmed email:",
-          emailError,
-        );
-        // Don't fail the request if email fails
+    // Get user for email
+    const user = await User.findById(appointment.userId);
+
+    // Send emails based on status change
+    if (user) {
+      if (isBeingConfirmed) {
+        // Send appointment confirmed email
+        sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
+          console.error("Failed to send appointment confirmed email:", error);
+        });
+      } else if (isBeingCompleted) {
+        // Send appointment completed email
+        sendAppointmentCompletedEmail(user, appointment).catch((error) => {
+          console.error("Failed to send appointment completed email:", error);
+        });
+      } else if (isBeingCancelled) {
+        // Send status change notification for cancellation
+        sendStatusChangeNotification(
+          user,
+          appointment,
+          oldStatus,
+          "cancelled",
+        ).catch((error) => {
+          console.error("Failed to send status change email:", error);
+        });
+      } else if (status && status !== oldStatus) {
+        // Send general status change notification for any other status change
+        sendStatusChangeNotification(
+          user,
+          appointment,
+          oldStatus,
+          status,
+        ).catch((error) => {
+          console.error("Failed to send status change email:", error);
+        });
       }
     }
 
@@ -289,7 +333,6 @@ export const updateAppointment = async (req, res) => {
     });
   }
 };
-
 // @desc    Delete appointment
 // @route   DELETE /api/admin/appointments/:id
 export const deleteAppointment = async (req, res) => {

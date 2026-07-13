@@ -30,12 +30,12 @@ export const register = async (req, res) => {
       email,
       phone,
       password,
-      role: "user", // Default role
+      role: "user",
     });
 
     const token = generateToken(user._id);
 
-    // Send welcome email (don't await - let it run in background)
+    // Send welcome email
     sendWelcomeEmail(user).catch((error) => {
       console.error("Failed to send welcome email:", error);
     });

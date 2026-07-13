@@ -1030,3 +1030,170 @@ export const appointmentConfirmedTemplate = (appointment, user) => {
     </html>
   `;
 };
+
+// Appointment Completed Email Template
+export const appointmentCompletedTemplate = (appointment, user) => {
+  const serviceLabels = {
+    twist: "Micro Locs - Twist Method",
+    braids: "Micro Locs - Braids Method",
+    interlocking: "Micro Locs - Interlocking Method",
+    retie: "Retie Maintenance",
+    repair: "Loc Repair Service",
+  };
+
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Appointment Completed</title>
+      <style>
+        body { font-family: 'Arial', sans-serif; background-color: #fdf8f6; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #4a2b1d 0%, #7f482f 100%); border-radius: 12px 12px 0 0; }
+        .header h1 { color: #c48d2c; font-family: Georgia, serif; font-size: 28px; margin: 0; }
+        .content { background: #ffffff; padding: 40px 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 20px rgba(74, 43, 29, 0.1); }
+        .content h2 { color: #4a2b1d; font-family: Georgia, serif; font-size: 22px; margin-top: 0; }
+        .details { background: #fdf8f6; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .footer { text-align: center; padding: 30px 20px; background: #fdf8f6; border-radius: 0 0 12px 12px; border-top: 1px solid #f6ede8; }
+        .footer p { color: #7f482f; font-size: 13px; margin: 5px 0; }
+        .review-box { background: #f0fdf4; border: 2px solid #86efac; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: center; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>✅ Appointment Completed</h1>
+        </div>
+        <div class="content">
+          <h2>Hello ${user.name},</h2>
+          
+          <div class="review-box">
+            <p style="font-size: 24px; margin: 0;">🎉</p>
+            <p style="font-size: 16px; color: #166534; margin: 10px 0 0 0;">
+              Your appointment has been marked as completed!
+            </p>
+          </div>
+
+          <div class="details">
+            <p><strong>📋 Service:</strong> ${serviceLabels[appointment.serviceType] || appointment.serviceType}</p>
+            <p><strong>📅 Date:</strong> ${new Date(
+              appointment.appointmentDate,
+            ).toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}</p>
+            <p><strong>⏰ Time:</strong> ${new Date(
+              appointment.appointmentDate,
+            ).toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}</p>
+          </div>
+
+          <p style="text-align: center;">
+            We hope you loved your experience! 💛<br>
+            <span style="color: #c48d2c;">- Zainab</span>
+          </p>
+        </div>
+        <div class="footer">
+          <p>📍 735 Liberty Avenue, Brooklyn, NY 11208</p>
+          <p>📞 (646) 400-7132 | 📧 info@royallabelle.com</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+};
+
+// Status Change Notification Template
+export const statusChangeNotificationTemplate = (
+  appointment,
+  user,
+  oldStatus,
+  newStatus,
+) => {
+  const serviceLabels = {
+    twist: "Micro Locs - Twist Method",
+    braids: "Micro Locs - Braids Method",
+    interlocking: "Micro Locs - Interlocking Method",
+    retie: "Retie Maintenance",
+    repair: "Loc Repair Service",
+  };
+
+  const statusMessages = {
+    confirmed: "Your appointment has been confirmed! 🎉",
+    completed:
+      "Your appointment has been marked as completed. We hope you enjoyed your experience! 💛",
+    cancelled:
+      "Your appointment has been cancelled. Please contact us if you have any questions.",
+  };
+
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Appointment Status Update</title>
+      <style>
+        body { font-family: 'Arial', sans-serif; background-color: #fdf8f6; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .header { text-align: center; padding: 30px 20px; background: linear-gradient(135deg, #4a2b1d 0%, #7f482f 100%); border-radius: 12px 12px 0 0; }
+        .header h1 { color: #c48d2c; font-family: Georgia, serif; font-size: 28px; margin: 0; }
+        .content { background: #ffffff; padding: 40px 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 20px rgba(74, 43, 29, 0.1); }
+        .content h2 { color: #4a2b1d; font-family: Georgia, serif; font-size: 22px; margin-top: 0; }
+        .status-box { background: #fdf8f6; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #c48d2c; }
+        .footer { text-align: center; padding: 30px 20px; background: #fdf8f6; border-radius: 0 0 12px 12px; border-top: 1px solid #f6ede8; }
+        .footer p { color: #7f482f; font-size: 13px; margin: 5px 0; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>📋 Status Update</h1>
+        </div>
+        <div class="content">
+          <h2>Hello ${user.name},</h2>
+          
+          <div class="status-box">
+            <p style="font-size: 16px; margin: 0;">
+              ${statusMessages[newStatus] || `Your appointment status has been updated to: ${newStatus}`}
+            </p>
+          </div>
+
+          <div class="details">
+            <p><strong>📋 Service:</strong> ${serviceLabels[appointment.serviceType] || appointment.serviceType}</p>
+            <p><strong>📅 Date:</strong> ${new Date(
+              appointment.appointmentDate,
+            ).toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}</p>
+            <p><strong>⏰ Time:</strong> ${new Date(
+              appointment.appointmentDate,
+            ).toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}</p>
+            <p><strong>📌 Status:</strong> ${newStatus.charAt(0).toUpperCase() + newStatus.slice(1)}</p>
+          </div>
+
+          <p style="text-align: center; font-size: 14px; color: #7f482f;">
+            Have questions? Contact us at (646) 400-7132
+          </p>
+        </div>
+        <div class="footer">
+          <p>📍 735 Liberty Avenue, Brooklyn, NY 11208</p>
+          <p>📞 (646) 400-7132 | 📧 info@royallabelle.com</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+};
