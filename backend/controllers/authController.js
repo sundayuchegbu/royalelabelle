@@ -30,12 +30,12 @@ export const register = async (req, res) => {
       email,
       phone,
       password,
-      role: "user",
+      role: "user", // Default role
     });
 
     const token = generateToken(user._id);
 
-    // Send welcome email
+    // Send welcome email (don't await - let it run in background)
     sendWelcomeEmail(user).catch((error) => {
       console.error("Failed to send welcome email:", error);
     });
@@ -63,7 +63,6 @@ export const register = async (req, res) => {
     });
   }
 };
-
 // @desc    Login user
 // @route   POST /api/auth/login
 export const login = async (req, res) => {

@@ -11,6 +11,7 @@ import User from "../models/User.js";
 
 // Create transporter with better error handling
 const createTransporter = () => {
+  // Check if email credentials are configured
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     console.warn(
       "⚠️ Email credentials not configured. Emails will not be sent.",
@@ -24,6 +25,7 @@ const createTransporter = () => {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
+    // Add timeout and debug options
     connectionTimeout: 5000,
     greetingTimeout: 5000,
     socketTimeout: 5000,
@@ -105,7 +107,7 @@ export const sendBookingConfirmationEmail = async (user, appointment) => {
   }
 };
 
-// Send Appointment Confirmed Email
+// Send Appointment Confirmed Email (when admin changes status to confirmed)
 export const sendAppointmentConfirmedEmail = async (user, appointment) => {
   try {
     const transporter = createTransporter();
@@ -137,7 +139,7 @@ export const sendAppointmentConfirmedEmail = async (user, appointment) => {
   }
 };
 
-// Send Appointment Completed Email
+// Send Appointment Completed Email (when admin changes status to completed)
 export const sendAppointmentCompletedEmail = async (user, appointment) => {
   try {
     const transporter = createTransporter();
@@ -178,6 +180,7 @@ export const sendAdminBookingNotification = async (appointment, user) => {
       return { success: false, message: "Email not configured" };
     }
 
+    // Get all admin users
     const admins = await User.find({
       role: { $in: ["admin", "super_admin"] },
       isActive: true,
