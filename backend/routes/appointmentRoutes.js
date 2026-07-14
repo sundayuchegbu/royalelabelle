@@ -5,7 +5,7 @@ import {
   createAppointment,
   rescheduleAppointment,
   confirmAppointment,
-  updateAppointment,
+  // updateAppointment,
 } from "../controllers/appointmentController.js";
 
 const router = express.Router();
@@ -20,7 +20,7 @@ router.post("/", validateAppointment, createAppointment);
 router.put("/:id/confirm", confirmAppointment);
 
 // Update appointment
-router.put("/:id", updateAppointment);
+// router.put("/:id", updateAppointment);
 
 // Reschedule appointment
 router.put("/:id/reschedule", rescheduleAppointment);

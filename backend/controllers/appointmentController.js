@@ -1,6 +1,6 @@
 import Appointment from "../models/Appointment.js";
 import Consultation from "../models/Consultation.js";
-import User from "../models/User.js"; // Make sure this import exists
+import User from "../models/User.js";
 import {
   sendBookingConfirmationEmail,
   sendAdminBookingNotification,
@@ -95,6 +95,54 @@ export const createAppointment = async (req, res) => {
     });
   } catch (error) {
     console.error("Appointment creation error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// @desc    Confirm appointment (after payment)
+// @route   PUT /api/appointments/:id/confirm
+export const confirmAppointment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { paymentMethod, paymentId } = req.body;
+
+    const appointment = await Appointment.findById(id);
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    // Update appointment status
+    appointment.status = "confirmed";
+    if (paymentMethod) appointment.paymentMethod = paymentMethod;
+    if (paymentId) appointment.stripePaymentId = paymentId;
+    await appointment.save();
+
+    // Update consultation status to 'completed'
+    await Consultation.findByIdAndUpdate(appointment.consultationId, {
+      status: "completed",
+    });
+
+    // Get user and send confirmation email
+    const user = await User.findById(appointment.userId);
+    if (user) {
+      sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
+        console.error("Failed to send appointment confirmed email:", error);
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Appointment confirmed successfully",
+      appointment,
+    });
+  } catch (error) {
+    console.error("Confirm appointment error:", error);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -200,14 +248,14 @@ export const cancelAppointment = async (req, res) => {
     appointment.status = "cancelled";
     await appointment.save();
 
-    // 🔑 CRITICAL FIX: Set consultation back to active so they can rebook
+    // Set consultation back to active so they can rebook
     if (appointment.consultationId) {
       await Consultation.findByIdAndUpdate(appointment.consultationId, {
         status: "active",
         expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       });
       console.log(
-        `  ✅ Consultation ${appointment.consultationId} set to active`,
+        `✅ Consultation ${appointment.consultationId} set to active`,
       );
     }
 
@@ -225,6 +273,7 @@ export const cancelAppointment = async (req, res) => {
     });
   }
 };
+
 // @desc    Reschedule appointment
 // @route   PUT /api/user/appointments/:id/reschedule
 export const rescheduleAppointment = async (req, res) => {
@@ -288,127 +337,6 @@ export const rescheduleAppointment = async (req, res) => {
     });
   } catch (error) {
     console.error("Reschedule appointment error:", error);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-// @desc    Confirm appointment (after payment)
-// @route   PUT /api/appointments/:id/confirm
-export const confirmAppointment = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { paymentMethod, paymentId } = req.body;
-
-    const appointment = await Appointment.findById(id);
-    if (!appointment) {
-      return res.status(404).json({
-        success: false,
-        message: "Appointment not found",
-      });
-    }
-
-    // Update appointment status
-    appointment.status = "confirmed";
-    if (paymentMethod) appointment.paymentMethod = paymentMethod;
-    if (paymentId) appointment.stripePaymentId = paymentId;
-    await appointment.save();
-
-    // Update consultation status to 'completed'
-    await Consultation.findByIdAndUpdate(appointment.consultationId, {
-      status: "completed",
-    });
-
-    // Get user and send confirmation email
-    const user = await User.findById(appointment.userId);
-    if (user) {
-      sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
-        console.error("Failed to send appointment confirmed email:", error);
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Appointment confirmed successfully",
-      appointment,
-    });
-  } catch (error) {
-    console.error("Confirm appointment error:", error);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-
-// Update the existing updateAppointment function to handle status change
-// @desc    Update appointment (admin)
-// @route   PUT /api/admin/appointments/:id
-export const updateAppointment = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { status, appointmentDate, notes, lateFee } = req.body;
-
-    const appointment = await Appointment.findById(id);
-    if (!appointment) {
-      return res.status(404).json({
-        success: false,
-        message: "Appointment not found",
-      });
-    }
-
-    // Check if status is changing to 'confirmed' or 'completed' or 'cancelled'
-    const isBeingConfirmed =
-      status === "confirmed" && appointment.status !== "confirmed";
-    const isBeingCompleted =
-      status === "completed" && appointment.status !== "completed";
-    const isBeingCancelled =
-      status === "cancelled" && appointment.status !== "cancelled";
-
-    // Update fields
-    if (status) {
-      appointment.status = status;
-
-      // If appointment is being confirmed or completed, update consultation status
-      if (status === "confirmed" || status === "completed") {
-        await Consultation.findByIdAndUpdate(appointment.consultationId, {
-          status: "completed",
-        });
-      }
-
-      // If appointment is being cancelled, update consultation status back to 'active'
-      if (status === "cancelled") {
-        await Consultation.findByIdAndUpdate(appointment.consultationId, {
-          status: "active",
-        });
-      }
-    }
-
-    if (appointmentDate) appointment.appointmentDate = appointmentDate;
-    if (notes) appointment.notes = notes;
-    if (lateFee !== undefined) appointment.lateFee = lateFee;
-
-    await appointment.save();
-
-    // Send email if being confirmed
-    if (isBeingConfirmed) {
-      const user = await User.findById(appointment.userId);
-      if (user) {
-        sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
-          console.error("Failed to send appointment confirmed email:", error);
-        });
-      }
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Appointment updated successfully",
-      appointment,
-    });
-  } catch (error) {
-    console.error("Update appointment error:", error);
     res.status(500).json({
       success: false,
       message: error.message,

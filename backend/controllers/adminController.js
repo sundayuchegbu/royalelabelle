@@ -4,6 +4,11 @@ import Consultation from "../models/Consultation.js";
 import Gallery from "../models/Gallery.js";
 import mongoose from "mongoose";
 import cloudinary, { extractPublicId } from "../config/cloudinary.js";
+import {
+  sendAppointmentConfirmedEmail,
+  sendAppointmentCompletedEmail,
+  sendStatusChangeNotification,
+} from "../services/emailService.js";
 
 // @desc    Get dashboard stats (uses the same auth token from User)
 // @route   GET /api/admin/stats
@@ -288,35 +293,23 @@ export const updateAppointment = async (req, res) => {
     // Send emails based on status change
     if (user) {
       if (isBeingConfirmed) {
-        // Send appointment confirmed email
-        sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
-          console.error("Failed to send appointment confirmed email:", error);
-        });
+        await sendAppointmentConfirmedEmail(user, appointment);
       } else if (isBeingCompleted) {
-        // Send appointment completed email
-        sendAppointmentCompletedEmail(user, appointment).catch((error) => {
-          console.error("Failed to send appointment completed email:", error);
-        });
+        await sendAppointmentCompletedEmail(user, appointment);
       } else if (isBeingCancelled) {
-        // Send status change notification for cancellation
-        sendStatusChangeNotification(
+        await sendStatusChangeNotification(
           user,
           appointment,
           oldStatus,
           "cancelled",
-        ).catch((error) => {
-          console.error("Failed to send status change email:", error);
-        });
+        );
       } else if (status && status !== oldStatus) {
-        // Send general status change notification for any other status change
-        sendStatusChangeNotification(
+        await sendStatusChangeNotification(
           user,
           appointment,
           oldStatus,
           status,
-        ).catch((error) => {
-          console.error("Failed to send status change email:", error);
-        });
+        );
       }
     }
 
@@ -333,6 +326,7 @@ export const updateAppointment = async (req, res) => {
     });
   }
 };
+
 // @desc    Delete appointment
 // @route   DELETE /api/admin/appointments/:id
 export const deleteAppointment = async (req, res) => {
