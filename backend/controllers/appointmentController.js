@@ -342,4 +342,4 @@ export const rescheduleAppointment = async (req, res) => {
       message: error.message,
     });
   }
-};
+}; // <-- MAKE SURE THIS CLOSING BRACE IS HERE

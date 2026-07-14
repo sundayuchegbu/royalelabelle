@@ -3,9 +3,9 @@ import {
   sendWelcomeEmail,
   sendBookingConfirmationEmail,
   sendAdminBookingNotification,
-  testEmailConnection,
   sendAppointmentConfirmedEmail,
 } from "../services/emailService.js";
+
 import User from "../models/User.js";
 import Appointment from "../models/Appointment.js";
 
@@ -136,12 +136,6 @@ router.post("/test-appointment-confirmed", async (req, res) => {
       message: error.message,
     });
   }
-});
-
-// Test email connection
-router.get("/test-connection", async (req, res) => {
-  const result = await testEmailConnection();
-  res.status(result.success ? 200 : 500).json(result);
 });
 
 // Test welcome email

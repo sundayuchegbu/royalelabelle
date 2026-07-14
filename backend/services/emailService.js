@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import {
   welcomeEmailTemplate,
   bookingConfirmationTemplate,
@@ -9,127 +9,97 @@ import {
 } from "../utils/emailTemplates.js";
 import User from "../models/User.js";
 
-// Create transporter with better error handling
-const createTransporter = () => {
-  // Check if email credentials are configured
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.warn(
-      "⚠️ Email credentials not configured. Emails will not be sent.",
-    );
-    return null;
-  }
-
-  return nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-    // Add timeout and debug options
-    connectionTimeout: 5000,
-    greetingTimeout: 5000,
-    socketTimeout: 5000,
-  });
-};
-
-// Test email connection
-export const testEmailConnection = async () => {
-  try {
-    const transporter = createTransporter();
-    if (!transporter)
-      return { success: false, message: "Email not configured" };
-
-    await transporter.verify();
-    console.log("✅ Email service connected successfully");
-    return { success: true };
-  } catch (error) {
-    console.error("❌ Email connection failed:", error.message);
-    return { success: false, error: error.message };
-  }
-};
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Send Welcome Email
 export const sendWelcomeEmail = async (user) => {
   try {
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.log("⚠️ Email not configured - skipping welcome email");
-      return { success: false, message: "Email not configured" };
+    if (!process.env.RESEND_API_KEY) {
+      console.log("⚠️ RESEND_API_KEY not configured - skipping email");
+      return { success: false, message: "RESEND_API_KEY not configured" };
     }
 
     const bookingLink = `${process.env.FRONTEND_URL || "https://royalelabelle.netlify.app"}/#booking`;
     const htmlContent = welcomeEmailTemplate(user, bookingLink);
 
-    const mailOptions = {
+    const { data, error } = await resend.emails.send({
       from:
-        process.env.EMAIL_FROM ||
-        `"Royale la'belle" <${process.env.EMAIL_USER}>`,
+        process.env.EMAIL_FROM || "Royale la'belle <noreply@royalelabelle.com>",
       to: user.email,
       subject: "Welcome to Royale la'belle! ✨",
       html: htmlContent,
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error("❌ Resend error:", error);
+      return { success: false, error: error.message };
+    }
+
     console.log(`📧 Welcome email sent to ${user.email}`);
-    return { success: true, messageId: info.messageId };
+    return { success: true, messageId: data?.id };
   } catch (error) {
     console.error("❌ Failed to send welcome email:", error.message);
     return { success: false, error: error.message };
   }
 };
 
-// Send Booking Confirmation Email (to customer)
+// Send Booking Confirmation Email
 export const sendBookingConfirmationEmail = async (user, appointment) => {
   try {
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.log("⚠️ Email not configured - skipping booking confirmation");
-      return { success: false, message: "Email not configured" };
+    if (!process.env.RESEND_API_KEY) {
+      console.log("⚠️ RESEND_API_KEY not configured - skipping email");
+      return { success: false, message: "RESEND_API_KEY not configured" };
     }
 
     const htmlContent = bookingConfirmationTemplate(appointment, user);
 
-    const mailOptions = {
+    const { data, error } = await resend.emails.send({
       from:
-        process.env.EMAIL_FROM ||
-        `"Royale la'belle" <${process.env.EMAIL_USER}>`,
+        process.env.EMAIL_FROM || "Royale la'belle <noreply@royalelabelle.com>",
       to: user.email,
       subject: "📋 Booking Confirmation - Royale la'belle",
       html: htmlContent,
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error("❌ Resend error:", error);
+      return { success: false, error: error.message };
+    }
+
     console.log(`📧 Booking confirmation sent to ${user.email}`);
-    return { success: true, messageId: info.messageId };
+    return { success: true, messageId: data?.id };
   } catch (error) {
     console.error("❌ Failed to send booking confirmation:", error.message);
     return { success: false, error: error.message };
   }
 };
 
-// Send Appointment Confirmed Email (when admin changes status to confirmed)
+// Send Appointment Confirmed Email
 export const sendAppointmentConfirmedEmail = async (user, appointment) => {
   try {
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.log("⚠️ Email not configured - skipping appointment confirmed");
-      return { success: false, message: "Email not configured" };
+    if (!process.env.RESEND_API_KEY) {
+      console.log("⚠️ RESEND_API_KEY not configured - skipping email");
+      return { success: false, message: "RESEND_API_KEY not configured" };
     }
 
     const htmlContent = appointmentConfirmedTemplate(appointment, user);
 
-    const mailOptions = {
+    const { data, error } = await resend.emails.send({
       from:
-        process.env.EMAIL_FROM ||
-        `"Royale la'belle" <${process.env.EMAIL_USER}>`,
+        process.env.EMAIL_FROM || "Royale la'belle <noreply@royalelabelle.com>",
       to: user.email,
       subject: "✅ Appointment Confirmed - Royale la'belle",
       html: htmlContent,
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error("❌ Resend error:", error);
+      return { success: false, error: error.message };
+    }
+
     console.log(`📧 Appointment confirmed email sent to ${user.email}`);
-    return { success: true, messageId: info.messageId };
+    return { success: true, messageId: data?.id };
   } catch (error) {
     console.error(
       "❌ Failed to send appointment confirmed email:",
@@ -139,29 +109,31 @@ export const sendAppointmentConfirmedEmail = async (user, appointment) => {
   }
 };
 
-// Send Appointment Completed Email (when admin changes status to completed)
+// Send Appointment Completed Email
 export const sendAppointmentCompletedEmail = async (user, appointment) => {
   try {
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.log("⚠️ Email not configured - skipping appointment completed");
-      return { success: false, message: "Email not configured" };
+    if (!process.env.RESEND_API_KEY) {
+      console.log("⚠️ RESEND_API_KEY not configured - skipping email");
+      return { success: false, message: "RESEND_API_KEY not configured" };
     }
 
     const htmlContent = appointmentCompletedTemplate(appointment, user);
 
-    const mailOptions = {
+    const { data, error } = await resend.emails.send({
       from:
-        process.env.EMAIL_FROM ||
-        `"Royale la'belle" <${process.env.EMAIL_USER}>`,
+        process.env.EMAIL_FROM || "Royale la'belle <noreply@royalelabelle.com>",
       to: user.email,
       subject: "✅ Appointment Completed - Royale la'belle",
       html: htmlContent,
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error("❌ Resend error:", error);
+      return { success: false, error: error.message };
+    }
+
     console.log(`📧 Appointment completed email sent to ${user.email}`);
-    return { success: true, messageId: info.messageId };
+    return { success: true, messageId: data?.id };
   } catch (error) {
     console.error(
       "❌ Failed to send appointment completed email:",
@@ -174,10 +146,9 @@ export const sendAppointmentCompletedEmail = async (user, appointment) => {
 // Send Admin Notification for New Booking
 export const sendAdminBookingNotification = async (appointment, user) => {
   try {
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.log("⚠️ Email not configured - skipping admin notification");
-      return { success: false, message: "Email not configured" };
+    if (!process.env.RESEND_API_KEY) {
+      console.log("⚠️ RESEND_API_KEY not configured - skipping email");
+      return { success: false, message: "RESEND_API_KEY not configured" };
     }
 
     // Get all admin users
@@ -194,18 +165,21 @@ export const sendAdminBookingNotification = async (appointment, user) => {
     const adminEmails = admins.map((admin) => admin.email);
     const htmlContent = adminBookingNotificationTemplate(appointment, user);
 
-    const mailOptions = {
+    const { data, error } = await resend.emails.send({
       from:
-        process.env.EMAIL_FROM ||
-        `"Royale la'belle" <${process.env.EMAIL_USER}>`,
+        process.env.EMAIL_FROM || "Royale la'belle <noreply@royalelabelle.com>",
       to: adminEmails,
       subject: "📅 New Booking Alert - Royale la'belle",
       html: htmlContent,
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error("❌ Resend error:", error);
+      return { success: false, error: error.message };
+    }
+
     console.log(`📧 Admin notification sent to ${adminEmails.length} admins`);
-    return { success: true, messageId: info.messageId };
+    return { success: true, messageId: data?.id };
   } catch (error) {
     console.error("❌ Failed to send admin notification:", error.message);
     return { success: false, error: error.message };
@@ -220,12 +194,9 @@ export const sendStatusChangeNotification = async (
   newStatus,
 ) => {
   try {
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.log(
-        "⚠️ Email not configured - skipping status change notification",
-      );
-      return { success: false, message: "Email not configured" };
+    if (!process.env.RESEND_API_KEY) {
+      console.log("⚠️ RESEND_API_KEY not configured - skipping email");
+      return { success: false, message: "RESEND_API_KEY not configured" };
     }
 
     const htmlContent = statusChangeNotificationTemplate(
@@ -235,49 +206,25 @@ export const sendStatusChangeNotification = async (
       newStatus,
     );
 
-    const mailOptions = {
+    const { data, error } = await resend.emails.send({
       from:
-        process.env.EMAIL_FROM ||
-        `"Royale la'belle" <${process.env.EMAIL_USER}>`,
+        process.env.EMAIL_FROM || "Royale la'belle <noreply@royalelabelle.com>",
       to: user.email,
       subject: `📋 Appointment ${newStatus} - Royale la'belle`,
       html: htmlContent,
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error("❌ Resend error:", error);
+      return { success: false, error: error.message };
+    }
+
     console.log(
       `📧 Status change email sent to ${user.email} (${oldStatus} → ${newStatus})`,
     );
-    return { success: true, messageId: info.messageId };
+    return { success: true, messageId: data?.id };
   } catch (error) {
     console.error("❌ Failed to send status change email:", error.message);
-    return { success: false, error: error.message };
-  }
-};
-
-// Send Generic Email
-export const sendEmail = async (to, subject, htmlContent) => {
-  try {
-    const transporter = createTransporter();
-    if (!transporter) {
-      console.log("⚠️ Email not configured - skipping email");
-      return { success: false, message: "Email not configured" };
-    }
-
-    const mailOptions = {
-      from:
-        process.env.EMAIL_FROM ||
-        `"Royale la'belle" <${process.env.EMAIL_USER}>`,
-      to: to,
-      subject: subject,
-      html: htmlContent,
-    };
-
-    const info = await transporter.sendMail(mailOptions);
-    console.log(`📧 Email sent to ${to}`);
-    return { success: true, messageId: info.messageId };
-  } catch (error) {
-    console.error("❌ Failed to send email:", error.message);
     return { success: false, error: error.message };
   }
 };
