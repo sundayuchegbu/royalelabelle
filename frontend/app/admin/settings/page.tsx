@@ -259,7 +259,7 @@ export default function AdminSettings() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading settings...</p>
         </div>
       </div>
@@ -310,7 +310,7 @@ export default function AdminSettings() {
       {/* Save Success Banner */}
       {saveSuccess && (
         <div className="bg-green-50 border-2 border-green-500 rounded-xl p-4 mb-6 flex items-center gap-3 animate-fadeInUp">
-          <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
+          <CheckCircle className="w-6 h-6 text-green-500 shrink-0" />
           <div>
             <p className="font-medium text-green-800">Settings Saved!</p>
             <p className="text-sm text-green-700">
@@ -330,7 +330,7 @@ export default function AdminSettings() {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex items-center gap-2 px-6 py-4 text-sm font-medium transition-colors whitespace-nowrap ${
                   activeTab === tab.id
-                    ? "text-[#c48d2c] border-b-2 border-[#c48d2c]"
+                    ? "text-gold border-b-2 border-gold"
                     : "text-[#7f482f] hover:text-[#4a2b1d] hover:bg-[#fdf8f6]"
                 }`}
               >
@@ -369,7 +369,7 @@ export default function AdminSettings() {
                           businessName: e.target.value,
                         })
                       }
-                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -389,7 +389,7 @@ export default function AdminSettings() {
                           businessEmail: e.target.value,
                         })
                       }
-                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -409,7 +409,7 @@ export default function AdminSettings() {
                           businessPhone: e.target.value,
                         })
                       }
-                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -423,7 +423,7 @@ export default function AdminSettings() {
                     <input
                       type="url"
                       value="https://royallabelle.com"
-                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-gray-50"
+                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-gray-50"
                       disabled
                     />
                   </div>
@@ -445,7 +445,7 @@ export default function AdminSettings() {
                       })
                     }
                     rows={3}
-                    className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none"
+                    className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none"
                   />
                 </div>
               </div>
@@ -500,7 +500,7 @@ export default function AdminSettings() {
                             )
                           }
                           disabled={isClosed}
-                          className="px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                          className="px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                         />
                         <span className="text-[#7f482f]">to</span>
                         <input
@@ -514,7 +514,7 @@ export default function AdminSettings() {
                             )
                           }
                           disabled={isClosed}
-                          className="px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                          className="px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                         />
                       </div>
                       <button
@@ -585,7 +585,7 @@ export default function AdminSettings() {
                               }
                               min="0"
                               step="50"
-                              className="w-full px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                              className="w-full px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                             />
                           </div>
                           <div>
@@ -607,7 +607,7 @@ export default function AdminSettings() {
                               }
                               min="0"
                               step="50"
-                              className="w-full px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                              className="w-full px-3 py-1 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                             />
                           </div>
                         </div>
@@ -777,7 +777,7 @@ export default function AdminSettings() {
                         Users who will receive admin notifications
                       </p>
                     </div>
-                    <button className="px-3 py-1 text-sm bg-[#c48d2c] text-white rounded-lg">
+                    <button className="px-3 py-1 text-sm bg-gold text-white rounded-lg">
                       Manage Admins
                     </button>
                   </div>
@@ -822,7 +822,7 @@ export default function AdminSettings() {
                       onClick={() => handleThemeChange(theme.key as any)}
                       className={`p-6 rounded-xl border-2 transition-all ${
                         isSelected
-                          ? "border-[#c48d2c] bg-[#fdf8f6] shadow-lg"
+                          ? "border-gold bg-[#fdf8f6] shadow-lg"
                           : "border-[#f6ede8] hover:border-[#d4a691]"
                       }`}
                     >
@@ -830,7 +830,7 @@ export default function AdminSettings() {
                         <div
                           className={`w-12 h-12 rounded-full flex items-center justify-center ${
                             isSelected
-                              ? "bg-[#c48d2c] text-white"
+                              ? "bg-gold text-white"
                               : "bg-[#f6ede8] text-[#7f482f]"
                           }`}
                         >
@@ -838,7 +838,7 @@ export default function AdminSettings() {
                         </div>
                         <div className="text-center">
                           <p
-                            className={`font-medium ${isSelected ? "text-[#c48d2c]" : "text-[#4a2b1d]"}`}
+                            className={`font-medium ${isSelected ? "text-gold" : "text-[#4a2b1d]"}`}
                           >
                             {theme.label}
                           </p>

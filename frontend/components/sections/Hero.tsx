@@ -43,11 +43,11 @@ export default function Hero() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6">
             <p className="text-gold font-semibold text-sm tracking-widest">
-              🌟 AMP Certified Micro Locs Specialist
+              🌟 Loc'd in Beauty, Rooted in Royalty
             </p>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-bold mb-6 leading-tight">
+          <h1 className="font-serif text-4xl sm:text-5xl pt-12 sm:pt-0 md:text-6xl lg:text-7xl text-white font-bold mb-6 leading-tight">
             Hello Beautiful,
             <br />
             <span className="text-gradient">Welcome to Royale la'belle</span>
@@ -81,11 +81,11 @@ export default function Hero() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+          {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
             {[
               { label: "Happy Clients", value: "500+" },
-              { label: "Years Experience", value: "8+" },
-              { label: "Certified Specialist", value: "AMP" },
+              { label: "Years Experience", value: "4+" },
+              { label: "Skilled ", value: "Locs Specialist" },
               { label: "Locs Installed", value: "1000+" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
@@ -93,7 +93,7 @@ export default function Hero() {
                 <p className="text-[#d4a691] text-sm">{stat.label}</p>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
 

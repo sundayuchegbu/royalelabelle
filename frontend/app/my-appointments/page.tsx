@@ -132,7 +132,7 @@ export default function MyAppointmentsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading appointments...</p>
         </div>
       </div>
@@ -178,7 +178,7 @@ export default function MyAppointmentsPage() {
               onClick={() => setFilter(option.value)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 filter === option.value
-                  ? "bg-[#c48d2c] text-white"
+                  ? "bg-gold text-white"
                   : "bg-white text-[#7f482f] hover:bg-[#f6ede8]"
               }`}
             >
@@ -263,7 +263,7 @@ export default function MyAppointmentsPage() {
                       onClick={() =>
                         router.push(`/my-appointments/${appointment._id}`)
                       }
-                      className="p-2 text-[#c48d2c] hover:bg-[#fdf8f6] rounded-lg transition-colors"
+                      className="p-2 text-gold hover:bg-[#fdf8f6] rounded-lg transition-colors"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>

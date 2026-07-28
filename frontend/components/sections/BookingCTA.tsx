@@ -39,7 +39,7 @@ export default function BookingCTA() {
             </Button>
           </div>
           <p className="mt-6 text-[#d4a691] text-sm">
-            Virtual consultations available • Serving Brooklyn, NY
+            Virtual consultations available • Serving Kitchener, Ontario
           </p>
         </div>
       </div>

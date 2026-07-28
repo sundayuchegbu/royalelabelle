@@ -18,18 +18,18 @@ export default function Services() {
       description:
         "Keep your locs looking fresh with regular reties and professional maintenance services.",
     },
-    {
-      icon: <Wrench className="w-8 h-8" />,
-      title: "Repairs & Restoration",
-      description:
-        "Expert repair services for damaged locs, thinning areas, and loc restoration.",
-    },
-    {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: "Natural Hair Care",
-      description:
-        "Comprehensive natural hair care services including deep conditioning and scalp treatments.",
-    },
+    // {
+    //   icon: <Wrench className="w-8 h-8" />,
+    //   title: "Repairs & Restoration",
+    //   description:
+    //     "Expert repair services for damaged locs, thinning areas, and loc restoration.",
+    // },
+    // {
+    //   icon: <Sparkles className="w-8 h-8" />,
+    //   title: "Natural Hair Care",
+    //   description:
+    //     "Comprehensive natural hair care services including deep conditioning and scalp treatments.",
+    // },
   ];
 
   return (

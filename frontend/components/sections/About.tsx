@@ -10,9 +10,9 @@ export default function About() {
   const features = [
     {
       icon: <Award className="w-6 h-6 text-gold" />,
-      title: "AMP Certified",
+      title: "Micro Locs Specialist",
       description:
-        "Certified micro locs specialist with advanced training and expertise.",
+        " Micro locs specialist with advanced training and expertise.",
     },
     {
       icon: <Sparkles className="w-6 h-6 text-gold" />,
@@ -59,7 +59,7 @@ export default function About() {
             </div>
             {/* Decorative Badge */}
             <div className="absolute -bottom-4 -right-4 bg-gradient-gold text-white px-6 py-3 rounded-lg shadow-lg">
-              <p className="font-semibold">8+ Years</p>
+              <p className="font-semibold">4+ Years</p>
               <p className="text-xs opacity-90">of Excellence</p>
             </div>
           </div>
@@ -69,22 +69,21 @@ export default function About() {
             <SectionHeadingComponent
               subtitle="About Me"
               title="Your Trusted Micro Locs Specialist"
-              description="Hello beautiful! I'm Zainab, an AMP certified Micro Locs and natural hair specialist."
+              description="Welcome! I'm Peacequeen"
               align="left"
               className="mb-8"
             />
 
             <p className="text-[#7f482f] leading-relaxed mb-6">
-              Whether you are just about to start or you are already on your
-              locs journey, my goal is to help you start and maintain healthy
-              and beautiful locs. I believe every client deserves personalized
-              care and attention to detail.
+              I'm dedicated to creating locs that are beautiful, strong, and
+              made to last. Every appointment is tailored to your hair's unique
+              needs, with a focus on quality, consistency, and a comfortable
+              experience.
             </p>
 
             <p className="text-[#7f482f] leading-relaxed mb-8">
-              With over 8 years of experience and AMP certification, I bring
-              expertise, passion, and precision to every appointment. Your hair
-              health and satisfaction are my top priorities.
+              With over four years of hands-on experience, I'm committed to
+              helping you wear your locs with confidence from day one.
             </p>
 
             <div className="grid grid-cols-2 gap-4">

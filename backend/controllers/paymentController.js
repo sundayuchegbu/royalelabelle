@@ -103,6 +103,7 @@ export const getPaymentInfo = async (req, res) => {
           email: process.env.INTERAC_EMAIL,
           phone: process.env.INTERAC_PHONE,
           name: process.env.INTERAC_NAME,
+
           description: "Pay with Interac e-Transfer (Canadian banks)",
           processingTime: "24-48 hours for verification",
         },

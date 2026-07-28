@@ -400,7 +400,7 @@ export default function AdminReports() {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-[#c48d2c] animate-spin mx-auto" />
+          <Loader2 className="w-12 h-12 text-gold animate-spin mx-auto" />
           <p className="mt-4 text-[#7f482f]">Loading reports...</p>
         </div>
       </div>
@@ -449,7 +449,7 @@ export default function AdminReports() {
               onClick={() => setDateRange(period as any)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 dateRange === period
-                  ? "bg-[#c48d2c] text-white"
+                  ? "bg-gold text-white"
                   : "bg-[#fdf8f6] text-[#7f482f] hover:bg-[#f6ede8]"
               }`}
             >
@@ -465,7 +465,7 @@ export default function AdminReports() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs text-[#7f482f]">Total Revenue</p>
-              <p className="text-2xl font-bold text-[#c48d2c]">
+              <p className="text-2xl font-bold text-gold">
                 {formatPrice(revenue.total)}
               </p>
             </div>
@@ -551,7 +551,7 @@ export default function AdminReports() {
         {/* Monthly Revenue Chart */}
         <div className="bg-white rounded-xl shadow-luxury p-6">
           <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-            <TrendingUp className="w-5 h-5 text-[#c48d2c] mr-2" />
+            <TrendingUp className="w-5 h-5 text-gold mr-2" />
             Revenue Trend
           </h3>
           <div className="h-72">
@@ -584,7 +584,7 @@ export default function AdminReports() {
         {/* Payment Methods Pie Chart */}
         <div className="bg-white rounded-xl shadow-luxury p-6">
           <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-            <PieChartIcon className="w-5 h-5 text-[#c48d2c] mr-2" />
+            <PieChartIcon className="w-5 h-5 text-gold mr-2" />
             Payment Methods
           </h3>
           <div className="h-72">
@@ -632,7 +632,7 @@ export default function AdminReports() {
         {/* Service Breakdown */}
         <div className="bg-white rounded-xl shadow-luxury p-6">
           <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-            <ShoppingBag className="w-5 h-5 text-[#c48d2c] mr-2" />
+            <ShoppingBag className="w-5 h-5 text-gold mr-2" />
             Service Breakdown
           </h3>
           <div className="h-72">
@@ -652,7 +652,7 @@ export default function AdminReports() {
         {/* Status Breakdown */}
         <div className="bg-white rounded-xl shadow-luxury p-6">
           <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-            <AlertCircle className="w-5 h-5 text-[#c48d2c] mr-2" />
+            <AlertCircle className="w-5 h-5 text-gold mr-2" />
             Appointment Status
           </h3>
           <div className="h-72">
@@ -815,7 +815,7 @@ export default function AdminReports() {
       {/* Daily Revenue Chart */}
       <div className="bg-white rounded-xl shadow-luxury p-6">
         <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-          <Calendar className="w-5 h-5 text-[#c48d2c] mr-2" />
+          <Calendar className="w-5 h-5 text-gold mr-2" />
           Daily Revenue (Last 30 Days)
         </h3>
         <div className="h-64">

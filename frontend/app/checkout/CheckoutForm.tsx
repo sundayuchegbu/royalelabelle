@@ -241,7 +241,7 @@ export default function checkoutForm() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#fdf8f6]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading payment...</p>
         </div>
       </div>
@@ -252,7 +252,7 @@ export default function checkoutForm() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#fdf8f6]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Redirecting to login...</p>
         </div>
         {showAuthModal && (
@@ -321,7 +321,7 @@ export default function checkoutForm() {
             paymentMethod === "interac" ||
             paymentMethod === "cash" ? (
             <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
               <p className="mt-4 text-[#7f482f]">
                 {paymentMethod === "cash"
                   ? "Confirming appointment..."

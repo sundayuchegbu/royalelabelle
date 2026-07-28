@@ -31,7 +31,7 @@ export default function ProtectedRoute({
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold"></div>
       </div>
     );
   }
@@ -41,7 +41,7 @@ export default function ProtectedRoute({
       <>
         <div className="min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
             <p className="mt-4 text-[#7f482f]">Please wait...</p>
           </div>
         </div>

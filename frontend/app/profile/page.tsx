@@ -86,7 +86,7 @@ export default function ProfilePage() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold"></div>
       </div>
     );
   }
@@ -117,7 +117,7 @@ export default function ProfilePage() {
                     <User className="w-16 h-16 text-[#7f482f]" />
                   )}
                 </div>
-                <label className="absolute bottom-0 right-0 p-1.5 bg-[#c48d2c] rounded-full cursor-pointer hover:bg-[#d6a545] transition-colors">
+                <label className="absolute bottom-0 right-0 p-1.5 bg-gold rounded-full cursor-pointer hover:bg-[#d6a545] transition-colors">
                   <Camera className="w-4 h-4 text-white" />
                   <input
                     type="file"
@@ -158,7 +158,7 @@ export default function ProfilePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
-                    <User className="w-5 h-5 text-[#c48d2c]" />
+                    <User className="w-5 h-5 text-gold" />
                     <div>
                       <p className="text-xs text-[#7f482f]">Full Name</p>
                       <p className="text-[#4a2b1d]">
@@ -167,14 +167,14 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Mail className="w-5 h-5 text-[#c48d2c]" />
+                    <Mail className="w-5 h-5 text-gold" />
                     <div>
                       <p className="text-xs text-[#7f482f]">Email</p>
                       <p className="text-[#4a2b1d]">{user?.email}</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Phone className="w-5 h-5 text-[#c48d2c]" />
+                    <Phone className="w-5 h-5 text-gold" />
                     <div>
                       <p className="text-xs text-[#7f482f]">Phone</p>
                       <p className="text-[#4a2b1d]">
@@ -186,7 +186,7 @@ export default function ProfilePage() {
 
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3">
-                    <MapPin className="w-5 h-5 text-[#c48d2c] mt-1" />
+                    <MapPin className="w-5 h-5 text-gold mt-1" />
                     <div>
                       <p className="text-xs text-[#7f482f]">Location</p>
                       <p className="text-[#4a2b1d]">
@@ -195,7 +195,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
-                    <User className="w-5 h-5 text-[#c48d2c] mt-1" />
+                    <User className="w-5 h-5 text-gold mt-1" />
                     <div>
                       <p className="text-xs text-[#7f482f]">Bio</p>
                       <p className="text-[#4a2b1d]">
@@ -216,7 +216,7 @@ export default function ProfilePage() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
                 </div>
 
@@ -229,7 +229,7 @@ export default function ProfilePage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
                 </div>
 
@@ -243,7 +243,7 @@ export default function ProfilePage() {
                     value={formData.location}
                     onChange={handleChange}
                     placeholder="e.g., Brooklyn, NY"
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   />
                 </div>
 
@@ -257,7 +257,7 @@ export default function ProfilePage() {
                     onChange={handleChange}
                     rows={3}
                     placeholder="Tell us a bit about yourself..."
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none"
                   />
                 </div>
 
@@ -287,15 +287,15 @@ export default function ProfilePage() {
         {/* Quick Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
           <div className="bg-white rounded-xl shadow-luxury p-4 text-center">
-            <p className="text-2xl font-bold text-[#c48d2c]">12</p>
+            <p className="text-2xl font-bold text-gold">12</p>
             <p className="text-sm text-[#7f482f]">Total Appointments</p>
           </div>
           <div className="bg-white rounded-xl shadow-luxury p-4 text-center">
-            <p className="text-2xl font-bold text-[#c48d2c]">8</p>
+            <p className="text-2xl font-bold text-gold">8</p>
             <p className="text-sm text-[#7f482f]">Completed</p>
           </div>
           <div className="bg-white rounded-xl shadow-luxury p-4 text-center">
-            <p className="text-2xl font-bold text-[#c48d2c]">2</p>
+            <p className="text-2xl font-bold text-gold">2</p>
             <p className="text-sm text-[#7f482f]">Upcoming</p>
           </div>
         </div>

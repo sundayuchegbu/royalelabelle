@@ -57,9 +57,9 @@ export default function Gallery() {
             title="Gallery of Excellence"
             description="Explore my work and see the transformation of beautiful locs."
           />
-          <div className="flex items-center justify-center min-h-[300px]">
+          <div className="flex items-center justify-center min-h-75">
             <div className="text-center">
-              <Loader2 className="w-12 h-12 text-[#c48d2c] animate-spin mx-auto" />
+              <Loader2 className="w-12 h-12 text-gold animate-spin mx-auto" />
               <p className="mt-4 text-[#7f482f]">Loading gallery...</p>
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function Gallery() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   selectedCategory === category
-                    ? "bg-[#c48d2c] text-white"
+                    ? "bg-gold text-white"
                     : "bg-white text-[#7f482f] hover:bg-[#f6ede8]"
                 }`}
               >
@@ -112,7 +112,7 @@ export default function Gallery() {
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-4">
                   <div>
                     <p className="text-white font-semibold text-sm">
                       {image.title}
@@ -139,14 +139,14 @@ export default function Gallery() {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#4a2b1d] to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300 flex items-end p-4">
+                <div className="absolute inset-0 bg-linear-to-t from-[#4a2b1d] to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300 flex items-end p-4">
                   <div>
                     <p className="text-white font-semibold">{image.title}</p>
                     <p className="text-[#d4a691] text-sm capitalize">
                       {image.category.replace("-", " ")}
                     </p>
                     {image.isFeatured && (
-                      <span className="inline-block mt-1 bg-[#c48d2c] text-white text-xs px-2 py-0.5 rounded-full">
+                      <span className="inline-block mt-1 bg-gold text-white text-xs px-2 py-0.5 rounded-full">
                         Featured
                       </span>
                     )}
@@ -176,7 +176,7 @@ export default function Gallery() {
                   gallerySection.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="text-[#c48d2c] font-semibold hover:text-[#d6a545] transition-colors"
+              className="text-gold font-semibold hover:text-[#d6a545] transition-colors"
             >
               View Full Gallery →
             </button>

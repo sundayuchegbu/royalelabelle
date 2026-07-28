@@ -54,34 +54,34 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   const serviceTypes = [
     {
       value: "twist",
-      label: "Micro Locs - Twist Method",
-      price: "$1,000",
-      deposit: "$200",
+      label: "Micro Locs - Twist Method longer than 6 inches, + $100",
+      price: "$600",
+      deposit: "$400",
     },
     {
       value: "braids",
       label: "Micro Locs - Braids Method",
-      price: "$1,200",
-      deposit: "$200",
+      price: "$700",
+      deposit: "$500",
     },
     {
       value: "interlocking",
       label: "Micro Locs - Interlocking Method",
-      price: "$1,600",
-      deposit: "$300",
+      price: "$1,000",
+      deposit: "$800",
     },
     {
       value: "retie",
-      label: "Retie Maintenance",
+      label: "Retie Maintenance, Every extra hour + $25",
       price: "$150",
-      deposit: "$200",
+      deposit: "$100",
     },
-    {
-      value: "repair",
-      label: "Loc Repair Service",
-      price: "$200",
-      deposit: "$200",
-    },
+    // {
+    //   value: "repair",
+    //   label: "Loc Repair Service",
+    //   price: "$200",
+    //   deposit: "$200",
+    // },
   ];
 
   const hairTypes = [
@@ -271,7 +271,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                 Book Your Appointment
               </h2>
               {!isAuthenticated && (
-                <p className="text-xs text-[#c48d2c] flex items-center mt-1">
+                <p className="text-xs text-gold flex items-center mt-1">
                   <Shield className="w-3 h-3 mr-1" />
                   Please sign in or register to book
                 </p>
@@ -300,7 +300,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
             {/* Personal Information */}
             <div className="border-b border-[#f6ede8] pb-4">
               <h4 className="font-semibold text-[#4a2b1d] mb-3 flex items-center text-sm">
-                <User className="w-4 h-4 text-[#c48d2c] mr-2" />
+                <User className="w-4 h-4 text-gold mr-2" />
                 Personal Information
               </h4>
 
@@ -317,7 +317,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your full name"
-                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent text-sm bg-white"
+                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                       required
                       readOnly={isAuthenticated && !!user?.name}
                     />
@@ -336,7 +336,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="your@email.com"
-                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent text-sm bg-white"
+                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                       required
                       readOnly={isAuthenticated && !!user?.email}
                     />
@@ -356,7 +356,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="(555) 555-5555"
-                    className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent text-sm bg-white"
+                    className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                     required
                     readOnly={isAuthenticated && !!user?.phone}
                   />
@@ -367,7 +367,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
             {/* Hair Information */}
             <div className="border-b border-[#f6ede8] pb-4">
               <h4 className="font-semibold text-[#4a2b1d] mb-3 flex items-center text-sm">
-                <Scissors className="w-4 h-4 text-[#c48d2c] mr-2" />
+                <Scissors className="w-4 h-4 text-gold mr-2" />
                 Hair Information
               </h4>
 
@@ -380,7 +380,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                     name="hairType"
                     value={formData.hairType}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white text-sm"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white text-sm"
                     required
                   >
                     <option value="">Select hair type...</option>
@@ -400,7 +400,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                     name="hairLength"
                     value={formData.hairLength}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white text-sm"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white text-sm"
                     required
                   >
                     <option value="">Select hair length...</option>
@@ -422,7 +422,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                     name="hairDensity"
                     value={formData.hairDensity}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white text-sm"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white text-sm"
                     required
                   >
                     <option value="">Select hair density...</option>
@@ -444,7 +444,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                     value={formData.hairCondition}
                     onChange={handleChange}
                     placeholder="e.g., Healthy, Damaged..."
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent text-sm bg-white"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                     required
                   />
                 </div>
@@ -454,7 +454,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
             {/* Style Preferences */}
             <div className="border-b border-[#f6ede8] pb-4">
               <h4 className="font-semibold text-[#4a2b1d] mb-3 flex items-center text-sm">
-                <Calendar className="w-4 h-4 text-[#c48d2c] mr-2" />
+                <Calendar className="w-4 h-4 text-gold mr-2" />
                 Style & Schedule
               </h4>
 
@@ -466,7 +466,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                   name="preferredStyle"
                   value={formData.preferredStyle}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white text-sm"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white text-sm"
                   required
                 >
                   <option value="">Select a style...</option>
@@ -491,7 +491,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                       name="preferredDate"
                       value={formData.preferredDate}
                       onChange={handleChange}
-                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent text-sm bg-white"
+                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                       min={new Date().toISOString().split("T")[0]}
                       required
                     />
@@ -509,7 +509,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                       name="preferredTime"
                       value={formData.preferredTime}
                       onChange={handleChange}
-                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent text-sm bg-white"
+                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                       required
                     />
                   </div>
@@ -520,7 +520,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
             {/* Additional Information */}
             <div>
               <h4 className="font-semibold text-[#4a2b1d] mb-3 flex items-center text-sm">
-                <MessageCircle className="w-4 h-4 text-[#c48d2c] mr-2" />
+                <MessageCircle className="w-4 h-4 text-gold mr-2" />
                 Additional Information
               </h4>
 
@@ -534,7 +534,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                   onChange={handleChange}
                   placeholder="What are your hair goals?"
                   rows={2}
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none text-sm bg-white"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none text-sm bg-white"
                 />
               </div>
 
@@ -548,7 +548,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                   onChange={handleChange}
                   placeholder="Any special requests..."
                   rows={2}
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none text-sm bg-white"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none text-sm bg-white"
                 />
               </div>
             </div>
@@ -568,9 +568,9 @@ export default function BookingModal({ onClose }: BookingModalProps) {
             </Button>
 
             {!isAuthenticated && (
-              <div className="bg-[#fff5e6] p-3 rounded-lg border-l-4 border-[#c48d2c]">
+              <div className="bg-[#fff5e6] p-3 rounded-lg border-l-4 border-gold">
                 <p className="text-xs text-[#7f482f] flex items-start space-x-2">
-                  <AlertCircle className="w-4 h-4 text-[#c48d2c] flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-4 h-4 text-gold shrink-0 mt-0.5" />
                   <span>
                     By clicking "Sign In to Book", you'll be prompted to log in
                     or create an account. All fields will be auto-filled after
@@ -583,7 +583,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
             {isAuthenticated && (
               <div className="bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
                 <p className="text-xs text-green-700 flex items-start space-x-2">
-                  <Shield className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                  <Shield className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                   <span>
                     Signed in as <strong>{user?.name}</strong>. Your personal
                     details have been auto-filled. Complete the form to book.

@@ -7,23 +7,27 @@ export default function Pricing() {
   const pricingData = [
     {
       title: "Micro Locs Twist",
-      price: "$1,000",
-      deposit: "$200",
+      price: "$600",
+      deposit: "$400",
       features: [
         "Professional twist installation",
-        "AMP certified technique",
+        // "AMP certified technique",
+        "Longer than 6 inches +$100",
+        "Higher density +$100",
         "Customized for your hair type",
         "Post-installation care guide",
       ],
       popular: false,
     },
     {
-      title: "Micro Locs Braids",
-      price: "$1,200",
-      deposit: "$200",
+      title: "Braids  Method",
+      price: "$700",
+      deposit: "$500",
       features: [
         "Professional braid installation",
-        "AMP certified technique",
+        // "AMP certified technique",
+        "Longer than 6 inches +$100",
+        "Higher density +$100",
         "Customized for your hair type",
         "Post-installation care guide",
         "Bonus: Maintenance tips",
@@ -32,11 +36,13 @@ export default function Pricing() {
     },
     {
       title: "Micro Locs Interlocking",
-      price: "$1,600",
-      deposit: "$300",
+      price: "$1,000",
+      deposit: "$700",
       features: [
         "Professional interlocking installation",
-        "AMP certified technique",
+        // "AMP certified technique",
+        "Longer than 6 inches +200",
+        "Higher density +$200",
         "Customized for your hair type",
         "Post-installation care guide",
         "Bonus: Maintenance tips",
@@ -61,7 +67,7 @@ export default function Pricing() {
               key={plan.title}
               className={`relative bg-[#fdf8f6] rounded-2xl p-8 transition-all duration-300 ${
                 plan.popular
-                  ? "shadow-2xl border-2 border-[#c48d2c] transform -translate-y-4"
+                  ? "shadow-2xl border-2 border-gold transform -translate-y-4"
                   : "shadow-luxury hover:shadow-2xl"
               }`}
             >
@@ -74,7 +80,7 @@ export default function Pricing() {
                 {plan.title}
               </h3>
               <div className="mb-4">
-                <span className="text-4xl font-bold text-[#c48d2c]">
+                <span className="text-4xl font-bold text-gold">
                   {plan.price}
                 </span>
                 <p className="text-sm text-[#7f482f]">
@@ -84,7 +90,7 @@ export default function Pricing() {
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start space-x-2">
-                    <Check className="w-5 h-5 text-[#c48d2c] flex-shrink-0 mt-0.5" />
+                    <Check className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                     <span className="text-[#4a2b1d] text-sm">{feature}</span>
                   </li>
                 ))}

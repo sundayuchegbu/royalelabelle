@@ -16,9 +16,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Royale la'belle - AMP Certified Micro Locs Specialist",
+  title: "Royale la'belle -  Micro Locs Specialist",
   description:
-    "Expert micro locs and natural hair care in Brooklyn, NY. AMP certified specialist offering professional installations, reties, and repairs.",
+    "Expert micro locs and natural hair care in Kitchener, ON. Micro locs specialist offering professional installations, reties, and repairs.",
 };
 
 export default function RootLayout({

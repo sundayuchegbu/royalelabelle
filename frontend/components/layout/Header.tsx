@@ -53,7 +53,9 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg"
+          : "bg-white lg:bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +68,7 @@ export default function Header() {
               </span>
             </div>
             <div>
-              <h1 className="font-serif text-xl font-bold text-[#c48d2c]">
+              <h1 className="font-serif text-xl font-bold text-gold">
                 Royale la'belle
               </h1>
             </div>
@@ -78,7 +80,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="hover:text-[#4a2b1d] text-[#c48d2c] transition-colors font-medium text-sm"
+                className="hover:text-[#4a2b1d] text-gold transition-colors font-medium text-sm"
               >
                 {link.label}
               </Link>
@@ -89,7 +91,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <a
               href="tel:+15485573218"
-              className="flex items-center text-[#ffffff] hover:text-[#c48d2c] transition-colors"
+              className="flex items-center text-[#ffffff] hover:text-gold transition-colors"
             >
               <Phone className="w-4 h-4 mr-2" />
               <span className="font-medium">+1(548) 557-3218</span>
@@ -102,12 +104,12 @@ export default function Header() {
                   onClick={() => setShowUserMenu(!showUserMenu)}
                   className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-[#f6ede8] transition-colors"
                 >
-                  <UserCircle className="w-6 h-6 text-[#c48d2c]" />
+                  <UserCircle className="w-6 h-6 text-gold" />
                   <span className="text-sm font-medium text-[#4a2b1d]">
                     {user?.name?.split(" ")[0] || "User"}
                   </span>
                   {isAdmin && (
-                    <span className="text-xs bg-[#c48d2c] text-white px-2 py-0.5 rounded-full">
+                    <span className="text-xs bg-gold text-white px-2 py-0.5 rounded-full">
                       Admin
                     </span>
                   )}
@@ -121,7 +123,7 @@ export default function Header() {
                       </p>
                       <p className="text-xs text-[#7f482f]">{user?.email}</p>
                       {isAdmin && (
-                        <p className="text-xs text-[#c48d2c] font-medium mt-1 flex items-center">
+                        <p className="text-xs text-gold font-medium mt-1 flex items-center">
                           <Shield className="w-3 h-3 mr-1" />
                           Administrator
                         </p>
@@ -136,7 +138,7 @@ export default function Header() {
                             setShowUserMenu(false);
                             router.push("/admin/dashboard");
                           }}
-                          className="w-full flex items-center space-x-2 px-4 py-2 text-sm text-[#c48d2c] hover:bg-[#fdf8f6] transition-colors border-b border-[#f6ede8]"
+                          className="w-full flex items-center space-x-2 px-4 py-2 text-sm text-gold hover:bg-[#fdf8f6] transition-colors border-b border-[#f6ede8]"
                         >
                           <LayoutDashboard className="w-4 h-4" />
                           <span>Admin Dashboard</span>
@@ -230,13 +232,13 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-[#f6ede8]">
+          <div className="lg:hidden py-4 mt-4 border-t border-[#f6ede8]">
             <nav className="flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[#4a2b1d] hover:text-[#c48d2c] transition-colors font-medium"
+                  className="text-[#4a2b1d] hover:text-gold transition-colors font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
@@ -252,7 +254,7 @@ export default function Header() {
                         </p>
                         <p className="text-xs text-[#7f482f]">{user?.email}</p>
                         {isAdmin && (
-                          <p className="text-xs text-[#c48d2c] font-medium flex items-center">
+                          <p className="text-xs text-gold font-medium flex items-center">
                             <Shield className="w-3 h-3 mr-1" />
                             Admin
                           </p>
@@ -274,7 +276,7 @@ export default function Header() {
                           setIsMenuOpen(false);
                           router.push("/admin/dashboard");
                         }}
-                        className="w-full flex items-center space-x-2 px-4 py-2 bg-[#fdf8f6] rounded-lg text-[#c48d2c] text-sm"
+                        className="w-full flex items-center space-x-2 px-4 py-2 bg-[#fdf8f6] rounded-lg text-gold text-sm"
                       >
                         <LayoutDashboard className="w-4 h-4" />
                         <span>Admin Dashboard</span>

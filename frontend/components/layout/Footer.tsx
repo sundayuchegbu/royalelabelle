@@ -18,8 +18,8 @@ export default function Footer() {
             </h3>
 
             <p className="text-sm leading-relaxed text-[#d4a691]">
-              AMP Certified Micro Locs and Natural Hair Specialist dedicated to
-              helping you start and maintain healthy, beautiful locs.
+              Natural Hair Specialist dedicated to helping you start and
+              maintain healthy, beautiful locs.
             </p>
 
             <div className="mt-4 flex space-x-4">
@@ -28,7 +28,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                className="text-[#d4a691] transition-colors hover:text-gold"
               >
                 <FaInstagram className="h-5 w-5" />
               </a>
@@ -38,7 +38,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                className="text-[#d4a691] transition-colors hover:text-gold"
               >
                 <FaFacebook className="h-5 w-5" />
               </a>
@@ -48,7 +48,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"
-                className="text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                className="text-[#d4a691] transition-colors hover:text-gold"
               >
                 <FaYoutube className="h-5 w-5" />
               </a>
@@ -63,7 +63,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#about"
-                  className="text-sm text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                  className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
                   About
                 </Link>
@@ -72,7 +72,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#services"
-                  className="text-sm text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                  className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
                   Services
                 </Link>
@@ -81,7 +81,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#pricing"
-                  className="text-sm text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                  className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
                   Pricing
                 </Link>
@@ -90,7 +90,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#gallery"
-                  className="text-sm text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                  className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
                   Gallery
                 </Link>
@@ -104,32 +104,32 @@ export default function Footer() {
 
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
-                <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#c48d2c]" />
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
 
                 <span className="text-sm text-[#d4a691]">
-                  735 Liberty Avenue
-                  <br />
-                  Brooklyn, NY 11208
+                  {/* 735 Liberty Avenue */}
+                  {/* <br /> */}
+                  Kitchener, ON N2H 5C2
                 </span>
               </li>
 
               <li className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 flex-shrink-0 text-[#c48d2c]" />
+                <Phone className="h-5 w-5 shrink-0 text-gold" />
 
                 <a
-                  href="tel:6464007132"
-                  className="text-sm text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                  href="tel:5485573218"
+                  className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
-                  (646) 400-7132
+                  (548) 557-3218
                 </a>
               </li>
 
               <li className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 flex-shrink-0 text-[#c48d2c]" />
+                <Mail className="h-5 w-5 shrink-0 text-gold" />
 
                 <a
-                  href="mailto:info@locsbyhairarena.com"
-                  className="text-sm text-[#d4a691] transition-colors hover:text-[#c48d2c]"
+                  href="mailto:info@royalelabelle.com"
+                  className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
                   info@royalelabelle.com
                 </a>
@@ -163,8 +163,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 border-t border-[#7f482f] pt-8 text-center">
           <p className="text-sm text-[#d4a691]">
-            © {currentYear} Royale la'belle. All rights reserved. | AMP
-            Certified
+            © {currentYear} Royale la'belle. All rights reserved.
           </p>
         </div>
       </div>

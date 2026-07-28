@@ -25,7 +25,7 @@ export default function InteracSuccessPage() {
 
         <div className="bg-[#fdf8f6] p-6 rounded-lg mb-6">
           <div className="flex items-center justify-center space-x-2 mb-3">
-            <Clock className="w-5 h-5 text-[#c48d2c]" />
+            <Clock className="w-5 h-5 text-gold" />
             <span className="font-semibold">Verification in Progress</span>
           </div>
           <p className="text-sm text-[#7f482f]">
@@ -69,8 +69,8 @@ export default function InteracSuccessPage() {
         <div className="mt-6 pt-6 border-t border-[#f6ede8]">
           <p className="text-xs text-[#7f482f]">
             Need help? Call or text us at{" "}
-            <a href="tel:6464007132" className="text-[#c48d2c] font-medium">
-              (646) 400-7132
+            <a href="tel:+15485573218" className="text-gold font-medium">
+              (548) 557-3218
             </a>
           </p>
         </div>

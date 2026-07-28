@@ -84,7 +84,7 @@ export default function AdminLayout({
         {/* Sidebar Header */}
         <div className="flex items-center justify-between p-4 border-b border-[#7f482f]">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-gold rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 bg-gradient-gold rounded-full flex items-center justify-center shrink-0">
               <span className="text-white font-serif text-lg font-bold">
                 RL
               </span>
@@ -109,11 +109,11 @@ export default function AdminLayout({
               href={item.href}
               className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                 isActive(item.href)
-                  ? "bg-[#c48d2c] text-white"
+                  ? "bg-gold text-white"
                   : "text-[#d4a691] hover:bg-[#7f482f] hover:text-white"
               }`}
             >
-              <item.icon className="w-5 h-5 flex-shrink-0" />
+              <item.icon className="w-5 h-5 shrink-0" />
               {isSidebarOpen && <span className="text-sm">{item.label}</span>}
             </Link>
           ))}

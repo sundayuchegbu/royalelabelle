@@ -60,8 +60,8 @@ export default function Policy() {
       icon: <MapPin className="w-5 h-5" />,
       title: "Location & Guests",
       content: [
-        "Located at 735 Liberty Avenue, Brooklyn, NY 11208.",
-        "Between Liberty and Linwood in East New York.",
+        "Kitchener, Ontario",
+        "Between King and Princess.",
         "No extra guests allowed due to limited space.",
         "Please come alone to your appointment.",
       ],
@@ -70,7 +70,7 @@ export default function Policy() {
       icon: <Users className="w-5 h-5" />,
       title: "Squeeze-In Appointments",
       content: [
-        "Call or text (646) 400-7132 for squeeze-in appointments.",
+        "Call or text (548) 557-3218 for squeeze-in appointments.",
         "A $50 extra fee is required for squeeze-in services.",
       ],
     },
@@ -98,7 +98,7 @@ export default function Policy() {
                 }
               >
                 <div className="flex items-center space-x-3">
-                  <span className="text-[#c48d2c]">{policy.icon}</span>
+                  <span className="text-gold">{policy.icon}</span>
                   <span className="font-semibold text-[#4a2b1d]">
                     {policy.title}
                   </span>
@@ -117,7 +117,7 @@ export default function Policy() {
                         key={i}
                         className="text-[#7f482f] text-sm flex items-start space-x-2"
                       >
-                        <span className="text-[#c48d2c]">•</span>
+                        <span className="text-gold">•</span>
                         <span>{item}</span>
                       </li>
                     ))}

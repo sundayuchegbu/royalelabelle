@@ -154,7 +154,7 @@ export default function PaymentSelection({
   if (isLoading) {
     return (
       <div className="text-center py-8">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
         <p className="mt-4 text-[#7f482f]">Loading payment options...</p>
       </div>
     );
@@ -168,8 +168,7 @@ export default function PaymentSelection({
         </h3>
         <div className="mt-2 flex justify-center gap-8 text-sm text-[#7f482f]">
           <span>
-            Deposit:{" "}
-            <strong className="text-[#c48d2c]">${depositAmount}</strong>
+            Deposit: <strong className="text-gold">${depositAmount}</strong>
           </span>
           <span>
             Total: <strong>${fullPrice}</strong>
@@ -189,7 +188,7 @@ export default function PaymentSelection({
               disabled={!isAvailable}
               className={`p-6 rounded-xl border-2 transition-all text-left ${
                 isSelected
-                  ? "border-[#c48d2c] bg-[#fdf8f6] shadow-lg"
+                  ? "border-gold bg-[#fdf8f6] shadow-lg"
                   : isAvailable
                     ? "border-[#f6ede8] hover:border-[#d4a691] hover:shadow-md"
                     : "border-gray-200 bg-gray-50 opacity-60 cursor-not-allowed"
@@ -197,8 +196,8 @@ export default function PaymentSelection({
             >
               <div className="flex items-start space-x-4">
                 <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center text-white flex-shrink-0 ${
-                    isSelected ? "bg-[#c48d2c]" : method.iconColor
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-white shrink-0 ${
+                    isSelected ? "bg-gold" : method.iconColor
                   }`}
                 >
                   {method.icon}
@@ -208,7 +207,7 @@ export default function PaymentSelection({
                     <h4 className="font-semibold text-[#4a2b1d]">
                       {method.title}
                     </h4>
-                    {isSelected && <Check className="w-5 h-5 text-[#c48d2c]" />}
+                    {isSelected && <Check className="w-5 h-5 text-gold" />}
                     {!isAvailable && (
                       <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
                         Unavailable
@@ -230,7 +229,7 @@ export default function PaymentSelection({
                         key={feature}
                         className="text-xs text-[#7f482f] flex items-center"
                       >
-                        <span className="w-1 h-1 bg-[#c48d2c] rounded-full mr-2" />
+                        <span className="w-1 h-1 bg-gold rounded-full mr-2" />
                         {feature}
                       </li>
                     ))}

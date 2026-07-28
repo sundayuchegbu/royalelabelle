@@ -108,7 +108,7 @@ export default function SettingsPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold"></div>
       </div>
     );
   }
@@ -124,7 +124,7 @@ export default function SettingsPage() {
         {/* Notification Preferences */}
         <div className="bg-white rounded-2xl shadow-luxury p-6 mb-6">
           <h2 className="font-serif text-xl text-[#4a2b1d] mb-4 flex items-center">
-            <Bell className="w-5 h-5 text-[#c48d2c] mr-2" />
+            <Bell className="w-5 h-5 text-gold mr-2" />
             Notification Preferences
           </h2>
 
@@ -150,7 +150,7 @@ export default function SettingsPage() {
                 }
                 disabled={isSubmitting}
                 className={`relative w-12 h-6 rounded-full transition-colors ${
-                  formData.emailNotifications ? "bg-[#c48d2c]" : "bg-gray-300"
+                  formData.emailNotifications ? "bg-gold" : "bg-gray-300"
                 }`}
               >
                 <span
@@ -182,7 +182,7 @@ export default function SettingsPage() {
                 }
                 disabled={isSubmitting}
                 className={`relative w-12 h-6 rounded-full transition-colors ${
-                  formData.smsNotifications ? "bg-[#c48d2c]" : "bg-gray-300"
+                  formData.smsNotifications ? "bg-gold" : "bg-gray-300"
                 }`}
               >
                 <span
@@ -212,7 +212,7 @@ export default function SettingsPage() {
                 }
                 disabled={isSubmitting}
                 className={`relative w-12 h-6 rounded-full transition-colors ${
-                  formData.marketingEmails ? "bg-[#c48d2c]" : "bg-gray-300"
+                  formData.marketingEmails ? "bg-gold" : "bg-gray-300"
                 }`}
               >
                 <span
@@ -228,7 +228,7 @@ export default function SettingsPage() {
         {/* Change Password */}
         <div className="bg-white rounded-2xl shadow-luxury p-6">
           <h2 className="font-serif text-xl text-[#4a2b1d] mb-4 flex items-center">
-            <Shield className="w-5 h-5 text-[#c48d2c] mr-2" />
+            <Shield className="w-5 h-5 text-gold mr-2" />
             Change Password
           </h2>
 
@@ -247,7 +247,7 @@ export default function SettingsPage() {
                       currentPassword: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
                 <button
@@ -278,7 +278,7 @@ export default function SettingsPage() {
                   })
                 }
                 placeholder="Min 6 characters"
-                className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 required
                 minLength={6}
               />
@@ -297,7 +297,7 @@ export default function SettingsPage() {
                     confirmPassword: e.target.value,
                   })
                 }
-                className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 required
               />
             </div>

@@ -167,7 +167,7 @@ export default function BookingPage() {
         {/* Back Button */}
         <Link
           href="/"
-          className="inline-flex items-center text-[#7f482f] hover:text-[#c48d2c] transition-colors mb-6"
+          className="inline-flex items-center text-[#7f482f] hover:text-gold transition-colors mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Home
@@ -190,7 +190,7 @@ export default function BookingPage() {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                   s === step
-                    ? "bg-[#c48d2c] text-white"
+                    ? "bg-gold text-white"
                     : s < step
                       ? "bg-green-500 text-white"
                       : "bg-[#f6ede8] text-[#7f482f]"
@@ -241,7 +241,7 @@ export default function BookingPage() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Your full name"
-                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                         required
                       />
                     </div>
@@ -259,7 +259,7 @@ export default function BookingPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="your@email.com"
-                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                         required
                       />
                     </div>
@@ -278,7 +278,7 @@ export default function BookingPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="(555) 555-5555"
-                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                       required
                     />
                   </div>
@@ -292,7 +292,7 @@ export default function BookingPage() {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                     required
                   >
                     <option value="">Select a service...</option>
@@ -338,7 +338,7 @@ export default function BookingPage() {
                     name="hairLength"
                     value={formData.hairLength}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                     required
                   >
                     <option value="">Select hair length...</option>
@@ -358,7 +358,7 @@ export default function BookingPage() {
                     name="hairDensity"
                     value={formData.hairDensity}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                     required
                   >
                     <option value="">Select hair density...</option>
@@ -378,7 +378,7 @@ export default function BookingPage() {
                     name="hairTexture"
                     value={formData.hairTexture}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent bg-white"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
                     required
                   >
                     <option value="">Select hair texture...</option>
@@ -402,13 +402,13 @@ export default function BookingPage() {
                       onChange={handleChange}
                       placeholder="What are your hair goals? (e.g., length, style, maintenance)"
                       rows={4}
-                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none"
+                      className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="bg-[#fff5e6] p-4 rounded-lg border-l-4 border-[#c48d2c]">
+                <div className="bg-[#fff5e6] p-4 rounded-lg border-l-4 border-gold">
                   <p className="text-sm text-[#7f482f]">
                     <span className="font-medium">💡 Tip:</span> Be as detailed
                     as possible about your hair goals. This helps me prepare the
@@ -440,7 +440,7 @@ export default function BookingPage() {
                         name="date"
                         value={formData.date}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                         min={new Date().toISOString().split("T")[0]}
                         required
                       />
@@ -458,7 +458,7 @@ export default function BookingPage() {
                         name="time"
                         value={formData.time}
                         onChange={handleChange}
-                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                        className="w-full pl-10 pr-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -466,7 +466,7 @@ export default function BookingPage() {
 
                 <div className="bg-[#fdf8f6] p-4 rounded-lg">
                   <p className="text-sm text-[#7f482f] flex items-center">
-                    <Clock className="w-4 h-4 mr-2 text-[#c48d2c]" />
+                    <Clock className="w-4 h-4 mr-2 text-gold" />
                     Available hours: Monday - Saturday, 9:00 AM - 7:00 PM
                   </p>
                 </div>
@@ -481,7 +481,7 @@ export default function BookingPage() {
                     onChange={handleChange}
                     placeholder="Any special requests or information..."
                     rows={3}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent resize-none"
+                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none"
                   />
                 </div>
               </div>
@@ -511,7 +511,7 @@ export default function BookingPage() {
                         }
                         className={`p-4 rounded-xl border-2 transition-all text-left ${
                           isSelected
-                            ? "border-[#c48d2c] bg-[#fdf8f6] shadow-lg"
+                            ? "border-gold bg-[#fdf8f6] shadow-lg"
                             : "border-[#f6ede8] hover:border-[#d4a691]"
                         }`}
                       >
@@ -519,7 +519,7 @@ export default function BookingPage() {
                           <div
                             className={`w-10 h-10 rounded-full flex items-center justify-center ${
                               isSelected
-                                ? "bg-[#c48d2c] text-white"
+                                ? "bg-gold text-white"
                                 : "bg-[#f6ede8] text-[#7f482f]"
                             }`}
                           >
@@ -543,7 +543,7 @@ export default function BookingPage() {
                 </div>
 
                 {formData.paymentMethod && (
-                  <div className="bg-[#fff5e6] p-4 rounded-lg border-l-4 border-[#c48d2c]">
+                  <div className="bg-[#fff5e6] p-4 rounded-lg border-l-4 border-gold">
                     <p className="text-sm text-[#7f482f]">
                       {formData.paymentMethod === "stripe" &&
                         "💳 You will be redirected to Stripe to complete your secure payment."}

@@ -40,7 +40,7 @@ export const welcomeEmailTemplate = (user, bookingLink) => {
       <div class="container">
         <div class="header">
           <h1>✨ Royale la'belle</h1>
-          <p>AMP Certified Micro Locs Specialist</p>
+          <p>Loc'ed in Beauty, Rooted in Royalty</p>
         </div>
         <div class="content">
           <h2>Welcome to the Family, ${user.name}! 💛</h2>
@@ -61,10 +61,10 @@ export const welcomeEmailTemplate = (user, bookingLink) => {
             <div class="feature-item"><span class="icon">✨</span><h4>Premium Quality</h4><p>Top-notch products & techniques</p></div>
             <div class="feature-item"><span class="icon">💛</span><h4>Personalized Service</h4><p>Tailored to your hair goals</p></div>
           </div>
-          <p style="text-align: center; font-size: 16px; color: #4a2b1d;">Looking forward to locking with you! 💛<br><span style="color: #c48d2c;">- Zainab</span></p>
+          <p style="text-align: center; font-size: 16px; color: #4a2b1d;">Looking forward to locking with you! 💛<br><span style="color: #c48d2c;">- Peace Queen</span></p>
         </div>
         <div class="footer">
-          <p>📍 735 Liberty Avenue, Brooklyn, NY 11208<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p>
+          <p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p>
           <div class="social-links">
             <a href="https://instagram.com/royallabelle" target="_blank">Instagram</a>
             <a href="https://facebook.com/royallabelle" target="_blank">Facebook</a>
@@ -129,7 +129,7 @@ export const bookingConfirmationTemplate = (appointment, user) => {
           <p style="text-align: center; font-size: 14px; color: #7f482f;">Your appointment will be confirmed after payment.</p>
         </div>
         <div class="footer">
-          <p>📍 735 Liberty Avenue, Brooklyn, NY 11208</p>
+          <p>📍 Ketchener, Ontario</p>
           <p>📞 (548) 557-3218 | 📧 info@royallabelle.com</p>
         </div>
       </div>
@@ -200,7 +200,7 @@ export const adminBookingNotificationTemplate = (appointment, user) => {
           </div>
         </div>
         <div class="footer">
-          <p>📍 735 Liberty Avenue, Brooklyn, NY 11208</p>
+          <p>📍 Ketchener, Ontario</p>
           <p>📞 (548) 557-3218 | 📧 info@royallabelle.com</p>
         </div>
       </div>
@@ -255,10 +255,10 @@ export const appointmentConfirmedTemplate = (appointment, user) => {
             <div class="detail-item"><div class="label">Service</div><div class="value">${serviceLabels[appointment.serviceType] || appointment.serviceType}</div></div>
             <div class="detail-item"><div class="label">Date & Time</div><div class="value">${new Date(appointment.appointmentDate).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })} at ${new Date(appointment.appointmentDate).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}</div></div>
           </div>
-          <div class="info-box"><ul><li><strong>Location:</strong> 735 Liberty Avenue, Brooklyn, NY 11208</li><li><strong>Arrival:</strong> Please arrive 10 minutes before</li><li><strong>Late Policy:</strong> $20 fee after 15 minutes</li></ul></div>
+          <div class="info-box"><ul><li><strong>Location:</strong> Ketchener, Ontario</li><li><strong>Arrival:</strong> Please arrive 10 minutes before</li><li><strong>Late Policy:</strong> $20 fee after 15 minutes</li></ul></div>
           <div style="text-align: center;"><a href="${process.env.FRONTEND_URL}/appointments/${appointment._id}" class="button">📋 View Details</a></div>
         </div>
-        <div class="footer"><p>📍 735 Liberty Avenue, Brooklyn, NY 11208<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
+        <div class="footer"><p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
       </div>
     </body>
     </html>
@@ -304,9 +304,9 @@ export const appointmentCompletedTemplate = (appointment, user) => {
             <p><strong>📋 Service:</strong> ${serviceLabels[appointment.serviceType] || appointment.serviceType}</p>
             <p><strong>📅 Date:</strong> ${new Date(appointment.appointmentDate).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
           </div>
-          <p style="text-align: center;">We hope you loved your experience! 💛<br><span style="color: #c48d2c;">- Zainab</span></p>
+          <p style="text-align: center;">We hope you loved your experience! 💛<br><span style="color: #c48d2c;">- Peace Queen</span></p>
         </div>
-        <div class="footer"><p>📍 735 Liberty Avenue, Brooklyn, NY 11208<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
+        <div class="footer"><p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
       </div>
     </body>
     </html>
@@ -368,7 +368,7 @@ export const statusChangeNotificationTemplate = (
           </div>
           <p style="text-align: center; font-size: 14px; color: #7f482f;">Have questions? Contact us at (548) 557-3218</p>
         </div>
-        <div class="footer"><p>📍 735 Liberty Avenue, Brooklyn, NY 11208<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
+        <div class="footer"><p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
       </div>
     </body>
     </html>

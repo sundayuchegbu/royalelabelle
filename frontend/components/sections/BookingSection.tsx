@@ -52,34 +52,34 @@ export default function BookingSection() {
   const serviceTypes = [
     {
       value: "twist",
-      label: "Micro Locs - Twist Method",
-      price: "$1,000",
-      deposit: "$200",
+      label: "Micro Locs - Twist Method longer than 6 inches, + $100",
+      price: "$600",
+      deposit: "$400",
     },
     {
       value: "braids",
       label: "Micro Locs - Braids Method",
-      price: "$1,200",
-      deposit: "$200",
+      price: "$700",
+      deposit: "$500",
     },
     {
       value: "interlocking",
       label: "Micro Locs - Interlocking Method",
-      price: "$1,600",
-      deposit: "$300",
+      price: "$1,000",
+      deposit: "$800",
     },
     {
       value: "retie",
-      label: "Retie Maintenance",
+      label: "Retie Maintenance, Every extra hour + $25",
       price: "$150",
-      deposit: "$200",
+      deposit: "$100",
     },
-    {
-      value: "repair",
-      label: "Loc Repair Service",
-      price: "$200",
-      deposit: "$200",
-    },
+    // {
+    //   value: "repair",
+    //   label: "Loc Repair Service",
+    //   price: "$200",
+    //   deposit: "$200",
+    // },
   ];
 
   const hairTypes = [
@@ -641,7 +641,7 @@ export default function BookingSection() {
                 <Phone className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Call Us</p>
                 <a
-                  href="tel:6464007132"
+                  href="tel:+15485573218"
                   className="text-sm text-[#7f482f] hover:text-gold"
                 >
                   (548) 557-3218

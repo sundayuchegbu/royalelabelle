@@ -43,7 +43,7 @@ export default function ZelleSuccessPage() {
 
         <div className="bg-[#fdf8f6] p-6 rounded-lg mb-6">
           <div className="flex items-center justify-center space-x-2 mb-3">
-            <Clock className="w-5 h-5 text-[#c48d2c]" />
+            <Clock className="w-5 h-5 text-gold" />
             <span className="font-semibold">Verification in Progress</span>
           </div>
           <p className="text-sm text-[#7f482f]">
@@ -54,7 +54,7 @@ export default function ZelleSuccessPage() {
 
         <div className="bg-[#fff5e6] p-4 rounded-lg mb-6 text-left">
           <h3 className="font-semibold text-[#4a2b1d] mb-2 flex items-center">
-            <Mail className="w-4 h-4 text-[#c48d2c] mr-2" />
+            <Mail className="w-4 h-4 text-gold mr-2" />
             What's Next?
           </h3>
           <ul className="space-y-2 text-sm text-[#7f482f]">
@@ -87,7 +87,7 @@ export default function ZelleSuccessPage() {
         <div className="mt-6 pt-6 border-t border-[#f6ede8]">
           <p className="text-xs text-[#7f482f]">
             Need help? Call or text us at{" "}
-            <a href="tel:6464007132" className="text-[#c48d2c] font-medium">
+            <a href="tel:6464007132" className="text-gold font-medium">
               (646) 400-7132
             </a>
           </p>

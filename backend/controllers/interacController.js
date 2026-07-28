@@ -3,13 +3,19 @@ import Consultation from "../models/Consultation.js";
 import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// Create transporter but don't fail if it doesn't work
+const createTransporter = () => {
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    return null;
+  }
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+};
 
 // @desc    Create Interac payment
 // @route   POST /api/payments/interac/create
@@ -45,23 +51,48 @@ export const createInteracPayment = async (req, res) => {
     appointment.status = "payment_pending";
     await appointment.save();
 
-    // Get user and send instructions
+    // Get user
     const user = await User.findById(userId);
-    await sendInteracInstructions(user, appointment);
 
+    // Prepare interac info
+    const interacInfo = {
+      email: process.env.INTERAC_EMAIL || "okundiapeacequeen@gmail.com",
+      phone: process.env.INTERAC_PHONE || "+1 (548) 557-3218",
+      name: process.env.INTERAC_NAME || "Peace Queen",
+      amount: appointment.depositAmount,
+    };
+
+    // Try to send email, but don't fail if it doesn't work
+    let emailSent = false;
+    try {
+      await sendInteracInstructions(user, appointment, interacInfo);
+      emailSent = true;
+    } catch (emailError) {
+      console.error("❌ Email sending failed:", emailError.message);
+      // Continue - we'll show instructions in the response
+    }
+
+    // Always return success with instructions
     res.status(200).json({
       success: true,
-      message: "Interac payment instructions sent to your email",
+      message: emailSent
+        ? "Interac payment instructions sent to your email"
+        : "Interac payment instructions are ready below",
       appointment: {
         id: appointment._id,
         status: appointment.status,
         paymentMethod: "interac",
-        interacInfo: {
-          email: process.env.INTERAC_EMAIL,
-          phone: process.env.INTERAC_PHONE,
-          name: process.env.INTERAC_NAME,
-          amount: appointment.depositAmount,
-        },
+        interacInfo: interacInfo,
+      },
+      // Include instructions for frontend display (fallback)
+      instructions: {
+        recipientName: interacInfo.name,
+        recipientEmail: interacInfo.email,
+        recipientPhone: interacInfo.phone,
+        amount: interacInfo.amount,
+        reference: `Appointment #${appointment._id.toString().slice(-6)}`,
+        securityQuestion: "What is my business name?",
+        securityAnswer: "Royale la'belle",
       },
     });
   } catch (error) {
@@ -74,7 +105,13 @@ export const createInteracPayment = async (req, res) => {
 };
 
 // Send Interac payment instructions
-const sendInteracInstructions = async (user, appointment) => {
+const sendInteracInstructions = async (user, appointment, interacInfo) => {
+  const transporter = createTransporter();
+  if (!transporter) {
+    console.log("⚠️ Email not configured - skipping Interac instructions");
+    return;
+  }
+
   const serviceNames = {
     twist: "Micro Locs - Twist Method",
     braids: "Micro Locs - Braids Method",
@@ -84,13 +121,14 @@ const sendInteracInstructions = async (user, appointment) => {
   };
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from:
+      process.env.EMAIL_FROM || `"Royale la'belle" <${process.env.EMAIL_USER}>`,
     to: user.email,
-    subject: "💰 Interac e-Transfer Instructions - Locs by HairArena",
+    subject: "💰 Interac e-Transfer Instructions - Royale la'belle",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #fdf8f6;">
         <div style="text-align: center; padding: 20px; background: #4a2b1d; border-radius: 10px;">
-          <h1 style="color: #c48d2c; font-family: Georgia, serif;">Locs by HairArena</h1>
+          <h1 style="color: #c48d2c; font-family: Georgia, serif;">Royale la'belle</h1>
         </div>
         
         <div style="padding: 30px; background: white; border-radius: 10px; margin-top: 20px;">
@@ -100,13 +138,13 @@ const sendInteracInstructions = async (user, appointment) => {
           
           <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #4CAF50;">
             <h3 style="color: #4a2b1d; margin-top: 0;">📋 Interac e-Transfer Details</h3>
-            <p><strong>Recipient Name:</strong> ${process.env.INTERAC_NAME}</p>
-            <p><strong>Email:</strong> ${process.env.INTERAC_EMAIL}</p>
-            <p><strong>Phone:</strong> ${process.env.INTERAC_PHONE}</p>
-            <p><strong>Amount:</strong> $${appointment.depositAmount} CAD</p>
+            <p><strong>Recipient Name:</strong> ${interacInfo.name}</p>
+            <p><strong>Email:</strong> ${interacInfo.email}</p>
+            <p><strong>Phone:</strong> ${interacInfo.phone}</p>
+            <p><strong>Amount:</strong> $${interacInfo.amount} CAD</p>
             <p><strong>Reference:</strong> Appointment #${appointment._id.toString().slice(-6)}</p>
             <p><strong>Security Question:</strong> What is my business name?</p>
-            <p><strong>Security Answer:</strong> HairArena</p>
+            <p><strong>Security Answer:</strong> Royale la'belle</p>
           </div>
           
           <div style="background: #fdf8f6; padding: 15px; border-radius: 8px; margin: 20px 0;">
@@ -151,25 +189,26 @@ const sendInteracInstructions = async (user, appointment) => {
           </div>
           
           <p style="color: #7f482f; margin-top: 20px; text-align: center;">
-            Questions? Call or text us at (646) 400-7132<br>
-            <span style="color: #c48d2c;">- Zainab</span>
+            Questions? Call or text us at ${interacInfo.phone}<br>
+            <span style="color: #c48d2c;">- Peace Queen</span>
           </p>
         </div>
         
         <div style="text-align: center; padding: 20px; color: #7f482f; font-size: 12px;">
-          <p>Locs by HairArena | AMP Certified Micro Locs Specialist</p>
-          <p>📍 735 Liberty Avenue, Brooklyn, NY 11208 | 📞 (646) 400-7132</p>
+          <p>Royale la'belle | Loc'ed in beauty, rooted in royalty</p>
+          <p>📍 Ketchener, Ontario</p>
         </div>
       </div>
     `,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
     console.log(`📧 Interac instructions sent to ${user.email}`);
+    return { success: true, messageId: info.messageId };
   } catch (error) {
     console.error("❌ Email sending failed:", error);
-    throw new Error("Failed to send payment instructions");
+    throw error;
   }
 };
 
@@ -216,8 +255,12 @@ export const verifyInteracPayment = async (req, res) => {
     appointment.status = "payment_verified";
     await appointment.save();
 
-    // Notify admin
-    await notifyAdminInteracPayment(appointment, req.user);
+    // Notify admin (don't fail if email fails)
+    try {
+      await notifyAdminInteracPayment(appointment, req.user);
+    } catch (emailError) {
+      console.error("Admin notification failed:", emailError);
+    }
 
     res.status(200).json({
       success: true,
@@ -236,10 +279,17 @@ export const verifyInteracPayment = async (req, res) => {
 
 // Notify admin about Interac payment
 export const notifyAdminInteracPayment = async (appointment, user) => {
+  const transporter = createTransporter();
+  if (!transporter) {
+    console.log("⚠️ Email not configured - skipping admin notification");
+    return;
+  }
+
   const adminEmail = process.env.EMAIL_USER;
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from:
+      process.env.EMAIL_FROM || `"Royale la'belle" <${process.env.EMAIL_USER}>`,
     to: adminEmail,
     subject: "💰 New Interac Payment Verification Required",
     html: `
@@ -270,6 +320,7 @@ export const notifyAdminInteracPayment = async (appointment, user) => {
     console.log(`📧 Admin notification sent for Interac payment`);
   } catch (error) {
     console.error("❌ Admin notification failed:", error);
+    throw error;
   }
 };
 
@@ -302,7 +353,11 @@ export const adminConfirmInteracPayment = async (req, res) => {
 
     const user = await User.findById(appointment.userId);
     if (user) {
-      await sendInteracConfirmationEmail(user, appointment);
+      try {
+        await sendInteracConfirmationEmail(user, appointment);
+      } catch (emailError) {
+        console.error("Confirmation email failed:", emailError);
+      }
     }
 
     res.status(200).json({
@@ -321,6 +376,12 @@ export const adminConfirmInteracPayment = async (req, res) => {
 
 // Send Interac confirmation email
 export const sendInteracConfirmationEmail = async (user, appointment) => {
+  const transporter = createTransporter();
+  if (!transporter) {
+    console.log("⚠️ Email not configured - skipping confirmation");
+    return;
+  }
+
   const serviceNames = {
     twist: "Micro Locs - Twist Method",
     braids: "Micro Locs - Braids Method",
@@ -330,13 +391,14 @@ export const sendInteracConfirmationEmail = async (user, appointment) => {
   };
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from:
+      process.env.EMAIL_FROM || `"Royale la'belle" <${process.env.EMAIL_USER}>`,
     to: user.email,
-    subject: "✅ Interac Payment Confirmed - Locs by HairArena",
+    subject: "✅ Interac Payment Confirmed - Royale la'belle",
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #fdf8f6;">
         <div style="text-align: center; padding: 20px; background: #4a2b1d; border-radius: 10px;">
-          <h1 style="color: #c48d2c; font-family: Georgia, serif;">Locs by HairArena</h1>
+          <h1 style="color: #c48d2c; font-family: Georgia, serif;">Royale la'belle</h1>
         </div>
         
         <div style="padding: 30px; background: white; border-radius: 10px; margin-top: 20px;">
@@ -369,7 +431,7 @@ export const sendInteracConfirmationEmail = async (user, appointment) => {
             <h3 style="color: #4a2b1d;">📋 Important Reminders</h3>
             <ul style="color: #7f482f; padding-left: 20px;">
               <li>Please arrive 10 minutes early</li>
-              <li>Call or text (646) 400-7132 if running late</li>
+              <li>Call or text +1 (548) 557-3218 if running late</li>
               <li>$20 late fee applies after 15 minutes</li>
               <li>No extra guests allowed due to limited space</li>
               <li>Remaining balance due on day of service</li>
@@ -378,7 +440,7 @@ export const sendInteracConfirmationEmail = async (user, appointment) => {
           
           <p style="color: #7f482f; margin-top: 20px; text-align: center;">
             Looking forward to locking with you! 💛<br>
-            <span style="color: #c48d2c;">- Zainab</span>
+            <span style="color: #c48d2c;">- Peace Queen</span>
           </p>
         </div>
       </div>
@@ -390,5 +452,6 @@ export const sendInteracConfirmationEmail = async (user, appointment) => {
     console.log(`📧 Interac confirmation email sent to ${user.email}`);
   } catch (error) {
     console.error("❌ Email sending failed:", error);
+    throw error;
   }
 };

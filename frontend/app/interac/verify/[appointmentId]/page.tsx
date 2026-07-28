@@ -23,7 +23,6 @@ export default function InteracVerifyPage() {
     email: "",
     phone: "",
     name: "",
-    amount: 0,
   });
   const [transactionId, setTransactionId] = useState("");
   const [referenceNumber, setReferenceNumber] = useState("");
@@ -39,10 +38,9 @@ export default function InteracVerifyPage() {
         const response = await api.get("/payments/info");
         const info = response.data.methods.interac;
         setInteracInfo({
-          email: info.email || "zainab@locsbyhairarena.com",
-          phone: info.phone || "(646) 400-7132",
-          name: info.name || "Zainab - Locs by HairArena",
-          amount: 200, // This would come from the appointment
+          email: info.email || "okundiapeacequeen@gmail.com",
+          phone: info.phone || "+1 (548) 557-3218",
+          name: info.name || "okundia peacequeen",
         });
         setIsLoading(false);
       } catch (error) {
@@ -98,7 +96,7 @@ export default function InteracVerifyPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#fdf8f6]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading payment details...</p>
         </div>
       </div>
@@ -111,7 +109,7 @@ export default function InteracVerifyPage() {
         <div className="bg-white rounded-2xl shadow-luxury overflow-hidden">
           {/* Header */}
           <div className="bg-[#4a2b1d] p-8 text-center">
-            <Building2 className="w-16 h-16 text-[#c48d2c] mx-auto mb-4" />
+            <Building2 className="w-16 h-16 text-gold mx-auto mb-4" />
             <h1 className="text-3xl font-serif text-white">
               Verify Interac Payment
             </h1>
@@ -137,17 +135,17 @@ export default function InteracVerifyPage() {
                 <p>
                   <strong>Phone:</strong> {interacInfo.phone}
                 </p>
-                <p>
+                {/* <p>
                   <strong>Amount:</strong>{" "}
                   <span className="text-green-600 font-bold">
                     ${interacInfo.amount}
                   </span>
-                </p>
+                </p> */}
                 <p>
                   <strong>Security Question:</strong> What is my business name?
                 </p>
                 <p>
-                  <strong>Answer:</strong> HairArena
+                  <strong>Answer:</strong> Royale la'belle
                 </p>
               </div>
             </div>
@@ -163,7 +161,7 @@ export default function InteracVerifyPage() {
                   value={transactionId}
                   onChange={(e) => setTransactionId(e.target.value)}
                   placeholder="Enter the transaction ID from your bank"
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
                 <p className="text-xs text-[#7f482f] mt-1">
@@ -180,7 +178,7 @@ export default function InteracVerifyPage() {
                   value={referenceNumber}
                   onChange={(e) => setReferenceNumber(e.target.value)}
                   placeholder="Enter the reference number you used"
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -193,7 +191,7 @@ export default function InteracVerifyPage() {
                   type="date"
                   value={paymentDate}
                   onChange={(e) => setPaymentDate(e.target.value)}
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                   required
                 />
               </div>
@@ -207,7 +205,7 @@ export default function InteracVerifyPage() {
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Any additional information about your payment..."
                   rows={3}
-                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-[#c48d2c] focus:border-transparent"
+                  className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
                 />
               </div>
 

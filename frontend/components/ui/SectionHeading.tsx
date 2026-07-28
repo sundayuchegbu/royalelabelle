@@ -26,11 +26,11 @@ export default function SectionHeading({
   return (
     <div className={cn("mb-12", alignClasses[align], className)}>
       {subtitle && (
-        <p className="text-[#c48d2c] font-semibold tracking-wider uppercase text-sm mb-2">
+        <p className="text-gold font-semibold tracking-wider uppercase text-sm mb-2">
           {subtitle}
         </p>
       )}
-      <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#4a2b1d] mb-4">
+      <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-[#4a2b1d] mb-8">
         {title}
       </h2>
       {description && (
