@@ -45,9 +45,9 @@ export default function Header() {
     { href: "#about", label: "About" },
     { href: "#services", label: "Services" },
     { href: "#pricing", label: "Pricing" },
-    { href: "#gallery", label: "Gallery" },
+    // { href: "#gallery", label: "Gallery" },
     { href: "#policy", label: "Policy" },
-    { href: "#testimonials", label: "Testimonials" },
+    // { href: "#testimonials", label: "Testimonials" },
   ];
 
   return (
@@ -89,13 +89,13 @@ export default function Header() {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
-            <a
+            {/* <a
               href="tel:+15485573218"
               className="flex items-center text-[#ffffff] hover:text-gold transition-colors"
             >
               <Phone className="w-4 h-4 mr-2" />
               <span className="font-medium">+1(548) 557-3218</span>
-            </a>
+            </a> */}
 
             {/* User Menu */}
             {isAuthenticated ? (

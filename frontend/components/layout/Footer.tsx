@@ -24,7 +24,7 @@ export default function Footer() {
 
             <div className="mt-4 flex space-x-4">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/kwc_loctician?igsh=MXBteG96dGhlNjdxeA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -43,7 +43,7 @@ export default function Footer() {
                 <FaFacebook className="h-5 w-5" />
               </a>
 
-              <a
+              {/* <a
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -51,7 +51,7 @@ export default function Footer() {
                 className="text-[#d4a691] transition-colors hover:text-gold"
               >
                 <FaYoutube className="h-5 w-5" />
-              </a>
+              </a> */}
             </div>
           </div>
 
@@ -87,14 +87,14 @@ export default function Footer() {
                 </Link>
               </li>
 
-              <li>
+              {/* <li>
                 <Link
                   href="#gallery"
                   className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
                   Gallery
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -109,11 +109,11 @@ export default function Footer() {
                 <span className="text-sm text-[#d4a691]">
                   {/* 735 Liberty Avenue */}
                   {/* <br /> */}
-                  Kitchener, ON N2H 5C2
+                  Kitchener, ON N2E OK5
                 </span>
               </li>
 
-              <li className="flex items-center space-x-3">
+              {/* <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 shrink-0 text-gold" />
 
                 <a
@@ -122,16 +122,16 @@ export default function Footer() {
                 >
                   (548) 557-3218
                 </a>
-              </li>
+              </li> */}
 
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 shrink-0 text-gold" />
 
                 <a
-                  href="mailto:info@royalelabelle.com"
+                  href="mailto:royale.labelle@gmail.com"
                   className="text-sm text-[#d4a691] transition-colors hover:text-gold"
                 >
-                  info@royalelabelle.com
+                  Royale.labelle@gmail.com
                 </a>
               </li>
             </ul>
@@ -154,7 +154,7 @@ export default function Footer() {
 
               <li className="flex justify-between">
                 <span>Sunday</span>
-                <span>Closed</span>
+                <span>12:00 PM -5:00 PM</span>
               </li>
             </ul>
           </div>

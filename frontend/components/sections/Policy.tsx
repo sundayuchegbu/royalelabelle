@@ -28,9 +28,12 @@ export default function Policy() {
       icon: <DollarSign className="w-5 h-5" />,
       title: "Deposit & Payment",
       content: [
+        "Final Price will be determined during consultation based on hair length, density, and method.",
         "$200 deposit required to secure installation date.",
         "$300 deposit for Interlocking services.",
-        "Deposit is non-refundable but transferable if rescheduled within 7 days.",
+        "$30 deposit for Retie services.",
+        "Deposit is non-refundable but transferable.",
+        "Failure to reschedule within 7 days results in 50% deposit forfeiture.",
         "Deposit goes towards your final balance.",
         "Full balance is due on the first day of service.",
         "Payments are not refundable after service has been rendered.",
@@ -42,8 +45,8 @@ export default function Policy() {
       content: [
         "New installation can be rescheduled once within the same month.",
         "Reschedule must be made at least 7 days prior to appointment.",
-        "Failure to reschedule within 7 days results in deposit forfeiture.",
-        "Retie or Repair appointments require new deposit for rescheduling.",
+        "Failure to reschedule within 7 days results in 50% deposit forfeiture.",
+        "Retie appointments require new deposit for rescheduling.",
       ],
     },
     {
@@ -51,8 +54,8 @@ export default function Policy() {
       title: "Lateness Policy",
       content: [
         "Call or text when running late.",
-        "$20 late fee charged if 15 minutes late.",
-        "20 minutes delay results in reschedule for next available opening.",
+        "$20 late fee charged if 30 minutes late.",
+        "1 hour delay results in reschedule for next available opening.",
         "Any deposits made will be forfeited for excessive lateness.",
       ],
     },
@@ -61,19 +64,18 @@ export default function Policy() {
       title: "Location & Guests",
       content: [
         "Kitchener, Ontario",
-        "Between King and Princess.",
         "No extra guests allowed due to limited space.",
         "Please come alone to your appointment.",
       ],
     },
-    {
-      icon: <Users className="w-5 h-5" />,
-      title: "Squeeze-In Appointments",
-      content: [
-        "Call or text (548) 557-3218 for squeeze-in appointments.",
-        "A $50 extra fee is required for squeeze-in services.",
-      ],
-    },
+    // {
+    //   icon: <Users className="w-5 h-5" />,
+    //   title: "Squeeze-In Appointments",
+    //   content: [
+    //     "Call or text (548) 557-3218 for squeeze-in appointments.",
+    //     "A $50 extra fee is required for squeeze-in services.",
+    //   ],
+    // },
   ];
 
   return (

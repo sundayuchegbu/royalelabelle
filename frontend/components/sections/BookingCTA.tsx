@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "../ui/Button";
-import { Calendar, Phone } from "lucide-react";
+import { Calendar, Mail } from "lucide-react";
 
 export default function BookingCTA() {
   return (
@@ -32,10 +32,12 @@ export default function BookingCTA() {
               variant="outline"
               size="lg"
               className="border-white text-white hover:bg-white/10"
-              onClick={() => (window.location.href = "tel:+15485573218")}
+              onClick={() =>
+                (window.location.href = "mailto:royale.labelle@gmail.com")
+              }
             >
-              <Phone className="w-5 h-5 mr-2" />
-              Call +1(548) 557-3218
+              <Mail className="w-5 h-5 mr-2" />
+              Royale.labelle@gmail.com
             </Button>
           </div>
           <p className="mt-6 text-[#d4a691] text-sm">

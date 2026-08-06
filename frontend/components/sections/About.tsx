@@ -14,18 +14,18 @@ export default function About() {
       description:
         " Micro locs specialist with advanced training and expertise.",
     },
-    {
-      icon: <Sparkles className="w-6 h-6 text-gold" />,
-      title: "Natural Hair Expert",
-      description:
-        "Specializing in natural hair care and healthy loc maintenance.",
-    },
-    {
-      icon: <Heart className="w-6 h-6 text-gold" />,
-      title: "Passionate Care",
-      description:
-        "Dedicated to helping you achieve your hair goals with love and care.",
-    },
+    // {
+    //   icon: <Sparkles className="w-6 h-6 text-gold" />,
+    //   title: "Natural Hair Expert",
+    //   description:
+    //     "Specializing in natural hair care and healthy loc maintenance.",
+    // },
+    // {
+    //   icon: <Heart className="w-6 h-6 text-gold" />,
+    //   title: "Passionate Care",
+    //   description:
+    //     "Dedicated to helping you achieve your hair goals with love and care.",
+    // },
     {
       icon: <Users className="w-6 h-6 text-gold" />,
       title: "Client-Centered",

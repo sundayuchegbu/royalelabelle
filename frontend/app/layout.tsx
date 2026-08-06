@@ -3,7 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/context/AuthContext";
-import WhatsAppWrapper from "@/components/layout/WhatsAppWrapper";
+// import WhatsAppWrapper from "@/components/layout/WhatsAppWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,7 +31,7 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           {children}
-          <WhatsAppWrapper />
+          {/* <WhatsAppWrapper /> */}
 
           <Toaster
             position="top-center"

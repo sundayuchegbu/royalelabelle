@@ -54,27 +54,27 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   const serviceTypes = [
     {
       value: "twist",
-      label: "Micro Locs - Twist Method longer than 6 inches, + $100",
-      price: "$600",
-      deposit: "$400",
+      label: "Micro Locs - Twist Method ",
+      price: "TBD",
+      deposit: "$200",
     },
     {
       value: "braids",
       label: "Micro Locs - Braids Method",
-      price: "$700",
-      deposit: "$500",
+      price: "TBD",
+      deposit: "$200",
     },
     {
       value: "interlocking",
       label: "Micro Locs - Interlocking Method",
-      price: "$1,000",
-      deposit: "$800",
+      price: "TBD",
+      deposit: "$300",
     },
     {
       value: "retie",
-      label: "Retie Maintenance, Every extra hour + $25",
-      price: "$150",
-      deposit: "$100",
+      label: "Retie Maintenance",
+      price: "TBD",
+      deposit: "$30",
     },
     // {
     //   value: "repair",
@@ -83,7 +83,6 @@ export default function BookingModal({ onClose }: BookingModalProps) {
     //   deposit: "$200",
     // },
   ];
-
   const hairTypes = [
     { value: "Straight", label: "Straight" },
     { value: "Wavy", label: "Wavy" },
@@ -93,8 +92,8 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   ];
 
   const hairLengths = [
-    { value: "0-2 inches", label: "0-2 inches" },
-    { value: "2-4 inches", label: "2-4 inches" },
+    // { value: "0-2 inches", label: "0-2 inches" },
+    // { value: "2-4 inches", label: "2-4 inches" },
     { value: "4-6 inches", label: "4-6 inches" },
     { value: "6+ inches", label: "6+ inches" },
   ];
@@ -507,7 +506,8 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                     <input
                       type="time"
                       name="preferredTime"
-                      value={formData.preferredTime}
+                      value="09:00"
+                      readOnly
                       onChange={handleChange}
                       className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                       required

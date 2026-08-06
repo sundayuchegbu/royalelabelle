@@ -64,7 +64,7 @@ export const welcomeEmailTemplate = (user, bookingLink) => {
           <p style="text-align: center; font-size: 16px; color: #4a2b1d;">Looking forward to locking with you! 💛<br><span style="color: #c48d2c;">- Peace Queen</span></p>
         </div>
         <div class="footer">
-          <p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p>
+          <p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 royale.labelle@gmail.com</p>
           <div class="social-links">
             <a href="https://instagram.com/royallabelle" target="_blank">Instagram</a>
             <a href="https://facebook.com/royallabelle" target="_blank">Facebook</a>
@@ -130,7 +130,7 @@ export const bookingConfirmationTemplate = (appointment, user) => {
         </div>
         <div class="footer">
           <p>📍 Ketchener, Ontario</p>
-          <p>📞 (548) 557-3218 | 📧 info@royallabelle.com</p>
+          <p>📞 (548) 557-3218 | 📧 royale.labelle@gmail.com</p>
         </div>
       </div>
     </body>
@@ -201,7 +201,7 @@ export const adminBookingNotificationTemplate = (appointment, user) => {
         </div>
         <div class="footer">
           <p>📍 Ketchener, Ontario</p>
-          <p>📞 (548) 557-3218 | 📧 info@royallabelle.com</p>
+          <p>📞 (548) 557-3218 | 📧 royale.labelle@gmail.com</p>
         </div>
       </div>
     </body>
@@ -258,7 +258,7 @@ export const appointmentConfirmedTemplate = (appointment, user) => {
           <div class="info-box"><ul><li><strong>Location:</strong> Ketchener, Ontario</li><li><strong>Arrival:</strong> Please arrive 10 minutes before</li><li><strong>Late Policy:</strong> $20 fee after 15 minutes</li></ul></div>
           <div style="text-align: center;"><a href="${process.env.FRONTEND_URL}/appointments/${appointment._id}" class="button">📋 View Details</a></div>
         </div>
-        <div class="footer"><p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
+        <div class="footer"><p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 royale.labelle@gmail.com</p></div>
       </div>
     </body>
     </html>
@@ -306,7 +306,7 @@ export const appointmentCompletedTemplate = (appointment, user) => {
           </div>
           <p style="text-align: center;">We hope you loved your experience! 💛<br><span style="color: #c48d2c;">- Peace Queen</span></p>
         </div>
-        <div class="footer"><p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
+        <div class="footer"><p>📍 594 Benninger drive, Kitchener, Ontario<br>📞 (548) 557-3218 | 📧 royale.labelle@gmail.com</p></div>
       </div>
     </body>
     </html>
@@ -368,7 +368,7 @@ export const statusChangeNotificationTemplate = (
           </div>
           <p style="text-align: center; font-size: 14px; color: #7f482f;">Have questions? Contact us at (548) 557-3218</p>
         </div>
-        <div class="footer"><p>📍 Ketchener, Ontario<br>📞 (548) 557-3218 | 📧 info@royallabelle.com</p></div>
+        <div class="footer"><p>📍 594 Benninger drive, Kitchener, Ontario<br>📞 (548) 557-3218 | 📧 royale.labelle@gmail.com</p></div>
       </div>
     </body>
     </html>
