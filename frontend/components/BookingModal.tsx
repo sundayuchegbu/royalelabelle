@@ -35,7 +35,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
     phone: "",
 
     // Hair Information
-    hairType: "",
+    hairType: "Straight",
     hairCondition: "",
     hairLength: "",
     hairDensity: "",
@@ -43,7 +43,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
     // Style Preferences
     preferredStyle: "",
     preferredDate: "",
-    preferredTime: "",
+    preferredTime: "09:00",
 
     // Additional
     goals: "",
@@ -54,7 +54,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   const serviceTypes = [
     {
       value: "twist",
-      label: "Micro Locs - Twist Method ",
+      label: "Micro Locs - Twist Method",
       price: "TBD",
       deposit: "$200",
     },
@@ -76,13 +76,8 @@ export default function BookingModal({ onClose }: BookingModalProps) {
       price: "TBD",
       deposit: "$30",
     },
-    // {
-    //   value: "repair",
-    //   label: "Loc Repair Service",
-    //   price: "$200",
-    //   deposit: "$200",
-    // },
   ];
+
   const hairTypes = [
     { value: "Straight", label: "Straight" },
     { value: "Wavy", label: "Wavy" },
@@ -92,8 +87,6 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   ];
 
   const hairLengths = [
-    // { value: "0-2 inches", label: "0-2 inches" },
-    // { value: "2-4 inches", label: "2-4 inches" },
     { value: "4-6 inches", label: "4-6 inches" },
     { value: "6+ inches", label: "6+ inches" },
   ];
@@ -190,16 +183,18 @@ export default function BookingModal({ onClose }: BookingModalProps) {
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
         phone: formData.phone.trim(),
-        hairType: formData.hairType,
+        hairType: "Straight",
         hairCondition: formData.hairCondition.trim(),
         hairLength: formData.hairLength,
         hairDensity: formData.hairDensity,
         preferredStyle: formData.preferredStyle,
         preferredDate: formData.preferredDate,
-        preferredTime: formData.preferredTime,
+        preferredTime: "09:00",
         goals: formData.goals.trim(),
         notes: formData.notes.trim(),
       };
+
+      console.log("📤 Sending consultation data:", consultationData);
 
       const consultationResponse = await api.post(
         "/consultations",
@@ -373,26 +368,6 @@ export default function BookingModal({ onClose }: BookingModalProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-[#4a2b1d] mb-1">
-                    Hair Type *
-                  </label>
-                  <select
-                    name="hairType"
-                    value={formData.hairType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white text-sm"
-                    required
-                  >
-                    <option value="">Select hair type...</option>
-                    {hairTypes.map((type) => (
-                      <option key={type.value} value={type.value}>
-                        {type.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-[#4a2b1d] mb-1">
                     Hair Length *
                   </label>
                   <select
@@ -504,14 +479,13 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                   <div className="relative">
                     <Clock className="w-4 h-4 text-[#7f482f] absolute left-3 top-1/2 transform -translate-y-1/2" />
                     <input
-                      type="time"
-                      name="preferredTime"
-                      value="09:00"
+                      type="text"
+                      value="9:00 AM"
+                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg text-sm bg-gray-100 cursor-not-allowed"
                       readOnly
-                      onChange={handleChange}
-                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
-                      required
+                      aria-readonly="true"
                     />
+                    <input type="hidden" name="preferredTime" value="09:00" />
                   </div>
                 </div>
               </div>

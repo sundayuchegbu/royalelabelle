@@ -33,7 +33,7 @@ export default function BookingSection() {
     phone: "",
 
     // Hair Information
-    hairType: "",
+    hairType: "Straight",
     hairCondition: "",
     hairLength: "",
     hairDensity: "",
@@ -41,7 +41,7 @@ export default function BookingSection() {
     // Style Preferences
     preferredStyle: "",
     preferredDate: "",
-    preferredTime: "",
+    preferredTime: "09:00",
 
     // Additional
     goals: "",
@@ -410,33 +410,13 @@ export default function BookingSection() {
                 </div>
 
                 {/* Hair Information */}
-                <div className="border-b border-[#f6ede8] pb-6">
-                  <h3 className="font-semibold text-[#4a2b1d] mb-4 flex items-center">
-                    <Scissors className="w-5 h-5 text-gold mr-2" />
+                <div className="border-b border-[#f6ede8] pb-4">
+                  <h4 className="font-semibold text-[#4a2b1d] mb-3 flex items-center text-sm">
+                    <Scissors className="w-4 h-4 text-gold mr-2" />
                     Hair Information
-                  </h3>
+                  </h4>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-[#4a2b1d] mb-1">
-                        Hair Type *
-                      </label>
-                      <select
-                        name="hairType"
-                        value={formData.hairType}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
-                        required
-                      >
-                        <option value="">Select hair type...</option>
-                        {hairTypes.map((type) => (
-                          <option key={type.value} value={type.value}>
-                            {type.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-sm font-medium text-[#4a2b1d] mb-1">
                         Hair Length *
@@ -445,7 +425,7 @@ export default function BookingSection() {
                         name="hairLength"
                         value={formData.hairLength}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
+                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white text-sm"
                         required
                       >
                         <option value="">Select hair length...</option>
@@ -458,7 +438,7 @@ export default function BookingSection() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
                     <div>
                       <label className="block text-sm font-medium text-[#4a2b1d] mb-1">
                         Hair Density *
@@ -467,7 +447,7 @@ export default function BookingSection() {
                         name="hairDensity"
                         value={formData.hairDensity}
                         onChange={handleChange}
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
+                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white text-sm"
                         required
                       >
                         <option value="">Select hair density...</option>
@@ -488,8 +468,8 @@ export default function BookingSection() {
                         name="hairCondition"
                         value={formData.hairCondition}
                         onChange={handleChange}
-                        placeholder="e.g., Healthy, Damaged, Color-treated..."
-                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
+                        placeholder="e.g., Healthy, Damaged..."
+                        className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-sm bg-white"
                         required
                       />
                     </div>
@@ -637,7 +617,7 @@ export default function BookingSection() {
 
             {/* Quick Contact Info */}
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
+              {/* <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
                 <Phone className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Call Us</p>
                 <a
@@ -646,7 +626,7 @@ export default function BookingSection() {
                 >
                   (548) 557-3218
                 </a>
-              </div>
+              </div> */}
               <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
                 <Mail className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Email Us</p>
@@ -654,7 +634,7 @@ export default function BookingSection() {
                   href="mailto:royale.labelle@gmail.com"
                   className="text-sm text-[#7f482f] hover:text-gold"
                 >
-                  Royale.labelle@gmail.com
+                  royale.labelle@gmail.com
                 </a>
               </div>
               <div className="bg-white p-4 rounded-xl text-center shadow-luxury">

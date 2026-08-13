@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import {
-  CreditCard,
-  Send,
+  // CreditCard,
+  // Send,
   Building2,
   DollarSign,
   Check,
@@ -16,19 +16,19 @@ import api from "@/lib/api";
 
 interface PaymentInfo {
   methods: {
-    stripe: {
-      available: boolean;
-      description: string;
-      processingTime: string;
-    };
-    zelle: {
-      available: boolean;
-      email: string;
-      phone: string;
-      name: string;
-      description: string;
-      processingTime: string;
-    };
+    // stripe: {
+    //   available: boolean;
+    //   description: string;
+    //   processingTime: string;
+    // };
+    // zelle: {
+    //   available: boolean;
+    //   email: string;
+    //   phone: string;
+    //   name: string;
+    //   description: string;
+    //   processingTime: string;
+    // };
     interac: {
       available: boolean;
       email: string;
@@ -50,7 +50,7 @@ interface PaymentSelectionProps {
   appointmentId: string;
   depositAmount: number;
   fullPrice: number;
-  onPaymentSelect: (method: "stripe" | "zelle" | "interac" | "cash") => void;
+  onPaymentSelect: (method: "interac" | "cash") => void;
   onBack?: () => void;
 }
 
@@ -62,8 +62,9 @@ export default function PaymentSelection({
   onBack,
 }: PaymentSelectionProps) {
   const [selectedMethod, setSelectedMethod] = useState<
-    "stripe" | "zelle" | "interac" | "cash" | null
+    "interac" | "cash" | null
   >(null);
+
   const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -83,36 +84,47 @@ export default function PaymentSelection({
   }, []);
 
   const paymentMethods = [
-    {
-      id: "stripe" as const,
-      icon: <CreditCard className="w-6 h-6" />,
-      title: "Credit/Debit Card",
-      description: "Pay instantly with any credit or debit card",
-      features: [
-        "Instant confirmation",
-        "Secure payment",
-        "Worldwide accepted",
-      ],
-      color: "border-blue-500 bg-blue-50",
-      iconColor: "bg-blue-500",
-      available: paymentInfo?.methods.stripe.available,
-      processingTime: paymentInfo?.methods.stripe.processingTime,
-    },
-    {
-      id: "zelle" as const,
-      icon: <Send className="w-6 h-6" />,
-      title: "Zelle",
-      description: "Pay directly from your US bank account",
-      features: [
-        "No fees",
-        "Direct bank transfer",
-        "Manual verification required",
-      ],
-      color: "border-purple-500 bg-purple-50",
-      iconColor: "bg-purple-500",
-      available: paymentInfo?.methods.zelle.available,
-      processingTime: paymentInfo?.methods.zelle.processingTime,
-    },
+    // =========================================================
+    // STRIPE - COMMENTED OUT
+    // =========================================================
+    // {
+    //   id: "stripe" as const,
+    //   icon: <CreditCard className="w-6 h-6" />,
+    //   title: "Credit/Debit Card",
+    //   description: "Pay instantly with any credit or debit card",
+    //   features: [
+    //     "Instant confirmation",
+    //     "Secure payment",
+    //     "Worldwide accepted",
+    //   ],
+    //   color: "border-blue-500 bg-blue-50",
+    //   iconColor: "bg-blue-500",
+    //   available: paymentInfo?.methods.stripe.available,
+    //   processingTime: paymentInfo?.methods.stripe.processingTime,
+    // },
+
+    // =========================================================
+    // ZELLE - COMMENTED OUT
+    // =========================================================
+    // {
+    //   id: "zelle" as const,
+    //   icon: <Send className="w-6 h-6" />,
+    //   title: "Zelle",
+    //   description: "Pay directly from your US bank account",
+    //   features: [
+    //     "No fees",
+    //     "Direct bank transfer",
+    //     "Manual verification required",
+    //   ],
+    //   color: "border-purple-500 bg-purple-50",
+    //   iconColor: "bg-purple-500",
+    //   available: paymentInfo?.methods.zelle.available,
+    //   processingTime: paymentInfo?.methods.zelle.processingTime,
+    // },
+
+    // =========================================================
+    // INTERAC - ACTIVE
+    // =========================================================
     {
       id: "interac" as const,
       icon: <Building2 className="w-6 h-6" />,
@@ -128,6 +140,10 @@ export default function PaymentSelection({
       available: paymentInfo?.methods.interac.available,
       processingTime: paymentInfo?.methods.interac.processingTime,
     },
+
+    // =========================================================
+    // CASH - ACTIVE
+    // =========================================================
     {
       id: "cash" as const,
       icon: <DollarSign className="w-6 h-6" />,
@@ -155,6 +171,7 @@ export default function PaymentSelection({
     return (
       <div className="text-center py-8">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
+
         <p className="mt-4 text-[#7f482f]">Loading payment options...</p>
       </div>
     );
@@ -162,20 +179,24 @@ export default function PaymentSelection({
 
   return (
     <div className="space-y-6">
+      {/* Payment Header */}
       <div className="text-center">
         <h3 className="font-serif text-2xl text-[#4a2b1d]">
           Choose Payment Method
         </h3>
+
         <div className="mt-2 flex justify-center gap-8 text-sm text-[#7f482f]">
           <span>
             Deposit: <strong className="text-gold">${depositAmount}</strong>
           </span>
+
           <span>
             Total: <strong>${fullPrice}</strong>
           </span>
         </div>
       </div>
 
+      {/* Payment Methods */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {paymentMethods.map((method) => {
           const isSelected = selectedMethod === method.id;
@@ -195,6 +216,7 @@ export default function PaymentSelection({
               }`}
             >
               <div className="flex items-start space-x-4">
+                {/* Icon */}
                 <div
                   className={`w-12 h-12 rounded-full flex items-center justify-center text-white shrink-0 ${
                     isSelected ? "bg-gold" : method.iconColor
@@ -202,20 +224,27 @@ export default function PaymentSelection({
                 >
                   {method.icon}
                 </div>
+
                 <div className="flex-1">
+                  {/* Title */}
                   <div className="flex items-center justify-between">
                     <h4 className="font-semibold text-[#4a2b1d]">
                       {method.title}
                     </h4>
+
                     {isSelected && <Check className="w-5 h-5 text-gold" />}
+
                     {!isAvailable && (
                       <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">
                         Unavailable
                       </span>
                     )}
                   </div>
+
+                  {/* Description */}
                   <p className="text-sm text-[#7f482f]">{method.description}</p>
 
+                  {/* Processing Time */}
                   {method.processingTime && isAvailable && (
                     <div className="flex items-center mt-2 text-xs text-[#7f482f]">
                       <Clock className="w-3 h-3 mr-1" />
@@ -223,6 +252,7 @@ export default function PaymentSelection({
                     </div>
                   )}
 
+                  {/* Features */}
                   <ul className="mt-2 space-y-1">
                     {method.features.map((feature) => (
                       <li
@@ -235,9 +265,11 @@ export default function PaymentSelection({
                     ))}
                   </ul>
 
+                  {/* Cash Notice */}
                   {method.id === "cash" && (
                     <div className="mt-2 p-2 bg-yellow-50 rounded text-xs text-yellow-800">
                       <AlertCircle className="w-3 h-3 inline mr-1" />
+
                       {paymentInfo?.methods.cash.notes ||
                         "Bring exact cash amount"}
                     </div>
@@ -249,6 +281,7 @@ export default function PaymentSelection({
         })}
       </div>
 
+      {/* Navigation Buttons */}
       <div className="flex gap-3">
         {onBack && (
           <Button
@@ -260,6 +293,7 @@ export default function PaymentSelection({
             Back
           </Button>
         )}
+
         <Button
           variant="gold"
           size="lg"
@@ -272,10 +306,12 @@ export default function PaymentSelection({
         </Button>
       </div>
 
+      {/* Terms */}
       <div className="text-center">
         <p className="text-xs text-[#7f482f]">
           By proceeding, you agree to our booking policy and terms of service.
         </p>
+
         <p className="text-xs text-[#7f482f] mt-1">
           💳 All payments are secure and encrypted
         </p>
