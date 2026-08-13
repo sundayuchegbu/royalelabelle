@@ -102,7 +102,7 @@ export default function Pricing() {
 
         {/* Consultation Section */}
         <div className="max-w-4xl mx-auto mb-16">
-          <div className="bg-gradient-to-r from-[#fdf8f6] to-[#f6ede8] rounded-2xl p-8 shadow-luxury border border-gold/20">
+          <div className="bg-linear-to-r from-[#fdf8f6] to-[#f6ede8] rounded-2xl p-8 shadow-luxury border border-gold/20">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center">
                 <Video className="w-6 h-6 text-gold" />
