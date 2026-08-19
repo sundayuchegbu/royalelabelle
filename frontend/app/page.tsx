@@ -27,7 +27,7 @@ export default function Home() {
         <About />
         <Services />
         <Pricing />
-        {/* <Gallery /> */}
+        <Gallery />
         {/* <Testimonials /> */}
         <Policy />
         <BookingSection /> {/* Add this */}

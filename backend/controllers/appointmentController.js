@@ -45,11 +45,10 @@ export const createAppointment = async (req, res) => {
 
     // Pricing logic
     const pricing = {
-      twist: { deposit: 400, full: 1000 },
-      braids: { deposit: 500, full: 1200 },
-      interlocking: { deposit: 800, full: 1600 },
-      retie: { deposit: 100, full: 150 },
-      // repair: { deposit: 200, full: 200 },
+      twist: { deposit: 200, full: 600 },
+      braids: { deposit: 200, full: 700 },
+      interlocking: { deposit: 300, full: 1000 },
+      retie: { deposit: 50, full: 150 },
     };
 
     const servicePricing = pricing[serviceType];

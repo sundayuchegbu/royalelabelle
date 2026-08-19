@@ -474,7 +474,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
 
                 <div>
                   <label className="block text-sm font-medium text-[#4a2b1d] mb-1">
-                    Preferred Time *
+                    Time *
                   </label>
                   <div className="relative">
                     <Clock className="w-4 h-4 text-[#7f482f] absolute left-3 top-1/2 transform -translate-y-1/2" />

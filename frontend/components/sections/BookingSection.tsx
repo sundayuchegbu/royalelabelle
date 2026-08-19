@@ -525,7 +525,7 @@ export default function BookingSection() {
 
                     <div>
                       <label className="block text-sm font-medium text-[#4a2b1d] mb-1">
-                        Preferred Time *
+                        Time *
                       </label>
                       <div className="relative">
                         <Clock className="w-5 h-5 text-[#7f482f] absolute left-3 top-1/2 transform -translate-y-1/2" />
