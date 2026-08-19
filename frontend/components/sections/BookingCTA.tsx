@@ -26,7 +26,7 @@ export default function BookingCTA() {
               onClick={() => (window.location.href = "#booking")}
             >
               <Calendar className="w-5 h-5 mr-2" />
-              Book Your Consultation
+              Book Your Appointment
             </Button>
             <Button
               variant="outline"
@@ -37,7 +37,7 @@ export default function BookingCTA() {
               }
             >
               <Mail className="w-5 h-5 mr-2" />
-              Royale.labelle@gmail.com
+              royale.labelle@gmail.com
             </Button>
           </div>
           <p className="mt-6 text-[#d4a691] text-sm">

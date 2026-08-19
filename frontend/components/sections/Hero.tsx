@@ -67,7 +67,7 @@ export default function Hero() {
               onClick={() => (window.location.href = "#booking")}
             >
               <Calendar className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform cursor-pointer" />
-              Book Your Consultation
+              Book Your Appointment
             </Button>
             <Button
               onClick={() => (window.location.href = "#about")}

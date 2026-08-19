@@ -62,8 +62,6 @@ export default function Pricing() {
         "Professional retie maintenance",
         "Every extra hour +$25",
         "Pricing based on length, locs count, new growth & slippage",
-        "Customized for your hair type",
-        "Post-maintenance care guide",
       ],
       popular: false,
     },
@@ -99,7 +97,6 @@ export default function Pricing() {
           title="Investment in Your Beauty"
           description="Prices vary based on length, density, texture, and method. A free virtual consultation is required for exact pricing."
         />
-
         {/* Consultation Section */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="bg-linear-to-r from-[#fdf8f6] to-[#f6ede8] rounded-2xl p-8 shadow-luxury border border-gold/20">
@@ -156,7 +153,6 @@ export default function Pricing() {
             </div>
           </div>
         </div>
-
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {pricingData.map((plan) => (
@@ -205,9 +201,7 @@ export default function Pricing() {
             </div>
           ))}
         </div>
-
-        {/* Retie Pricing Details */}
-        <div className="max-w-3xl mx-auto mt-12 p-6 bg-[#fdf8f6] rounded-2xl border border-[#f6ede8]">
+        {/* <div className="max-w-3xl mx-auto mt-12 p-6 bg-[#fdf8f6] rounded-2xl border border-[#f6ede8]">
           <h4 className="font-serif text-lg text-[#4a2b1d] text-center mb-3">
             📋 Retie Pricing Details
           </h4>
@@ -231,8 +225,7 @@ export default function Pricing() {
               • Length of hair • Locs count • Extent of new growth • Slippage
             </p>
           </div>
-        </div>
-
+        </div> */}
         <div className="mt-8 text-center">
           <p className="text-[#7f482f] text-sm">
             💳 Payment accepted via Interac or Cash. Full balance due on the

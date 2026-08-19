@@ -101,7 +101,7 @@ export default function BookingSection() {
     { value: "Thin", label: "Thin" },
     { value: "Medium", label: "Medium" },
     { value: "Thick", label: "Thick" },
-    { value: "Very Thick", label: "Very Thick" },
+    // { value: "Very Thick", label: "Very Thick" },
   ];
 
   // Auto-fill form with user data when authenticated
