@@ -144,21 +144,21 @@ export default function PaymentSelection({
     // =========================================================
     // CASH - ACTIVE
     // =========================================================
-    {
-      id: "cash" as const,
-      icon: <DollarSign className="w-6 h-6" />,
-      title: "Cash",
-      description: "Pay in person on the day of service",
-      features: [
-        "No fees",
-        "Pay at appointment",
-        "No deposit required upfront",
-      ],
-      color: "border-green-600 bg-green-50",
-      iconColor: "bg-green-600",
-      available: paymentInfo?.methods.cash.available,
-      processingTime: paymentInfo?.methods.cash.processingTime,
-    },
+    // {
+    //   id: "cash" as const,
+    //   icon: <DollarSign className="w-6 h-6" />,
+    //   title: "Cash",
+    //   description: "Pay in person on the day of service",
+    //   features: [
+    //     "No fees",
+    //     "Pay at appointment",
+    //     "No deposit required upfront",
+    //   ],
+    //   color: "border-green-600 bg-green-50",
+    //   iconColor: "bg-green-600",
+    //   available: paymentInfo?.methods.cash.available,
+    //   processingTime: paymentInfo?.methods.cash.processingTime,
+    // },
   ];
 
   const handleContinue = () => {
@@ -266,14 +266,14 @@ export default function PaymentSelection({
                   </ul>
 
                   {/* Cash Notice */}
-                  {method.id === "cash" && (
+                  {/* {method.id === "cash" && (
                     <div className="mt-2 p-2 bg-yellow-50 rounded text-xs text-yellow-800">
                       <AlertCircle className="w-3 h-3 inline mr-1" />
 
                       {paymentInfo?.methods.cash.notes ||
                         "Bring exact cash amount"}
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             </button>
