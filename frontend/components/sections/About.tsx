@@ -50,7 +50,7 @@ export default function About() {
                 {/* <p className="text-sm">Your Hair Specialist</p> */}
                 {/* </div> */} */
                 <Image
-                  src="/pq.jpg"
+                  src="/peacequeen.jpeg"
                   alt="peaceQueen - Your Hair Specialist"
                   layout="fill"
                   objectFit="cover"

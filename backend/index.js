@@ -47,15 +47,15 @@ console.log(
 //     credentials: true,
 //   }),
 // );
-app.use(
-  cors({
-    origin: [
-      "https://royalelabelle.netlify.app",
-      "http://localhost:3000", // Keep for local development
-    ],
-    credentials: true,
-  }),
-);
+// app.use(
+//   cors({
+//     origin: [
+//       "https://royalelabelle.netlify.app",
+//       "http://localhost:3000", // Keep for local development
+//     ],
+//     credentials: true,
+//   }),
+// );
 
 // --------------------------------------------------
 // Stripe Webhook
