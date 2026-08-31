@@ -302,7 +302,6 @@ export default function AppointmentConfirmationPage() {
                 #{appointment._id.slice(-8).toUpperCase()}
               </span>
             </div>
-
             {/* Service Details */}
             <div className="border-b border-[#f6ede8] pb-6">
               <h3 className="font-semibold text-[#4a2b1d] mb-4">
@@ -347,7 +346,6 @@ export default function AppointmentConfirmationPage() {
                 </div>
               </div>
             </div>
-
             {/* Payment Information */}
             <div className="border-b border-[#f6ede8] pb-6">
               <h3 className="font-semibold text-[#4a2b1d] mb-4">
@@ -375,20 +373,17 @@ export default function AppointmentConfirmationPage() {
                 </p>
               )}
             </div>
-
             {/* Location Information */}
             <div className="border-b border-[#f6ede8] pb-6">
               <h3 className="font-semibold text-[#4a2b1d] mb-4">📍 Location</h3>
               <div className="bg-[#fdf8f6] rounded-lg p-4">
                 <p className="font-medium text-[#4a2b1d]">Royale la'belle</p>
-                <p className="text-[#7f482f] text-sm">735 Liberty Avenue</p>
-                <p className="text-[#7f482f] text-sm">Brooklyn, NY 11208</p>
-                <p className="text-[#7f482f] text-sm">
-                  Between Liberty and Linwood, East New York
-                </p>
+                <p className="text-[#7f482f] text-sm">594 Benninger drive</p>
+                <p className="text-[#7f482f] text-sm">Kitchener, ON 20000</p>
+
                 <div className="mt-3 flex items-center space-x-4">
                   <a
-                    href="https://www.google.com/maps?q=735+Liberty+Avenue+Brooklyn+NY+11208"
+                    href="https://www.google.com/maps?q= 594+Benninger drive+Kitchener+ON+Canada"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-[#c48d2c] hover:underline"
@@ -398,7 +393,7 @@ export default function AppointmentConfirmationPage() {
                 </div>
               </div>
             </div>
-
+            , Kitchener, Ontario
             {/* Important Information */}
             <div className="border-b border-[#f6ede8] pb-6">
               <h3 className="font-semibold text-[#4a2b1d] mb-4">
@@ -449,7 +444,6 @@ export default function AppointmentConfirmationPage() {
                 )}
               </div>
             </div>
-
             {/* Actions */}
             <div className="flex flex-wrap gap-3 pt-2">
               {isConfirmed && !isCompleted && (
@@ -475,7 +469,6 @@ export default function AppointmentConfirmationPage() {
                 </Button>
               </Link>
             </div>
-
             {/* Contact Support */}
             <div className="bg-[#fff5e6] rounded-lg p-4 border-l-4 border-[#c48d2c]">
               <p className="text-sm text-[#7f482f]">
@@ -553,7 +546,7 @@ export default function AppointmentConfirmationPage() {
               .toISOString()
               .replace(/-|:|\.\d+/g, "")}&details=${encodeURIComponent(
               `Appointment at Royale la'belle - ${appointment.notes || ""}`,
-            )}&location=${encodeURIComponent("735 Liberty Avenue, Brooklyn, NY 11208")}`}
+            )}&location=${encodeURIComponent("594 Benninger drive, Kitchener, Ontario, Canada")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-4 py-2 bg-white border border-[#f6ede8] rounded-lg text-sm text-[#4a2b1d] hover:bg-[#fdf8f6] transition-colors"

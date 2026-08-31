@@ -14,8 +14,88 @@ const isWithinSevenDays = (date1, date2) => {
   return diffDays <= 7;
 };
 
-// @desc    Create appointment
-// @route   POST /api/appointments
+// Calculate dynamic pricing based on consultation data
+const calculatePricing = (serviceType, consultation) => {
+  // Base pricing
+  const basePricing = {
+    twist: { deposit: 200, full: 600 },
+    braids: { deposit: 200, full: 700 },
+    interlocking: { deposit: 300, full: 1000 },
+    retie: { deposit: 50, full: 150 },
+  };
+
+  let price = basePricing[serviceType];
+  if (!price) return null;
+
+  let fullPrice = price.full;
+  let depositAmount = price.deposit;
+
+  // Retie has different pricing structure
+  if (serviceType === "retie") {
+    // Retie is a 4-hour session at $150
+    // Extra hours may be needed based on length, density, etc.
+    let extraHours = 0;
+
+    // Check hair length
+    if (consultation.hairLength === "6+ inches") {
+      extraHours += 1;
+    }
+
+    // Check hair density
+    if (
+      consultation.hairDensity === "Thick" ||
+      consultation.hairDensity === "Very Thick"
+    ) {
+      extraHours += 0.5;
+    }
+
+    // Check hair condition (if damaged, may need more time)
+    if (consultation.hairCondition?.toLowerCase().includes("damaged")) {
+      extraHours += 0.5;
+    }
+
+    // Calculate retie price
+    fullPrice = 150 + extraHours * 25;
+    depositAmount = 50;
+
+    return { deposit: depositAmount, full: Math.round(fullPrice) };
+  }
+
+  // For installation services (twist, braids, interlocking)
+  // Check hair length - longer than 6 inches adds cost
+  if (consultation.hairLength === "6+ inches") {
+    if (serviceType === "twist" || serviceType === "braids") {
+      fullPrice += 100;
+    } else if (serviceType === "interlocking") {
+      fullPrice += 200;
+    }
+  }
+
+  // Check hair density - higher density adds cost
+  if (consultation.hairDensity === "Thick") {
+    if (serviceType === "twist" || serviceType === "braids") {
+      fullPrice += 100;
+    } else if (serviceType === "interlocking") {
+      fullPrice += 200;
+    }
+  } else if (consultation.hairDensity === "Very Thick") {
+    if (serviceType === "twist" || serviceType === "braids") {
+      fullPrice += 150;
+    } else if (serviceType === "interlocking") {
+      fullPrice += 250;
+    }
+  }
+
+  // Check hair condition - damaged hair may require extra care
+  if (consultation.hairCondition?.toLowerCase().includes("damaged")) {
+    fullPrice += 50;
+  }
+
+  return { deposit: depositAmount, full: fullPrice };
+};
+
+// @desc Create appointment
+// @route POST /api/appointments
 export const createAppointment = async (req, res) => {
   try {
     const { serviceType, appointmentDate, consultationId, notes } = req.body;
@@ -43,15 +123,9 @@ export const createAppointment = async (req, res) => {
       });
     }
 
-    // Pricing logic
-    const pricing = {
-      twist: { deposit: 200, full: 600 },
-      braids: { deposit: 200, full: 700 },
-      interlocking: { deposit: 300, full: 1000 },
-      retie: { deposit: 30, full: 150 },
-    };
+    // Calculate dynamic pricing based on consultation data
+    const servicePricing = calculatePricing(serviceType, consultation);
 
-    const servicePricing = pricing[serviceType];
     if (!servicePricing) {
       return res.status(400).json({
         success: false,
@@ -101,8 +175,8 @@ export const createAppointment = async (req, res) => {
   }
 };
 
-// @desc    Confirm appointment (after payment)
-// @route   PUT /api/appointments/:id/confirm
+// @desc Confirm appointment (after payment)
+// @route PUT /api/appointments/:id/confirm
 export const confirmAppointment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -149,8 +223,8 @@ export const confirmAppointment = async (req, res) => {
   }
 };
 
-// @desc    Get user's appointments
-// @route   GET /api/user/appointments
+// @desc Get user's appointments
+// @route GET /api/user/appointments
 export const getUserAppointments = async (req, res) => {
   try {
     const { status, limit = 10, page = 1 } = req.query;
@@ -189,8 +263,8 @@ export const getUserAppointments = async (req, res) => {
   }
 };
 
-// @desc    Get single appointment
-// @route   GET /api/user/appointments/:id
+// @desc Get single appointment
+// @route GET /api/user/appointments/:id
 export const getAppointment = async (req, res) => {
   try {
     const appointment = await Appointment.findOne({
@@ -218,8 +292,8 @@ export const getAppointment = async (req, res) => {
   }
 };
 
-// @desc    Cancel appointment (by customer)
-// @route   PUT /api/user/appointments/:id/cancel
+// @desc Cancel appointment (by customer)
+// @route PUT /api/user/appointments/:id/cancel
 export const cancelAppointment = async (req, res) => {
   try {
     const appointment = await Appointment.findOne({
@@ -273,8 +347,8 @@ export const cancelAppointment = async (req, res) => {
   }
 };
 
-// @desc    Reschedule appointment
-// @route   PUT /api/user/appointments/:id/reschedule
+// @desc Reschedule appointment
+// @route PUT /api/user/appointments/:id/reschedule
 export const rescheduleAppointment = async (req, res) => {
   try {
     const { newDate } = req.body;
@@ -341,4 +415,4 @@ export const rescheduleAppointment = async (req, res) => {
       message: error.message,
     });
   }
-}; // <-- MAKE SURE THIS CLOSING BRACE IS HERE
+};

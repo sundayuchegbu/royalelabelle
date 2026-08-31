@@ -618,15 +618,15 @@ export default function BookingSection() {
             {/* Quick Contact Info */}
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
-                <Phone className="w-6 h-6 text-gold mx-auto mb-2" />
-                <p className="text-sm font-medium text-[#4a2b1d]">Call Us</p>
-                <a
-                  href="tel:+15485573218"
-                  className="text-sm text-[#7f482f] hover:text-gold"
-                >
-                  (548) 557-3218
-                </a>
-              </div> */}
+                  <Phone className="w-6 h-6 text-gold mx-auto mb-2" />
+                  <p className="text-sm font-medium text-[#4a2b1d]">Call Us</p>
+                  <a
+                    href="tel:+15485573218"
+                    className="text-sm text-[#7f482f] hover:text-gold"
+                  >
+                    (548) 557-3218
+                  </a>
+                </div> */}
               <div className="bg-white p-4 rounded-xl text-center shadow-luxury">
                 <Mail className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Email Us</p>
@@ -641,6 +641,7 @@ export default function BookingSection() {
                 <Clock className="w-6 h-6 text-gold mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#4a2b1d]">Hours</p>
                 <p className="text-sm text-[#7f482f]">Mon-Sat: 9AM - 7PM</p>
+                <p className="text-sm text-[#7f482f]">Sun: 12PM - 5PM</p>
               </div>
             </div>
           </div>

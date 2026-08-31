@@ -359,16 +359,33 @@ export const deleteAppointment = async (req, res) => {
     console.log(`  - Service: ${appointment.serviceType}`);
     console.log(`  - Client: ${appointment.userId}`);
 
-    // 🔑 CRITICAL FIX: Update the associated consultation status back to 'active'
+    // Update the associated consultation status
+    // Only set to active if there are no other active appointments
     if (appointment.consultationId) {
-      await Consultation.findByIdAndUpdate(appointment.consultationId, {
-        status: "active",
-        // Optionally reset the expiration date to give them more time
-        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      // Check if there are any other active appointments for this consultation
+      const otherActiveAppointments = await Appointment.find({
+        consultationId: appointment.consultationId,
+        _id: { $ne: appointmentId },
+        status: {
+          $in: ["pending", "confirmed", "payment_pending", "payment_verified"],
+        },
       });
-      console.log(
-        `  ✅ Consultation ${appointment.consultationId} set to active`,
-      );
+
+      // If there are no other active appointments, set consultation to 'active'
+      // Otherwise, keep it as 'completed' or leave it as is
+      if (otherActiveAppointments.length === 0) {
+        await Consultation.findByIdAndUpdate(appointment.consultationId, {
+          status: "active",
+          expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        });
+        console.log(
+          `  ✅ Consultation ${appointment.consultationId} set to active (no other active appointments)`,
+        );
+      } else {
+        console.log(
+          `  ℹ️ Consultation ${appointment.consultationId} has ${otherActiveAppointments.length} other active appointments, keeping status`,
+        );
+      }
     }
 
     // Delete the appointment
@@ -385,6 +402,195 @@ export const deleteAppointment = async (req, res) => {
     res.status(500).json({
       success: false,
       message: error.message || "Failed to delete appointment",
+    });
+  }
+};
+
+// @desc    Admin confirms appointment (manual confirmation)
+// @route   PUT /api/admin/appointments/:id/confirm
+export const adminConfirmAppointment = async (req, res) => {
+  try {
+    if (req.user.role !== "admin" && req.user.role !== "super_admin") {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied. Admin privileges required.",
+      });
+    }
+
+    const { id } = req.params;
+    const { notes } = req.body;
+
+    const appointment = await Appointment.findById(id);
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    // Check if already confirmed or completed
+    if (
+      appointment.status === "confirmed" ||
+      appointment.status === "completed"
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Appointment is already confirmed or completed",
+      });
+    }
+
+    // Update appointment status
+    appointment.status = "confirmed";
+    if (notes) appointment.notes = notes;
+    await appointment.save();
+
+    // Update consultation status to 'completed'
+    await Consultation.findByIdAndUpdate(appointment.consultationId, {
+      status: "completed",
+    });
+
+    const user = await User.findById(appointment.userId);
+    if (user) {
+      sendAppointmentConfirmedEmail(user, appointment).catch((error) => {
+        console.error("Failed to send appointment confirmed email:", error);
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Appointment confirmed successfully by admin",
+      appointment,
+    });
+  } catch (error) {
+    console.error("Admin confirm appointment error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// @desc    Admin completes appointment
+// @route   PUT /api/admin/appointments/:id/complete
+export const adminCompleteAppointment = async (req, res) => {
+  try {
+    if (req.user.role !== "admin" && req.user.role !== "super_admin") {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied. Admin privileges required.",
+      });
+    }
+
+    const { id } = req.params;
+    const { notes } = req.body;
+
+    const appointment = await Appointment.findById(id);
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    // Can only complete if status is 'confirmed' or 'pending'
+    if (appointment.status === "completed") {
+      return res.status(400).json({
+        success: false,
+        message: "Appointment is already completed",
+      });
+    }
+
+    if (appointment.status === "cancelled") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot complete a cancelled appointment",
+      });
+    }
+
+    // Update appointment status to completed
+    appointment.status = "completed";
+    if (notes) appointment.notes = notes;
+    await appointment.save();
+
+    // Consultation already 'completed' from confirmation, but ensure it's completed
+    await Consultation.findByIdAndUpdate(appointment.consultationId, {
+      status: "completed",
+    });
+
+    // User can now book again (consultation is completed)
+
+    res.status(200).json({
+      success: true,
+      message: "Appointment marked as completed",
+      appointment,
+    });
+  } catch (error) {
+    console.error("Admin complete appointment error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// @desc    Admin cancels appointment
+// @route   PUT /api/admin/appointments/:id/cancel
+export const adminCancelAppointment = async (req, res) => {
+  try {
+    if (req.user.role !== "admin" && req.user.role !== "super_admin") {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied. Admin privileges required.",
+      });
+    }
+
+    const { id } = req.params;
+    const { notes } = req.body;
+
+    const appointment = await Appointment.findById(id);
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    // Can't cancel if already completed
+    if (appointment.status === "completed") {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot cancel a completed appointment",
+      });
+    }
+
+    if (appointment.status === "cancelled") {
+      return res.status(400).json({
+        success: false,
+        message: "Appointment is already cancelled",
+      });
+    }
+
+    // Update appointment status to cancelled
+    appointment.status = "cancelled";
+    if (notes) appointment.notes = notes;
+    await appointment.save();
+
+    // Set consultation back to 'active' so user can book again
+    await Consultation.findByIdAndUpdate(appointment.consultationId, {
+      status: "active",
+      expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Appointment cancelled successfully. User can now book again.",
+      appointment,
+    });
+  } catch (error) {
+    console.error("Admin cancel appointment error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
     });
   }
 };

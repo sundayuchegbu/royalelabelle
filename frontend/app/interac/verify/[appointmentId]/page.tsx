@@ -141,9 +141,9 @@ export default function InteracVerifyPage() {
                     ${interacInfo.amount}
                   </span>
                 </p> */}
-                <p>
+                {/* <p>
                   <strong>Security Question:</strong> What is my business name?
-                </p>
+                </p> */}
                 <p>
                   <strong>Answer:</strong> Royale la'belle
                 </p>

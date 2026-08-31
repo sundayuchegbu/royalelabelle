@@ -52,7 +52,7 @@ export default function InteracSuccessPage() {
             variant="gold"
             size="md"
             className="flex-1"
-            onClick={() => router.push(`/appointments/${appointmentId}`)}
+            onClick={() => router.push(`/my-appointments/${appointmentId}`)}
           >
             View Appointment
           </Button>
