@@ -21,7 +21,7 @@ const calculatePricing = (serviceType, consultation) => {
     twist: { deposit: 200, full: 600 },
     braids: { deposit: 200, full: 700 },
     interlocking: { deposit: 300, full: 1000 },
-    retie: { deposit: 50, full: 150 },
+    retie: { deposit: 30, full: 150 },
   };
 
   let price = basePricing[serviceType];
@@ -56,7 +56,7 @@ const calculatePricing = (serviceType, consultation) => {
 
     // Calculate retie price
     fullPrice = 150 + extraHours * 25;
-    depositAmount = 50;
+    depositAmount = 30;
 
     return { deposit: depositAmount, full: Math.round(fullPrice) };
   }
