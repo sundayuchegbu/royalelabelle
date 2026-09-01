@@ -66,7 +66,7 @@ export default function BookingPage() {
       value: "retie",
       label: "Retie Maintenance",
       price: "Varies",
-      deposit: "$200",
+      deposit: "$30",
     },
     {
       value: "repair",
@@ -603,9 +603,9 @@ export default function BookingPage() {
         {/* Footer Info */}
         <div className="mt-8 text-center">
           <div className="flex flex-wrap justify-center gap-4 text-xs text-[#7f482f]">
-            <span>📍 735 Liberty Avenue, Brooklyn, NY 11208</span>
+            <span>📍 Kitchener, ON N2E OK5</span>
             <span>•</span>
-            <span>📞 (646) 400-7132</span>
+            <span>📞 (548) 557-3218</span>
             <span>•</span>
             <span>⏰ Mon-Sat: 9AM - 7PM</span>
           </div>
