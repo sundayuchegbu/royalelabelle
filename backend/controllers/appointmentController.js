@@ -15,6 +15,7 @@ const isWithinSevenDays = (date1, date2) => {
 };
 
 // Calculate dynamic pricing based on consultation data
+// Calculate dynamic pricing based on consultation data
 const calculatePricing = (serviceType, consultation) => {
   // Base pricing
   const basePricing = {
@@ -30,35 +31,15 @@ const calculatePricing = (serviceType, consultation) => {
   let fullPrice = price.full;
   let depositAmount = price.deposit;
 
-  // Retie has different pricing structure
+  // Retie has fixed pricing - NO conditions apply
   if (serviceType === "retie") {
-    // Retie is a 4-hour session at $150
-    // Extra hours may be needed based on length, density, etc.
-    let extraHours = 0;
+    // Fixed price - no conditions
+    // Hair length does NOT affect retie pricing
+    // Hair density does NOT affect retie pricing
+    // Hair condition does NOT affect retie pricing
+    // Everything is included in the base price
 
-    // Check hair length
-    // if (consultation.hairLength === "6+ inches") {
-    //   extraHours += 1;
-    // }
-
-    // Check hair density
-    if (
-      consultation.hairDensity === "Thick" ||
-      consultation.hairDensity === "Very Thick"
-    ) {
-      extraHours += 0.5;
-    }
-
-    // Check hair condition (if damaged, may need more time)
-    if (consultation.hairCondition?.toLowerCase().includes("damaged")) {
-      extraHours += 0.5;
-    }
-
-    // Calculate retie price
-    fullPrice = 150 + extraHours * 25;
-    depositAmount = 30;
-
-    return { deposit: depositAmount, full: Math.round(fullPrice) };
+    return { deposit: depositAmount, full: fullPrice };
   }
 
   // For installation services (twist, braids, interlocking)
@@ -93,7 +74,6 @@ const calculatePricing = (serviceType, consultation) => {
 
   return { deposit: depositAmount, full: fullPrice };
 };
-
 // @desc Create appointment
 // @route POST /api/appointments
 export const createAppointment = async (req, res) => {
