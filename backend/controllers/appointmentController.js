@@ -37,9 +37,9 @@ const calculatePricing = (serviceType, consultation) => {
     let extraHours = 0;
 
     // Check hair length
-    if (consultation.hairLength === "6+ inches") {
-      extraHours += 1;
-    }
+    // if (consultation.hairLength === "6+ inches") {
+    //   extraHours += 1;
+    // }
 
     // Check hair density
     if (

@@ -57,7 +57,7 @@ export default function Pricing() {
     {
       title: "Retie Maintenance",
       price: "4-Hour Session - $150",
-      deposit: "$50",
+      deposit: "$30",
       features: [
         "Professional retie maintenance",
         "Every extra hour +$25",
