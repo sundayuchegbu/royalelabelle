@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import {
   X,
@@ -13,6 +13,7 @@ import {
   Shield,
   Scissors,
   AlertCircle,
+  ChevronRight,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import Button from "./ui/Button";
@@ -28,6 +29,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   const router = useRouter();
   const { isAuthenticated, user } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     // Personal Information
     name: "",
@@ -54,7 +56,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
   const serviceTypes = [
     {
       value: "twist",
-      label: "Micro Locs - Twist Method",
+      label: "Micro Locs - Twist Method ",
       price: "TBD",
       deposit: "$200",
     },
@@ -95,7 +97,6 @@ export default function BookingModal({ onClose }: BookingModalProps) {
     { value: "Thin", label: "Thin" },
     { value: "Medium", label: "Medium" },
     { value: "Thick", label: "Thick" },
-    { value: "Very Thick", label: "Very Thick" },
   ];
 
   // Auto-fill form with user data when authenticated
@@ -109,6 +110,36 @@ export default function BookingModal({ onClose }: BookingModalProps) {
       }));
     }
   }, [isAuthenticated, user]);
+
+  // Handle click outside to close modal
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        if (!showAuthModal) {
+          onClose();
+        }
+      }
+    };
+
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !showAuthModal) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscKey);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscKey);
+      document.body.style.overflow = "unset";
+    };
+  }, [onClose, showAuthModal]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -150,6 +181,9 @@ export default function BookingModal({ onClose }: BookingModalProps) {
 
     setIsSubmitting(true);
 
+    // Log current form data for debugging
+    console.log("Form Data before validation:", formData);
+
     // Validate all required fields
     const requiredFields = [
       { field: "name", label: "Full Name" },
@@ -178,28 +212,31 @@ export default function BookingModal({ onClose }: BookingModalProps) {
     }
 
     try {
-      // Step 1: Create consultation
+      // Prepare consultation data
       const consultationData = {
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
         phone: formData.phone.trim(),
-        hairType: "Straight",
+        hairType: formData.hairType,
         hairCondition: formData.hairCondition.trim(),
         hairLength: formData.hairLength,
         hairDensity: formData.hairDensity,
         preferredStyle: formData.preferredStyle,
         preferredDate: formData.preferredDate,
-        preferredTime: "09:00",
+        preferredTime: formData.preferredTime,
         goals: formData.goals.trim(),
         notes: formData.notes.trim(),
       };
 
-      console.log("📤 Sending consultation data:", consultationData);
+      console.log("Sending consultation data:", consultationData);
 
+      // Step 1: Create consultation
       const consultationResponse = await api.post(
         "/consultations",
         consultationData,
       );
+
+      console.log("Consultation response:", consultationResponse.data);
 
       if (!consultationResponse.data.success) {
         throw new Error(
@@ -209,7 +246,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
 
       const consultationId = consultationResponse.data.consultation._id;
 
-      // Step 2: Create appointment
+      // Step 2: Create appointment using the consultation data
       const appointmentData = {
         serviceType: formData.preferredStyle,
         appointmentDate: formData.preferredDate,
@@ -217,10 +254,14 @@ export default function BookingModal({ onClose }: BookingModalProps) {
         notes: formData.notes.trim(),
       };
 
+      console.log("Sending appointment data:", appointmentData);
+
       const appointmentResponse = await api.post(
         "/appointments",
         appointmentData,
       );
+
+      console.log("Appointment response:", appointmentResponse.data);
 
       if (!appointmentResponse.data.success) {
         throw new Error(
@@ -236,11 +277,13 @@ export default function BookingModal({ onClose }: BookingModalProps) {
       router.push(`/checkout?appointmentId=${appointmentId}`);
     } catch (error: any) {
       console.error("Booking error:", error);
+      console.error("Error response:", error.response?.data);
 
       // Handle validation errors from the backend
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);
       } else if (error.response?.data?.errors) {
+        // Handle mongoose validation errors
         const errorMessages = Object.values(error.response.data.errors)
           .map((err: any) => err.message)
           .join(", ");
@@ -255,10 +298,24 @@ export default function BookingModal({ onClose }: BookingModalProps) {
     }
   };
 
+  const handleClose = (e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    onClose();
+  };
+
   return (
     <>
-      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
+      <div
+        className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+        onClick={(e) => e.target === e.currentTarget && handleClose()}
+      >
+        <div
+          ref={modalRef}
+          className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="font-serif text-2xl text-[#4a2b1d]">
@@ -277,8 +334,9 @@ export default function BookingModal({ onClose }: BookingModalProps) {
               )}
             </div>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="p-2 rounded-lg hover:bg-[#f6ede8] transition-colors"
+              aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -316,6 +374,11 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                       readOnly={isAuthenticated && !!user?.name}
                     />
                   </div>
+                  {isAuthenticated && user?.name && (
+                    <p className="text-xs text-green-600 mt-1">
+                      ✓ Auto-filled from your account
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -335,6 +398,11 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                       readOnly={isAuthenticated && !!user?.email}
                     />
                   </div>
+                  {isAuthenticated && user?.email && (
+                    <p className="text-xs text-green-600 mt-1">
+                      ✓ Auto-filled from your account
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -355,6 +423,11 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                     readOnly={isAuthenticated && !!user?.phone}
                   />
                 </div>
+                {isAuthenticated && user?.phone && (
+                  <p className="text-xs text-green-600 mt-1">
+                    ✓ Auto-filled from your account
+                  </p>
+                )}
               </div>
             </div>
 
@@ -479,13 +552,13 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                   <div className="relative">
                     <Clock className="w-4 h-4 text-[#7f482f] absolute left-3 top-1/2 transform -translate-y-1/2" />
                     <input
-                      type="text"
-                      value="9:00 AM"
-                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg text-sm bg-gray-100 cursor-not-allowed"
+                      type="time"
+                      name="preferredTime"
+                      value="09:00"
                       readOnly
-                      aria-readonly="true"
+                      className="w-full pl-9 pr-3 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent bg-white"
+                      required
                     />
-                    <input type="hidden" name="preferredTime" value="09:00" />
                   </div>
                 </div>
               </div>
@@ -506,7 +579,7 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                   name="goals"
                   value={formData.goals}
                   onChange={handleChange}
-                  placeholder="What are your hair goals?"
+                  placeholder="What are your hair goals? (e.g., length, style, maintenance)"
                   rows={2}
                   className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none text-sm bg-white"
                 />
@@ -520,13 +593,14 @@ export default function BookingModal({ onClose }: BookingModalProps) {
                   name="notes"
                   value={formData.notes}
                   onChange={handleChange}
-                  placeholder="Any special requests..."
+                  placeholder="Any special requests or information..."
                   rows={2}
                   className="w-full px-4 py-2 border border-[#f6ede8] rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent resize-none text-sm bg-white"
                 />
               </div>
             </div>
 
+            {/* Submit Button */}
             <Button
               type="submit"
               variant="gold"
@@ -534,37 +608,31 @@ export default function BookingModal({ onClose }: BookingModalProps) {
               disabled={isSubmitting || !isAuthenticated}
               className="w-full"
             >
-              {isSubmitting
-                ? "Submitting..."
-                : !isAuthenticated
-                  ? "Sign In to Book"
-                  : "Book Appointment"}
+              {isSubmitting ? (
+                "Submitting..."
+              ) : !isAuthenticated ? (
+                <>
+                  <Shield className="w-4 h-4 mr-2" />
+                  Sign In to Book
+                </>
+              ) : (
+                <>
+                  Book Your Appointment
+                  <ChevronRight className="w-4 h-4 ml-2" />
+                </>
+              )}
             </Button>
 
-            {!isAuthenticated && (
-              <div className="bg-[#fff5e6] p-3 rounded-lg border-l-4 border-gold">
-                <p className="text-xs text-[#7f482f] flex items-start space-x-2">
-                  <AlertCircle className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                  <span>
-                    By clicking "Sign In to Book", you'll be prompted to log in
-                    or create an account. All fields will be auto-filled after
-                    sign in.
-                  </span>
-                </p>
-              </div>
-            )}
-
-            {isAuthenticated && (
-              <div className="bg-green-50 p-3 rounded-lg border-l-4 border-green-500">
-                <p className="text-xs text-green-700 flex items-start space-x-2">
-                  <Shield className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-                  <span>
-                    Signed in as <strong>{user?.name}</strong>. Your personal
-                    details have been auto-filled. Complete the form to book.
-                  </span>
-                </p>
-              </div>
-            )}
+            <div className="bg-[#fff5e6] p-3 rounded-lg border-l-4 border-gold">
+              <p className="text-xs text-[#7f482f] flex items-start space-x-2">
+                <AlertCircle className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                <span>
+                  By submitting, you agree to our booking policy and terms of
+                  service. A deposit is required to confirm your appointment.
+                  You'll be redirected to the checkout page after booking.
+                </span>
+              </p>
+            </div>
           </form>
         </div>
       </div>

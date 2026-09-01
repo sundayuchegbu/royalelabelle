@@ -5,6 +5,7 @@ import { X, User, Mail, Phone, Lock, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import Button from "./ui/Button";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 interface AuthModalProps {
   onClose: () => void;
@@ -210,6 +211,14 @@ export default function AuthModal({
                 </button>
               </div>
             </div>
+            <p className="text-xs text-center text-[#7f482f] mt-2">
+              <Link
+                href="/auth/forgot-password"
+                className="text-gold hover:underline font-medium"
+              >
+                Forgot Password?
+              </Link>
+            </p>
 
             <Button
               type="submit"

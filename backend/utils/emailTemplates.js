@@ -374,3 +374,314 @@ export const statusChangeNotificationTemplate = (
     </html>
   `;
 };
+
+// Add this to your existing emailTemplates.js file
+
+// Password Reset Email Template
+export const passwordResetTemplate = (user, resetLink) => {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Reset Your Password</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #fdf8f6;
+          margin: 0;
+          padding: 0;
+          -webkit-font-smoothing: antialiased;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 40px 20px;
+        }
+        .header {
+          text-align: center;
+          padding: 30px 20px;
+          background: linear-gradient(135deg, #4a2b1d 0%, #7f482f 100%);
+          border-radius: 12px 12px 0 0;
+        }
+        .header h1 {
+          color: #c48d2c;
+          font-family: Georgia, serif;
+          font-size: 28px;
+          margin: 0;
+        }
+        .header p {
+          color: #d4a691;
+          font-size: 16px;
+          margin: 10px 0 0 0;
+        }
+        .content {
+          background: #ffffff;
+          padding: 40px 30px;
+          border-radius: 0 0 12px 12px;
+          box-shadow: 0 4px 20px rgba(74, 43, 29, 0.1);
+        }
+        .content h2 {
+          color: #4a2b1d;
+          font-family: Georgia, serif;
+          font-size: 22px;
+          margin-top: 0;
+        }
+        .content p {
+          color: #4a2b1d;
+          line-height: 1.6;
+          font-size: 16px;
+        }
+        .reset-box {
+          background: #fdf8f6;
+          border-left: 4px solid #c48d2c;
+          padding: 20px;
+          margin: 20px 0;
+          border-radius: 4px;
+        }
+        .reset-box p {
+          margin: 5px 0;
+        }
+        .button {
+          display: inline-block;
+          background: linear-gradient(135deg, #c48d2c 0%, #d6a545 100%);
+          color: #ffffff !important;
+          padding: 14px 40px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: bold;
+          font-size: 16px;
+          margin: 20px 0;
+          transition: opacity 0.3s;
+          box-shadow: 0 4px 15px rgba(196, 141, 44, 0.3);
+        }
+        .button:hover {
+          opacity: 0.9;
+        }
+        .footer {
+          text-align: center;
+          padding: 30px 20px;
+          background: #fdf8f6;
+          border-radius: 0 0 12px 12px;
+          border-top: 1px solid #f6ede8;
+        }
+        .footer p {
+          color: #7f482f;
+          font-size: 13px;
+          margin: 5px 0;
+        }
+        .footer a {
+          color: #c48d2c;
+          text-decoration: none;
+        }
+        @media only screen and (max-width: 480px) {
+          .container {
+            padding: 20px 10px;
+          }
+          .content {
+            padding: 25px 20px;
+          }
+          .button {
+            display: block;
+            text-align: center;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <!-- Header -->
+        <div class="header">
+          <h1>🔐 Royale la'belle</h1>
+          <p>AMP Certified Micro Locs Specialist</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+          <h2>Reset Your Password</h2>
+          
+          <p>Hello ${user.name},</p>
+          
+          <p>We received a request to reset your password for your Royale la'belle account. Click the button below to create a new password:</p>
+
+          <div style="text-align: center;">
+            <a href="${resetLink}" class="button">🔑 Reset Password</a>
+          </div>
+
+          <div class="reset-box">
+            <p><strong>📌 Important:</strong></p>
+            <p>• This link will expire in <strong>1 hour</strong></p>
+            <p>• If you didn't request this, please ignore this email</p>
+            <p>• Your password will not be changed unless you click the link</p>
+          </div>
+
+          <p style="font-size: 14px; color: #7f482f; text-align: center; border-top: 1px solid #f6ede8; padding-top: 20px; margin-top: 20px;">
+            If you're having trouble clicking the button, copy and paste this link into your browser:<br>
+            <span style="color: #c48d2c; word-break: break-all; font-size: 12px;">${resetLink}</span>
+          </p>
+
+          <p style="text-align: center; font-size: 14px; color: #7f482f;">
+            Questions? Contact us at (548) 557-3218<br>
+            <span style="color: #c48d2c;">- Royale la'belle Team</span>
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+          <p>
+            📍 735 Liberty Avenue, Brooklyn, NY 11208<br>
+            📞 (548) 557-3218 | 📧 royale.labelle@gmail.com
+          </p>
+          <p style="font-size: 12px; color: #d4a691;">
+            © ${new Date().getFullYear()} Royale la'belle. All rights reserved.
+          </p>
+          <p style="font-size: 11px; color: #d4a691; margin-top: 5px;">
+            This email was sent because you requested a password reset.
+          </p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+};
+
+// Password Reset Confirmation Email
+export const passwordResetConfirmationTemplate = (user) => {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Password Reset Confirmation</title>
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #fdf8f6;
+          margin: 0;
+          padding: 0;
+          -webkit-font-smoothing: antialiased;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 40px 20px;
+        }
+        .header {
+          text-align: center;
+          padding: 30px 20px;
+          background: linear-gradient(135deg, #4a2b1d 0%, #7f482f 100%);
+          border-radius: 12px 12px 0 0;
+        }
+        .header h1 {
+          color: #c48d2c;
+          font-family: Georgia, serif;
+          font-size: 28px;
+          margin: 0;
+        }
+        .content {
+          background: #ffffff;
+          padding: 40px 30px;
+          border-radius: 0 0 12px 12px;
+          box-shadow: 0 4px 20px rgba(74, 43, 29, 0.1);
+        }
+        .content h2 {
+          color: #4a2b1d;
+          font-family: Georgia, serif;
+          font-size: 22px;
+          margin-top: 0;
+        }
+        .content p {
+          color: #4a2b1d;
+          line-height: 1.6;
+          font-size: 16px;
+        }
+        .success-box {
+          background: #f0fdf4;
+          border: 2px solid #86efac;
+          padding: 20px;
+          border-radius: 8px;
+          margin: 20px 0;
+          text-align: center;
+        }
+        .success-box .icon {
+          font-size: 48px;
+          display: block;
+          margin-bottom: 10px;
+        }
+        .success-box p {
+          color: #166534;
+          font-size: 16px;
+          margin: 0;
+        }
+        .button {
+          display: inline-block;
+          background: linear-gradient(135deg, #c48d2c 0%, #d6a545 100%);
+          color: #ffffff !important;
+          padding: 14px 40px;
+          text-decoration: none;
+          border-radius: 8px;
+          font-weight: bold;
+          font-size: 16px;
+          margin: 20px 0;
+          box-shadow: 0 4px 15px rgba(196, 141, 44, 0.3);
+        }
+        .footer {
+          text-align: center;
+          padding: 30px 20px;
+          background: #fdf8f6;
+          border-radius: 0 0 12px 12px;
+          border-top: 1px solid #f6ede8;
+        }
+        .footer p {
+          color: #7f482f;
+          font-size: 13px;
+          margin: 5px 0;
+        }
+        @media only screen and (max-width: 480px) {
+          .container {
+            padding: 20px 10px;
+          }
+          .button {
+            display: block;
+            text-align: center;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>🔐 Royale la'belle</h1>
+        </div>
+        <div class="content">
+          <h2>Password Reset Successful</h2>
+          
+          <div class="success-box">
+            <span class="icon">✅</span>
+            <p>Your password has been successfully reset.</p>
+          </div>
+          
+          <p>Hello ${user.name},</p>
+          
+          <p>This is a confirmation that your Royale la'belle account password has been changed.</p>
+
+          <div style="text-align: center;">
+            <a href="${process.env.FRONTEND_URL}/auth" class="button">🔐 Sign In Now</a>
+          </div>
+
+          <p style="font-size: 14px; color: #7f482f; text-align: center; border-top: 1px solid #f6ede8; padding-top: 20px; margin-top: 20px;">
+            If you did not make this change, please contact us immediately at (548) 557-3218.
+          </p>
+        </div>
+        <div class="footer">
+          <p>📍 Kitchener, ON N2E OK5
+</p>
+          <p>📞 (548) 557-3218 | 📧 royale.labelle@gmail.com</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+};
