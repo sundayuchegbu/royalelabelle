@@ -6,7 +6,6 @@ import { useAuth } from "@/context/AuthContext";
 import {
   Calendar,
   Clock,
-  MapPin,
   DollarSign,
   ChevronRight,
   XCircle,
