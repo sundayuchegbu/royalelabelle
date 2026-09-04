@@ -11,6 +11,9 @@ import {
   ChevronRight,
   XCircle,
   Calendar as CalendarIcon,
+  CreditCard,
+  AlertCircle,
+  RefreshCw,
 } from "lucide-react";
 import Button from "@/components/ui/Button";
 import { formatDate, formatPrice } from "@/lib/utils";
@@ -25,6 +28,7 @@ interface Appointment {
   depositAmount: number;
   fullPrice: number;
   paymentMethod: string;
+  paymentStatus?: string;
   notes?: string;
   consultationId?: {
     hairLength: string;
@@ -69,6 +73,26 @@ export default function MyAppointmentsPage() {
     }
   };
 
+  const handleContinuePayment = async (appointmentId: string) => {
+    try {
+      toast.loading("Checking appointment status...");
+      const response = await api.get(
+        `/user/appointments/${appointmentId}/continue-payment`,
+      );
+
+      if (response.data.success) {
+        toast.dismiss();
+        toast.success("Redirecting to payment...");
+        router.push(`/checkout?appointmentId=${appointmentId}`);
+      }
+    } catch (error: any) {
+      toast.dismiss();
+      toast.error(
+        error.response?.data?.message || "Unable to continue payment",
+      );
+    }
+  };
+
   const handleCancel = async (id: string) => {
     if (!confirm("Are you sure you want to cancel this appointment?")) return;
 
@@ -97,12 +121,12 @@ export default function MyAppointmentsPage() {
 
   const getStatusLabel = (status: string) => {
     const labels = {
-      confirmed: "Confirmed",
-      pending: "Pending",
-      completed: "Completed",
-      cancelled: "Cancelled",
-      payment_pending: "Payment Pending",
-      payment_verified: "Payment Verified",
+      confirmed: "✅ Confirmed",
+      pending: "⏳ Pending Payment",
+      completed: "✅ Completed",
+      cancelled: "❌ Cancelled",
+      payment_pending: "💳 Payment Pending",
+      payment_verified: "✅ Payment Verified",
     };
     return labels[status as keyof typeof labels] || status;
   };
@@ -128,6 +152,14 @@ export default function MyAppointmentsPage() {
     return labels[method as keyof typeof labels] || method;
   };
 
+  // Check if payment can be continued
+  const canContinuePayment = (appointment: Appointment) => {
+    return (
+      appointment.status === "pending" ||
+      appointment.status === "payment_pending"
+    );
+  };
+
   if (isLoading || isLoadingAppointments) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -141,8 +173,8 @@ export default function MyAppointmentsPage() {
 
   const filterOptions = [
     { value: "all", label: "All" },
+    { value: "pending", label: "Pending Payment" },
     { value: "confirmed", label: "Confirmed" },
-    { value: "pending", label: "Pending" },
     { value: "completed", label: "Completed" },
     { value: "cancelled", label: "Cancelled" },
   ];
@@ -209,68 +241,111 @@ export default function MyAppointmentsPage() {
           </div>
         ) : (
           <div className="space-y-4">
-            {appointments.map((appointment) => (
-              <div
-                key={appointment._id}
-                className="bg-white rounded-xl shadow-luxury p-6 hover:shadow-2xl transition-shadow"
-              >
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-2">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(appointment.status)}`}
-                      >
-                        {getStatusLabel(appointment.status)}
-                      </span>
-                      <span className="text-sm text-[#7f482f]">
-                        {getPaymentLabel(appointment.paymentMethod)}
-                      </span>
-                    </div>
+            {appointments.map((appointment) => {
+              const needsPayment = canContinuePayment(appointment);
 
-                    <h3 className="font-serif text-xl text-[#4a2b1d]">
-                      {getServiceLabel(appointment.serviceType)}
-                    </h3>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
-                      <div className="flex items-center space-x-2 text-sm text-[#7f482f]">
-                        <CalendarIcon className="w-4 h-4" />
-                        <span>{formatDate(appointment.appointmentDate)}</span>
-                      </div>
-                      <div className="flex items-center space-x-2 text-sm text-[#7f482f]">
-                        <DollarSign className="w-4 h-4" />
-                        <span>{formatPrice(appointment.fullPrice)}</span>
-                      </div>
-                    </div>
-
-                    {appointment.notes && (
-                      <p className="text-sm text-[#7f482f] mt-2 italic">
-                        "{appointment.notes}"
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="flex items-center space-x-2 mt-4 sm:mt-0">
-                    {appointment.status !== "cancelled" &&
-                      appointment.status !== "completed" && (
-                        <button
-                          onClick={() => handleCancel(appointment._id)}
-                          className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+              return (
+                <div
+                  key={appointment._id}
+                  className={`bg-white rounded-xl shadow-luxury p-6 hover:shadow-2xl transition-shadow ${
+                    needsPayment ? "border-2 border-yellow-400" : ""
+                  }`}
+                >
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center flex-wrap gap-2 mb-2">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(appointment.status)}`}
                         >
-                          <XCircle className="w-5 h-5" />
-                        </button>
+                          {getStatusLabel(appointment.status)}
+                        </span>
+                        {needsPayment && (
+                          <span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700 flex items-center gap-1">
+                            <AlertCircle className="w-3 h-3" />
+                            Payment Required
+                          </span>
+                        )}
+                        <span className="text-sm text-[#7f482f]">
+                          {getPaymentLabel(appointment.paymentMethod)}
+                        </span>
+                      </div>
+
+                      <h3 className="font-serif text-xl text-[#4a2b1d]">
+                        {getServiceLabel(appointment.serviceType)}
+                      </h3>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
+                        <div className="flex items-center space-x-2 text-sm text-[#7f482f]">
+                          <CalendarIcon className="w-4 h-4" />
+                          <span>{formatDate(appointment.appointmentDate)}</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-sm text-[#7f482f]">
+                          <DollarSign className="w-4 h-4" />
+                          <span>{formatPrice(appointment.fullPrice)}</span>
+                          <span className="text-xs text-[#7f482f]">
+                            (Deposit: {formatPrice(appointment.depositAmount)})
+                          </span>
+                        </div>
+                      </div>
+
+                      {appointment.notes && (
+                        <p className="text-sm text-[#7f482f] mt-2 italic">
+                          "{appointment.notes}"
+                        </p>
                       )}
-                    <button
-                      onClick={() =>
-                        router.push(`/my-appointments/${appointment._id}`)
-                      }
-                      className="p-2 text-gold hover:bg-[#fdf8f6] rounded-lg transition-colors"
-                    >
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-2 mt-4 sm:mt-0">
+                      {needsPayment && (
+                        <Button
+                          variant="gold"
+                          size="sm"
+                          onClick={() => handleContinuePayment(appointment._id)}
+                          className="whitespace-nowrap"
+                        >
+                          <CreditCard className="w-4 h-4 mr-2" />
+                          Complete Payment
+                        </Button>
+                      )}
+
+                      {appointment.status !== "cancelled" &&
+                        appointment.status !== "completed" && (
+                          <button
+                            onClick={() => handleCancel(appointment._id)}
+                            className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Cancel Appointment"
+                          >
+                            <XCircle className="w-5 h-5" />
+                          </button>
+                        )}
+
+                      <button
+                        onClick={() =>
+                          router.push(`/my-appointments/${appointment._id}`)
+                        }
+                        className="p-2 text-gold hover:bg-[#fdf8f6] rounded-lg transition-colors"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                    </div>
                   </div>
+
+                  {/* Payment reminder for pending appointments */}
+                  {needsPayment && (
+                    <div className="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200 flex items-start gap-2">
+                      <AlertCircle className="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" />
+                      <div className="text-sm text-yellow-800">
+                        <p className="font-medium">Payment pending</p>
+                        <p className="text-yellow-700">
+                          Complete your payment to confirm this appointment.
+                          Click the "Complete Payment" button above.
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 

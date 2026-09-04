@@ -45,6 +45,20 @@ const AppointmentSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    // Track payment status
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "paid", "failed", "refunded"],
+      default: "pending",
+    },
+    paymentAttempts: {
+      type: Number,
+      default: 0,
+    },
+    lastPaymentAttempt: {
+      type: Date,
+      default: null,
+    },
     consultationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Consultation",
@@ -65,4 +79,8 @@ const AppointmentSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.model("Appointment", AppointmentSchema);
+const Appointment =
+  mongoose.models.Appointment ||
+  mongoose.model("Appointment", AppointmentSchema);
+
+export default Appointment;

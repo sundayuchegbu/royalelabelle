@@ -15,7 +15,9 @@ import {
   Menu,
   X,
   Home,
+  Shield,
 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AdminLayout({
   children,
@@ -24,14 +26,28 @@ export default function AdminLayout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { user, isAuthenticated, isLoading, isAdmin, logout } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [adminData, setAdminData] = useState<any>(null);
+
+  // Check authentication and admin role
+  useEffect(() => {
+    if (!isLoading) {
+      if (!isAuthenticated) {
+        router.push("/auth");
+        return;
+      }
+
+      if (!isAdmin) {
+        router.push("/");
+        return;
+      }
+    }
+  }, [isLoading, isAuthenticated, isAdmin, router]);
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    localStorage.removeItem("adminData");
-    router.push("/login");
+    logout();
+    router.push("/");
   };
 
   const navItems = [
@@ -46,6 +62,21 @@ export default function AdminLayout({
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + "/");
+
+  if (isLoading || !isAuthenticated || !isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#fdf8f6]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
+          <p className="mt-4 text-[#7f482f]">
+            {!isAuthenticated
+              ? "Redirecting to login..."
+              : "Verifying access..."}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#fdf8f6]">
@@ -84,13 +115,19 @@ export default function AdminLayout({
         {/* Sidebar Header */}
         <div className="flex items-center justify-between p-4 border-b border-[#7f482f]">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-gold rounded-full flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 bg-gradient-gold rounded-full flex items-center justify-center flex-shrink-0">
               <span className="text-white font-serif text-lg font-bold">
                 RL
               </span>
             </div>
             {isSidebarOpen && (
-              <span className="font-serif text-lg font-bold">Admin</span>
+              <div>
+                <span className="font-serif text-lg font-bold">Admin</span>
+                <p className="text-xs text-[#d4a691] flex items-center">
+                  <Shield className="w-3 h-3 mr-1" />
+                  {user?.role || "Admin"}
+                </p>
+              </div>
             )}
           </div>
           <button
@@ -113,7 +150,7 @@ export default function AdminLayout({
                   : "text-[#d4a691] hover:bg-[#7f482f] hover:text-white"
               }`}
             >
-              <item.icon className="w-5 h-5 shrink-0" />
+              <item.icon className="w-5 h-5 flex-shrink-0" />
               {isSidebarOpen && <span className="text-sm">{item.label}</span>}
             </Link>
           ))}

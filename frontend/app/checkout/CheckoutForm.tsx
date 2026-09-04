@@ -115,11 +115,12 @@ export default function checkoutForm() {
   }, [isLoading, isAuthenticated]);
 
   // Fetch appointment details
+  // In the useEffect that fetches appointment details, add:
   useEffect(() => {
     if (!isAuthenticated || !appointmentId) {
       if (!appointmentId) {
         toast.error("No appointment selected");
-        router.push("/");
+        router.push("/my-appointments");
       }
       return;
     }
@@ -130,16 +131,28 @@ export default function checkoutForm() {
         const appointment = response.data.appointment;
         setDepositAmount(appointment.depositAmount || 200);
         setFullPrice(appointment.fullPrice || 1200);
+
+        // Check if appointment is already confirmed
+        if (
+          appointment.status === "confirmed" ||
+          appointment.status === "completed"
+        ) {
+          toast("This appointment is already confirmed", {
+            icon: "ℹ️",
+          });
+          router.push(`/my-appointments/${appointmentId}`);
+          return;
+        }
+
         setIsLoadingPayment(false);
       } catch (error) {
         toast.error("Failed to load appointment details");
-        router.push("/");
+        router.push("/my-appointments");
       }
     };
 
     fetchAppointmentDetails();
   }, [appointmentId, isAuthenticated, router]);
-
   const handleAuthSuccess = () => {
     setShowAuthModal(false);
     // Refresh the page to load appointment details

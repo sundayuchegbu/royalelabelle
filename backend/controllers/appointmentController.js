@@ -103,7 +103,7 @@ export const createAppointment = async (req, res) => {
       });
     }
 
-    // Calculate dynamic pricing based on consultation data
+    // Calculate dynamic pricing
     const servicePricing = calculatePricing(serviceType, consultation);
 
     if (!servicePricing) {
@@ -113,7 +113,7 @@ export const createAppointment = async (req, res) => {
       });
     }
 
-    // Create appointment
+    // Create appointment with payment tracking
     const appointment = await Appointment.create({
       userId,
       serviceType,
@@ -123,13 +123,13 @@ export const createAppointment = async (req, res) => {
       fullPrice: servicePricing.full,
       consultationId,
       notes: notes || consultation.notes,
-      status: "pending",
+      status: "pending", // Pending payment
+      paymentStatus: "pending", // Track payment specifically
     });
 
-    // Get user details
     const user = await User.findById(userId);
 
-    // Send emails in the background
+    // Send booking confirmation email
     if (user) {
       sendBookingConfirmationEmail(user, appointment).catch((error) => {
         console.error("Failed to send booking confirmation:", error);
@@ -145,9 +145,85 @@ export const createAppointment = async (req, res) => {
       appointment,
       requiresPayment: true,
       depositAmount: servicePricing.deposit,
+      message: "Booking created. Please complete payment to confirm.",
     });
   } catch (error) {
     console.error("Appointment creation error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// @desc Continue payment for pending appointment
+// @route GET /api/appointments/:id/continue-payment
+export const continuePayment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    console.log(`💰 Continue payment request for appointment: ${id}`);
+    console.log(`  - User: ${userId}`);
+
+    const appointment = await Appointment.findOne({
+      _id: id,
+      userId: userId,
+    });
+
+    if (!appointment) {
+      console.log(`❌ Appointment not found: ${id}`);
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    console.log(`  - Appointment status: ${appointment.status}`);
+    console.log(`  - Payment status: ${appointment.paymentStatus}`);
+
+    // Check if appointment can be paid for
+    if (
+      appointment.status === "confirmed" ||
+      appointment.status === "completed"
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "This appointment has already been confirmed",
+      });
+    }
+
+    if (appointment.status === "cancelled") {
+      return res.status(400).json({
+        success: false,
+        message: "This appointment has been cancelled",
+      });
+    }
+
+    // Check if payment is already paid
+    if (appointment.paymentStatus === "paid") {
+      return res.status(400).json({
+        success: false,
+        message: "Payment has already been completed",
+      });
+    }
+
+    // Update payment attempt
+    appointment.paymentAttempts = (appointment.paymentAttempts || 0) + 1;
+    appointment.lastPaymentAttempt = new Date();
+    await appointment.save();
+
+    console.log(`✅ Continue payment successful for appointment: ${id}`);
+
+    res.status(200).json({
+      success: true,
+      appointment,
+      canContinuePayment: true,
+      redirectUrl: `/checkout?appointmentId=${appointment._id}`,
+      message: "Continue to payment",
+    });
+  } catch (error) {
+    console.error("Continue payment error:", error);
     res.status(500).json({
       success: false,
       message: error.message,

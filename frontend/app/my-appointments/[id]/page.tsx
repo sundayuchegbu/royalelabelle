@@ -184,7 +184,7 @@ export default function AppointmentConfirmationPage() {
     return (
       <div className="min-h-screen bg-[#fdf8f6] flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#c48d2c] mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gold mx-auto"></div>
           <p className="mt-4 text-[#7f482f]">Loading appointment details...</p>
         </div>
       </div>
@@ -251,7 +251,7 @@ export default function AppointmentConfirmationPage() {
         {/* Back Button */}
         <Link
           href="/my-appointments"
-          className="inline-flex items-center text-[#7f482f] hover:text-[#c48d2c] transition-colors mb-6"
+          className="inline-flex items-center text-[#7f482f] hover:text-gold transition-colors mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to My Appointments
@@ -309,7 +309,7 @@ export default function AppointmentConfirmationPage() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex items-start space-x-3">
-                  <Calendar className="w-5 h-5 text-[#c48d2c] mt-0.5" />
+                  <Calendar className="w-5 h-5 text-gold mt-0.5" />
                   <div>
                     <p className="text-sm text-[#7f482f]">Service</p>
                     <p className="font-medium text-[#4a2b1d]">
@@ -318,7 +318,7 @@ export default function AppointmentConfirmationPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Calendar className="w-5 h-5 text-[#c48d2c] mt-0.5" />
+                  <Calendar className="w-5 h-5 text-gold mt-0.5" />
                   <div>
                     <p className="text-sm text-[#7f482f]">Date & Time</p>
                     <p className="font-medium text-[#4a2b1d]">
@@ -327,7 +327,7 @@ export default function AppointmentConfirmationPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <DollarSign className="w-5 h-5 text-[#c48d2c] mt-0.5" />
+                  <DollarSign className="w-5 h-5 text-gold mt-0.5" />
                   <div>
                     <p className="text-sm text-[#7f482f]">Total Price</p>
                     <p className="font-medium text-[#4a2b1d]">
@@ -336,7 +336,7 @@ export default function AppointmentConfirmationPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CreditCard className="w-5 h-5 text-[#c48d2c] mt-0.5" />
+                  <CreditCard className="w-5 h-5 text-gold mt-0.5" />
                   <div>
                     <p className="text-sm text-[#7f482f]">Payment Method</p>
                     <p className="font-medium text-[#4a2b1d]">
@@ -354,7 +354,7 @@ export default function AppointmentConfirmationPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="bg-[#fdf8f6] rounded-lg p-4">
                   <p className="text-sm text-[#7f482f]">Deposit Paid</p>
-                  <p className="text-xl font-bold text-[#c48d2c]">
+                  <p className="text-xl font-bold text-gold">
                     {formatPrice(appointment.depositAmount)}
                   </p>
                 </div>
@@ -386,7 +386,7 @@ export default function AppointmentConfirmationPage() {
                     href="https://www.google.com/maps?q= 594+Benninger drive+Kitchener+ON+Canada"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-[#c48d2c] hover:underline"
+                    className="text-sm text-gold hover:underline"
                   >
                     Open in Google Maps →
                   </a>
@@ -401,26 +401,24 @@ export default function AppointmentConfirmationPage() {
               </h3>
               <div className="space-y-3">
                 <div className="flex items-start space-x-3">
-                  <Clock className="w-5 h-5 text-[#c48d2c] mt-0.5 flex-shrink-0" />
+                  <Clock className="w-5 h-5 text-gold mt-0.5 shrink-0" />
                   <div>
                     <p className="font-medium text-[#4a2b1d]">Arrival Time</p>
-                    <p className="text-sm text-[#7f482f]">
-                      Please arrive 10 minutes before your appointment time.
-                    </p>
+                    <p className="text-sm text-[#7f482f]">Arrive on time</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Phone className="w-5 h-5 text-[#c48d2c] mt-0.5 flex-shrink-0" />
+                  <Phone className="w-5 h-5 text-gold mt-0.5 shrink-0" />
                   <div>
                     <p className="font-medium text-[#4a2b1d]">Late Policy</p>
                     <p className="text-sm text-[#7f482f]">
-                      $20 late fee if you arrive 15 minutes late. 20+ minutes
-                      late will result in rescheduling and deposit forfeiture.
+                      $20 late fee if you arrive 30 minutes late. 1hr late will
+                      result in rescheduling.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <User className="w-5 h-5 text-[#c48d2c] mt-0.5 flex-shrink-0" />
+                  <User className="w-5 h-5 text-gold mt-0.5 shrink-0" />
                   <div>
                     <p className="font-medium text-[#4a2b1d]">
                       No Extra Guests
@@ -433,7 +431,7 @@ export default function AppointmentConfirmationPage() {
                 </div>
                 {appointment.notes && (
                   <div className="flex items-start space-x-3">
-                    <AlertCircle className="w-5 h-5 text-[#c48d2c] mt-0.5 flex-shrink-0" />
+                    <AlertCircle className="w-5 h-5 text-gold mt-0.5 shrink-0" />
                     <div>
                       <p className="font-medium text-[#4a2b1d]">Your Notes</p>
                       <p className="text-sm text-[#7f482f] italic">
@@ -470,19 +468,19 @@ export default function AppointmentConfirmationPage() {
               </Link>
             </div>
             {/* Contact Support */}
-            <div className="bg-[#fff5e6] rounded-lg p-4 border-l-4 border-[#c48d2c]">
+            <div className="bg-[#fff5e6] rounded-lg p-4 border-l-4 border-gold">
               <p className="text-sm text-[#7f482f]">
                 <span className="font-medium">Need help?</span> Contact us at{" "}
                 <a
                   href="tel:6464007132"
-                  className="text-[#c48d2c] font-medium hover:underline"
+                  className="text-gold font-medium hover:underline"
                 >
-                  (646) 400-7132
+                  (548) 557-3218
                 </a>{" "}
                 or{" "}
                 <a
-                  href="mailto:info@royallabelle.com"
-                  className="text-[#c48d2c] font-medium hover:underline"
+                  href="mailto:royale.labelle@gmail.com"
+                  className="text-gold font-medium hover:underline"
                 >
                   info@royallabelle.com
                 </a>

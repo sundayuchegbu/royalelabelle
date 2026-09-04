@@ -7,6 +7,7 @@ import { User, Mail, Phone, MapPin, Edit2, Camera } from "lucide-react";
 import Button from "@/components/ui/Button";
 import toast from "react-hot-toast";
 import api from "@/lib/api";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -19,6 +20,7 @@ export default function ProfilePage() {
     location: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [pendingPayments, setPendingPayments] = useState(0);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -33,6 +35,28 @@ export default function ProfilePage() {
       });
     }
   }, [user, isLoading, isAuthenticated, router]);
+
+  useEffect(() => {
+    const fetchPendingPayments = async () => {
+      try {
+        const response = await api.get("/user/appointments", {
+          params: { status: "pending" },
+        });
+        setPendingPayments(
+          response.data.appointments.filter(
+            (a: any) =>
+              a.status === "pending" || a.status === "payment_pending",
+          ).length,
+        );
+      } catch (error) {
+        console.error("Failed to fetch pending payments:", error);
+      }
+    };
+
+    if (isAuthenticated) {
+      fetchPendingPayments();
+    }
+  }, [isAuthenticated]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -297,6 +321,24 @@ export default function ProfilePage() {
           <div className="bg-white rounded-xl shadow-luxury p-4 text-center">
             <p className="text-2xl font-bold text-gold">2</p>
             <p className="text-sm text-[#7f482f]">Upcoming</p>
+          </div>
+          <div className="bg-white rounded-xl shadow-luxury p-4 text-center relative">
+            {pendingPayments > 0 && (
+              <div className="absolute -top-2 -right-2 bg-yellow-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
+                {pendingPayments}
+              </div>
+            )}
+            <p className="text-2xl font-bold text-yellow-600">
+              {pendingPayments}
+            </p>
+            <p className="text-sm text-[#7f482f]">Pending Payments</p>
+            {pendingPayments > 0 && (
+              <Link href="/my-appointments?filter=pending">
+                <Button variant="outline" size="sm" className="mt-2 text-xs">
+                  Complete Payment →
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
