@@ -41,21 +41,24 @@ console.log(
 // CORS
 // --------------------------------------------------
 
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true,
-  }),
-);
+// Local
 // app.use(
 //   cors({
-//     origin: [
-//       "https://royalelabelle.netlify.app",
-//       "http://localhost:3000", // Keep for local development
-//     ],
+//     origin: process.env.FRONTEND_URL || "http://localhost:3000",
 //     credentials: true,
 //   }),
 // );
+
+// Production
+app.use(
+  cors({
+    origin: [
+      "https://royalelabelle.netlify.app",
+      "http://localhost:3000", // Keep for local development
+    ],
+    credentials: true,
+  }),
+);
 
 // --------------------------------------------------
 // Stripe Webhook
