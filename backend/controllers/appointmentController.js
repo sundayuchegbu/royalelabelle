@@ -15,7 +15,6 @@ const isWithinSevenDays = (date1, date2) => {
 };
 
 // Calculate dynamic pricing based on consultation data
-// Calculate dynamic pricing based on consultation data
 const calculatePricing = (serviceType, consultation) => {
   // Base pricing
   const basePricing = {
