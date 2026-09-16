@@ -144,7 +144,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-[#d4a691]">
               <li className="flex justify-between">
                 <span>Monday - Sunday</span>
-                <span>9:00 AM - 7:00 PM</span>
+                <span>9:00 AM - 5:00 PM</span>
               </li>
 
               {/* <li className="flex justify-between">
