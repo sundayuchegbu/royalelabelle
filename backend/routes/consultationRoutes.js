@@ -15,8 +15,8 @@ const router = express.Router();
 // All routes require authentication
 router.use(authMiddleware);
 
-// Create consultation with validation
-router.post("/", validateConsultation, createConsultation);
+// Create consultation - POST /api/consultations
+router.post("/", createConsultation);
 
 // Get user's consultation
 router.get("/me", getMyConsultation);

@@ -471,3 +471,78 @@ export const rescheduleAppointment = async (req, res) => {
     });
   }
 };
+// @desc Update appointment (admin)
+// @route PUT /api/appointments/:id
+export const updateAppointment = async (req, res) => {
+  try {
+    const { status, appointmentDate, notes, lateFee } = req.body;
+
+    const appointment = await Appointment.findById(req.params.id);
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    // Store old status for email comparison
+    const oldStatus = appointment.status;
+
+    // Check if status is changing
+    const isBeingConfirmed =
+      status === "confirmed" && appointment.status !== "confirmed";
+    const isBeingCompleted =
+      status === "completed" && appointment.status !== "completed";
+    const isBeingCancelled =
+      status === "cancelled" && appointment.status !== "cancelled";
+
+    // Update fields
+    if (status) {
+      appointment.status = status;
+
+      // Update consultation status based on appointment status
+      if (status === "confirmed" || status === "completed") {
+        await Consultation.findByIdAndUpdate(appointment.consultationId, {
+          status: "completed",
+        });
+      }
+
+      if (status === "cancelled") {
+        await Consultation.findByIdAndUpdate(appointment.consultationId, {
+          status: "active",
+        });
+      }
+    }
+
+    if (appointmentDate) appointment.appointmentDate = appointmentDate;
+    if (notes) appointment.notes = notes;
+    if (lateFee !== undefined) appointment.lateFee = lateFee;
+
+    await appointment.save();
+
+    // Get user for email
+    const user = await User.findById(appointment.userId);
+
+    // Send emails based on status change
+    if (user) {
+      if (isBeingConfirmed) {
+        await sendAppointmentConfirmedEmail(user, appointment);
+      } else if (isBeingCompleted) {
+        // You can add sendAppointmentCompletedEmail if available
+        console.log(`Appointment ${appointment._id} completed`);
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Appointment updated successfully",
+      appointment,
+    });
+  } catch (error) {
+    console.error("Update appointment error:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

@@ -1,31 +1,32 @@
 import express from "express";
 import authMiddleware from "../middleware/auth.js";
+import { validateAppointment } from "../middleware/validation.js";
 import {
-  getUserAppointments,
-  getAppointment,
-  cancelAppointment,
+  createAppointment,
   rescheduleAppointment,
+  confirmAppointment,
+  updateAppointment,
   continuePayment,
 } from "../controllers/appointmentController.js";
 
 const router = express.Router();
 
-// All routes require authentication
+// Protected routes
 router.use(authMiddleware);
 
-// Get all user appointments
-router.get("/appointments", getUserAppointments);
+// Create appointment - POST /api/appointments
+router.post("/", createAppointment);
 
-// Get single appointment
-router.get("/appointments/:id", getAppointment);
+// Confirm appointment (after payment)
+router.put("/:id/confirm", confirmAppointment);
 
-// Cancel appointment
-router.put("/appointments/:id/cancel", cancelAppointment);
+// Update appointment
+router.put("/:id", updateAppointment);
 
 // Reschedule appointment
-router.put("/appointments/:id/reschedule", rescheduleAppointment);
+router.put("/:id/reschedule", rescheduleAppointment);
 
-// Continue payment for pending appointment
-router.get("/appointments/:id/continue-payment", continuePayment);
+// Continue payment
+router.get("/:id/continue-payment", continuePayment);
 
 export default router;
