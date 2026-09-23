@@ -67,9 +67,9 @@ const calculatePricing = (serviceType, consultation) => {
   }
 
   // Check hair condition - damaged hair may require extra care
-  if (consultation.hairCondition?.toLowerCase().includes("damaged")) {
-    fullPrice += 50;
-  }
+  // if (consultation.hairCondition?.toLowerCase().includes("damaged")) {
+  //   fullPrice += 50;
+  // }
 
   return { deposit: depositAmount, full: fullPrice };
 };
