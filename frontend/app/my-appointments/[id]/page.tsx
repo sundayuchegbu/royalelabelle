@@ -374,7 +374,7 @@ export default function AppointmentConfirmationPage() {
               )}
             </div>
             {/* Location Information */}
-            <div className="border-b border-[#f6ede8] pb-6">
+            {/* <div className="border-b border-[#f6ede8] pb-6">
               <h3 className="font-semibold text-[#4a2b1d] mb-4">📍 Location</h3>
               <div className="bg-[#fdf8f6] rounded-lg p-4">
                 <p className="font-medium text-[#4a2b1d]">Royale la'belle</p>
@@ -392,7 +392,7 @@ export default function AppointmentConfirmationPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
             , Kitchener, Ontario
             {/* Important Information */}
             <div className="border-b border-[#f6ede8] pb-6">
